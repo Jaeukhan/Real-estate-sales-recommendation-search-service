@@ -1,8 +1,8 @@
 import axios from "axios";
 
-function houseInstance() {
+function apartInstance() {
   const instance = axios.create({
-    baseURL: "http://localhost:9999/finalbe",
+    baseURL: process.env.VUE_APP_APT_DEAL_URL,
     headers: {
       "Content-Type": "application/json;charset=utf-8",
     },
@@ -20,4 +20,4 @@ function apiInstance() {
   return instance;
 }
 
-export { houseInstance };
+export { houseInstance, apartInstance };
