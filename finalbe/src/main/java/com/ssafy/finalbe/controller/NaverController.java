@@ -1,9 +1,6 @@
 package com.ssafy.finalbe.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -40,19 +37,21 @@ public class NaverController {
 		return responseBody;
 	}
 
-	@GetMapping("/image")
-	public String image(String keyword) {
+	@GetMapping("/image/{keyword}")
+	public String image(@PathVariable("keyword")String keyword) {
 		String clientId = "xUnDHca_blUkKDYv2cWz"; //애플리케이션 클라이언트 아이디
 		String clientSecret = "zQ8VGS2rNa"; //애플리케이션 클라이언트 시크릿
 
 		String text = null;
 		try {
+//			System.out.println("keyword "+  keyword);
 			text = URLEncoder.encode(keyword, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			throw new RuntimeException("검색어 인코딩 실패", e);
 		}
 
-		String apiURL = "https://openapi.naver.com/v1/search/image.xml=" + text; // JSON 결과
+		String apiURL = "https://openapi.naver.com/v1/search/image?query=" + text; // JSON 결과
+
 
 		// // XML 결과
 

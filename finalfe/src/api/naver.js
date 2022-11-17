@@ -2,7 +2,8 @@ import { apiInstance } from "./index.js";
 
 const api = apiInstance();
 function getImage(keyword, success, fail) {
-  api.get("/naver/image?", { keyword: keyword }).then(success).catch(fail);
+  console.log("g", keyword);
+  api.get(`/naver/image/${keyword}`).then(success).catch(fail);
 }
 //   fetch("http://localhost:7777/rest/naver/blog?keyword=" + keyword)
 //     .then((resp) => resp.json())

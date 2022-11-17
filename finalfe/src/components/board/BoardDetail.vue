@@ -115,18 +115,6 @@ export default {
           console.log(error);
         }
       );
-      // http
-      //   .get(`/board/${this.$route.params.articleno}`)
-      //   .then(({ data }) => {
-      //     //   console.log(data);
-      //     this.article = data;
-      //   })
-      //   .then(() => {
-      //     http.get(`/comment/list/${this.article.articleno}`).then(({ data }) => {
-      //       console.log(data);
-      //       this.comment_list = data;
-      //     });
-      //   });
     },
     moveModifyArticle() {
       this.$router.replace({
