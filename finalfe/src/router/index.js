@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 
 import HomeView from "../views/HomeView.vue";
 import BoardView from "../views/BoardView.vue";
-import UserView from "../views/UserView.vue";
+import MemberView from "../views/MemberView.vue";
 import MapView from "../views/MapView.vue";
 
 Vue.use(VueRouter);
@@ -71,18 +71,18 @@ const routes = [
   {
     path: "/user",
     name: "user",
-    component: UserView,
+    component: MemberView,
     redirect: "/user/join",
     children: [
       {
         path: "join",
         name: "userRegister",
-        component: () => import("@/components/user/UserRegister"),
+        component: () => import("@/components/member/MemberRegister"),
       },
       {
         path: "login",
         name: "userLogin",
-        component: () => import("@/components/user/UserLogin"),
+        component: () => import("@/components/member/MemberLogin"),
       },
     ],
   },
