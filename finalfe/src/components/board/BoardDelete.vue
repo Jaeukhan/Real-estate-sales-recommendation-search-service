@@ -13,6 +13,7 @@
 
 <script>
 import http from "@/api/http";
+// import { deleteArticle } from "@/api/board";
 
 export default {
   name: "BoardDelete",

@@ -7,7 +7,15 @@
     </b-row>
     <b-row>
       <b-col>
-        <b-table hover :items="articles" :fields="fields" @row-clicked="viewArticle" id="boardlist-table" :per-page="perPage" :current-page="currentPage">
+        <b-table
+          hover
+          :items="articles"
+          :fields="fields"
+          @row-clicked="viewArticle"
+          id="boardlist-table"
+          :per-page="perPage"
+          :current-page="currentPage"
+        >
           <template #cell(subject)="data">
             <router-link :to="{ name: 'boarddetail', params: { articleno: data.item.articleno } }">
               {{ data.item.subject }}
@@ -17,14 +25,19 @@
       </b-col>
     </b-row>
     <b-row class="justify-content-md-center">
-      <b-pagination v-model="currentPage" pills :total-rows="rows" :per-page="perPage" aria-controls="boardlist-table"></b-pagination>
+      <b-pagination
+        v-model="currentPage"
+        pills
+        :total-rows="rows"
+        :per-page="perPage"
+        aria-controls="boardlist-table"
+      ></b-pagination>
     </b-row>
   </b-container>
 </template>
 
 <script>
-import http from "@/api/http";
-
+import { listArticle } from "@/api/board";
 export default {
   name: "BoardList",
   data() {
