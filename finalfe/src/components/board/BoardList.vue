@@ -56,6 +56,21 @@ export default {
     };
   },
   created() {
+    let param = {
+      pg: 1,
+      spp: 20,
+      key: null,
+      word: null,
+    };
+    listArticle(
+      param,
+      ({ data }) => {
+        this.articles = data;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
     http.get(`/board`).then(({ data }) => {
       //   console.log(data[0]);
       this.articles = data;
