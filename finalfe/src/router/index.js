@@ -72,7 +72,7 @@ const routes = [
     path: "/member",
     name: "member",
     component: MemberView,
-    redirect: "/member/join",
+    redirect: "/member/login",
     children: [
       {
         path: "join",

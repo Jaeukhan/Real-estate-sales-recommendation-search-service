@@ -13,6 +13,9 @@
             <b-form-group label="id:" label-for="id">
               <b-form-input id="id" v-model="id" required placeholder="ID"></b-form-input>
             </b-form-group>
+            <b-form-group label="name:" label-for="name">
+              <b-form-input type="text" id="name" v-model="name" required placeholder="name"></b-form-input>
+            </b-form-group>
             <b-form-group label="password:" label-for="password">
               <b-form-input
                 type="password"
@@ -22,14 +25,8 @@
                 placeholder="PASSWORD"
               ></b-form-input>
             </b-form-group>
-            <b-form-group label="name:" label-for="name">
-              <b-form-input type="text" id="name" v-model="name" required placeholder="name"></b-form-input>
-            </b-form-group>
             <b-form-group label="email:" label-for="email">
               <b-form-input type="email" id="email" v-model="email" required placeholder="email"></b-form-input>
-            </b-form-group>
-            <b-form-group label="age:" label-for="age">
-              <b-form-input type="number" id="age" v-model="age" required placeholder="age"></b-form-input>
             </b-form-group>
 
             <b-button type="button" class="m-1" @click="regist">SIGN UP</b-button>
@@ -50,7 +47,6 @@ export default {
       password: "",
       name: "",
       email: "",
-      age: 0,
     };
   },
   methods: {
@@ -65,9 +61,7 @@ export default {
         password: this.password,
         name: this.name,
         email: this.email,
-        age: this.age,
       };
-      console.log(user, this);
       this.$store.dispatch("createUser", user);
     },
   },

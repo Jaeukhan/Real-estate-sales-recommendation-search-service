@@ -15,26 +15,24 @@
             <b-form-group label="ID" label-for="id">
               <b-form-input
                 id="id"
-                v-model="id"
+                v-model="user.id"
                 required
                 placeholder="id"
-                @keyup.enter="confirm"
               ></b-form-input>
             </b-form-group>
             <b-form-group label="PASSWORD" label-for="password">
               <b-form-input
                 type="password"
                 id="password"
-                v-model="password"
+                v-model="user.password"
                 required
                 placeholder="password"
-                @keyup.enter="login"
               ></b-form-input>
             </b-form-group>
             <b-button
               type="button"
               class="m-1"
-              @click="login"
+              @click="confirm"
               style="background-color: rgba(250, 243, 221, 0.6); color: black"
               >SIGN IN</b-button
             >
@@ -54,29 +52,38 @@
 </template>
 
 <script>
+import {mapState, mapActions} from "vuex";
+
+const memberStore = "memberStore";
+
 export default {
-  name: "UserLogin",
+  name: "MemberLogin",
   data() {
     return {
-      id: "",
-      password: "",
+      user: {
+        id: null,
+        password: null,
+      },
     };
   },
+  computed: {
+    ...mapState(memberStore, ["isLogin", "isLoginError", "memberInfo"]),
+  },
   methods: {
-    login() {
-      if (this.id === "" || this.password === "") {
-        alert("아이디 또는 비밀번호를 확인하세요");
-        return;
+    ...mapActions(memberStore, ["memberConfirm", "getMemberInfo"]),
+    async confirm() {
+      console.log("버튼 눌림!!!");
+      await this.memberConfirm(this.user);
+      let token = sessionStorage.getItem("access-token");
+      console.log("토큰 가져옴", token);
+      if(this.isLogin) {
+        await this.getMemberInfo(token);
+        console.log("로그인 성공!");
+        this.$router.push({name: "home"});
       }
-
-      let user = {
-        id: this.id,
-        password: this.password,
-      };
-      this.$store.dispatch("setLoginUser", user);
     },
     movePage() {
-      this.$router.push({ name: "userRegister" });
+      this.$router.push({name: "memberRegister"});
     },
   },
 };
