@@ -22,19 +22,18 @@
               :options="guguns"
               value-field="gugunCode"
               text-field="gugunName"
-              @change="getDongs(gugun)"
             ></b-form-select>
           </b-col>
-          <b-col cols="3">
+          <!-- <b-col cols="3">
             <b-form-select
               v-model="dong"
               :options="dongs"
               value-field="dongCode"
               text-field="dongName"
             ></b-form-select>
-          </b-col>
+          </b-col> -->
           <b-col cols="3">
-            <b-button @click="getAptList(dong)">검색</b-button>
+            <b-button @click="getAptList()">검색</b-button>
           </b-col>
         </b-row>
       </b-card>
@@ -69,14 +68,9 @@ export default {
         this.guguns = data;
       });
     },
-    getDongs(gugunCode) {
-      http.get(`/map/dong?gugun=${gugunCode}`).then(({ data }) => {
-        this.dongs = data;
-      });
-    },
-    getAptList(dongCode) {
-      http.get(`/map/apt?dong=${dongCode}`).then(({ data }) => {
-        this.aparts = data;
+    getAptList() {
+      http.get(`/map/aptlist/${this.gugun}/202110`).then(({ data }) => {
+        this.aparts = data.response.body.items.item;
         this.$emit("getApartList", this.aparts);
       });
     },
