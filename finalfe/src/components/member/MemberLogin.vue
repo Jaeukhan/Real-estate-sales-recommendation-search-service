@@ -15,7 +15,7 @@
             <b-form-group label="ID" label-for="id">
               <b-form-input
                 id="id"
-                v-model="user.id"
+                v-model="user.userid"
                 required
                 placeholder="id"
               ></b-form-input>
@@ -24,7 +24,7 @@
               <b-form-input
                 type="password"
                 id="password"
-                v-model="user.password"
+                v-model="user.userpwd"
                 required
                 placeholder="password"
               ></b-form-input>
@@ -61,8 +61,8 @@ export default {
   data() {
     return {
       user: {
-        id: null,
-        password: null,
+        userid: null,
+        userpwd: null,
       },
     };
   },

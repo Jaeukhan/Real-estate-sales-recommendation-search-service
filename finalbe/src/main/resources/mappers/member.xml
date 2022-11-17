@@ -18,31 +18,31 @@
 	</resultMap>
 
 	<select id="login" parameterType="memberDto" resultMap="loginMap">
-		select username, userid, email
-		from happy_house
-		where userid = #{userid} and userpwd = #{userpwd}
+		select user_name, user_id, user_email
+		from members
+		where user_id = #{userid} and user_password = #{userpwd}
 	</select>
 	
 	<select id="userInfo" parameterType="String" resultMap="infoMap">
-		select username, userid, email, joindate
-		from happy_house
-		where userid = #{userid}
+		select user_name, user_id, email, join_date
+		from members
+		where user_id = #{userid}
 	</select>
 	
 		<select id="getRefreshToken" parameterType="string" resultType="string">
 		select token
-		from happy_house
+		from members
 		where user_id = #{userid}
 	</select>
 	
 	<update id="saveRefreshToken" parameterType="map">
-		update happy_house
+		update members
 		set token = #{token}
 		where user_id = #{userid}
 	</update>
 	
 	<update id="deleteRefreshToken" parameterType="map">
-		update happy_house
+		update members
 		set token = #{token, jdbcType=VARCHAR}
 		where user_id = #{userid}
 	</update>
