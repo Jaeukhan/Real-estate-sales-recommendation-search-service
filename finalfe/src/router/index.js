@@ -69,19 +69,19 @@ const routes = [
     ],
   },
   {
-    path: "/user",
-    name: "user",
+    path: "/member",
+    name: "member",
     component: MemberView,
-    redirect: "/user/join",
+    redirect: "/member/join",
     children: [
       {
         path: "join",
-        name: "userRegister",
+        name: "memberRegister",
         component: () => import("@/components/member/MemberRegister"),
       },
       {
         path: "login",
-        name: "userLogin",
+        name: "memberLogin",
         component: () => import("@/components/member/MemberLogin"),
       },
     ],
