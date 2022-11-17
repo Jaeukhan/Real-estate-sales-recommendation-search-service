@@ -7,6 +7,7 @@ function apartInstance() {
       "Content-Type": "application/json;charset=utf-8",
     },
   });
+  return instance;
 }
 
 // local vue api axios instance
@@ -20,4 +21,4 @@ function apiInstance() {
   return instance;
 }
 
-export { houseInstance, apartInstance };
+export { apiInstance, apartInstance };

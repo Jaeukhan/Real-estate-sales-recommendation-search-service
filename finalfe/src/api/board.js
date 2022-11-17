@@ -10,7 +10,7 @@ function writeArticle(article, success, fail) {
 }
 
 function getArticle(articleno, success, fail) {
-  api.get(`/board/${articleno}`).then(success).catch(fail);
+  api.get(`/board/${articleno}`).then(success).then().catch(fail);
 }
 
 function modifyArticle(article, success, fail) {
@@ -21,4 +21,12 @@ function deleteArticle(articleno, success, fail) {
   api.delete(`/board/${articleno}`).then(success).catch(fail);
 }
 
-export { listArticle, writeArticle, getArticle, modifyArticle, deleteArticle };
+function writeComment(param, success, fail) {
+  api.post(`/comment/write`, param).then(success).catch(fail);
+}
+
+function getComment(articleno, success) {
+  api.get(`/comment/list/${articleno}`).then(success);
+}
+
+export { listArticle, writeArticle, getArticle, modifyArticle, deleteArticle, writeComment, getComment };

@@ -1,17 +1,21 @@
 <template>
   <b-container class="bv-example-row mt-3">
-   <b-row class="mt-4 mb-4 text-center">
-    <b-col>
-    <h5>NO.{{ article.articleno }}</h5>
-    </b-col>
-   </b-row>
+    <b-row class="mt-4 mb-4 text-center">
+      <b-col>
+        <h5>NO.{{ article.articleno }}</h5>
+      </b-col>
+    </b-row>
     <b-row class="mb-1">
       <b-col class="text-left">
         <b-button variant="outline-primary" @click="moveList"><b-icon icon="list" font-scale="0.9"></b-icon></b-button>
       </b-col>
       <b-col class="text-right">
-        <b-button variant="outline-info" size="sm" @click="moveModifyArticle" class="mr-2"><b-icon-pencil-square font-scale="1.2"></b-icon-pencil-square></b-button>
-        <b-button variant="outline-danger" size="sm" @click="deleteArticle"><b-icon-trash-fill font-scale="1.2"></b-icon-trash-fill></b-button>
+        <b-button variant="outline-info" size="sm" @click="moveModifyArticle" class="mr-2"
+          ><b-icon-pencil-square font-scale="1.2"></b-icon-pencil-square
+        ></b-button>
+        <b-button variant="outline-danger" size="sm" @click="deleteArticle"
+          ><b-icon-trash-fill font-scale="1.2"></b-icon-trash-fill
+        ></b-button>
       </b-col>
     </b-row>
     <b-row class="mb-1">
@@ -31,9 +35,9 @@
         </b-card>
       </b-col>
     </b-row>
-    <br>
-    <br>
-    <br>
+    <br />
+    <br />
+    <br />
     <b-row>
       <b-col>
         <b-form class="text-left">
@@ -49,7 +53,9 @@
         </b-form>
       </b-col>
       <b-col cols="2">
-        <b-button @click="cregist" style="background-color: rgba(94, 100, 114, 0.4)"><b-icon-clipboard-check></b-icon-clipboard-check></b-button>
+        <b-button @click="cregist" style="background-color: rgba(94, 100, 114, 0.4)"
+          ><b-icon-clipboard-check></b-icon-clipboard-check
+        ></b-button>
       </b-col>
     </b-row>
     <b-row v-if="comment_list.length">
@@ -66,7 +72,7 @@
 
 <script>
 // import moment from "moment";
-import http from "@/api/http";
+import { getArticle, writeComment, getComment } from "@/api/board";
 
 export default {
   name: "BoardDetail",
@@ -89,22 +95,38 @@ export default {
     },
   },
   created() {
-    this.getComments();
+    this.getItems();
   },
   methods: {
-    getComments() {
-      http
-        .get(`/board/${this.$route.params.articleno}`)
-        .then(({ data }) => {
-          //   console.log(data);
+    getItems() {
+      let param = this.$route.params.articleno;
+      getArticle(
+        param,
+        ({ data }) => {
           this.article = data;
-        })
-        .then(() => {
-          http.get(`/comment/list/${this.article.articleno}`).then(({ data }) => {
-            console.log(data);
-            this.comment_list = data;
+        },
+        () => {
+          getComment(param, ({ data2 }) => {
+            console.log(data2);
+            this.comment_list = data2;
           });
-        });
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+      // http
+      //   .get(`/board/${this.$route.params.articleno}`)
+      //   .then(({ data }) => {
+      //     //   console.log(data);
+      //     this.article = data;
+      //   })
+      //   .then(() => {
+      //     http.get(`/comment/list/${this.article.articleno}`).then(({ data }) => {
+      //       console.log(data);
+      //       this.comment_list = data;
+      //     });
+      //   });
     },
     moveModifyArticle() {
       this.$router.replace({
@@ -125,18 +147,21 @@ export default {
       this.$router.push({ name: "boardlist" });
     },
     cregist() {
-      http
-        .post(`/comment/write`, {
-          articleno: this.article.articleno,
-          cwriter: this.article.userid,
-          ccontent: this.ccontent,
-        })
-        .then(({ data }) => {
+      let param = {
+        articleno: this.article.articleno,
+        cwriter: this.article.userid,
+        ccontent: this.ccontent,
+      };
+      writeComment(
+        param,
+        ({ data }) => {
           console.log(data);
-          // this.comment_list = data;
-          this.getComments();
-        });
-      this.ccontent = "";
+          this.getItems();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     },
   },
   // filters: {
