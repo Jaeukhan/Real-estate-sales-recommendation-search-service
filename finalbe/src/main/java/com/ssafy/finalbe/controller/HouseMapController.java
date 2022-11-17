@@ -103,15 +103,6 @@ public class HouseMapController {
 		return new ResponseEntity<String>(jsonStr, HttpStatus.OK);
 	}
 
-	@GetMapping("/dong")
-	public ResponseEntity<List<HouseInfoDto>> dong(@RequestParam("gugun") String gugun) throws Exception {
-		logger.info("dong - 호출");
-		return new ResponseEntity<List<HouseInfoDto>>(service.getDongInGugun(gugun), HttpStatus.OK);
-	}
 	
-	@GetMapping("/apt")
-	public ResponseEntity<List<HouseInfoDto>> apt(@RequestParam("dong") String dong) throws Exception {
-		return new ResponseEntity<List<HouseInfoDto>>(service.getAptInDong(dong), HttpStatus.OK);
-	}
 
 }
