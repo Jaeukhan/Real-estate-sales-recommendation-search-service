@@ -50,7 +50,7 @@ export default {
         { key: "regtime", label: "작성일", tdClass: "tdClass" },
         { key: "hit", label: "조회수", tdClass: "tdClass" },
       ],
-      currentPate: 1,
+      currentPage: 1,
       rows: 0,
       perPage: 10,
     };
@@ -66,7 +66,7 @@ export default {
       param,
       ({ data }) => {
         this.articles = data;
-        console.log(data);
+        // console.log(data);
         this.rows = this.articles.length;
       },
       (error) => {
