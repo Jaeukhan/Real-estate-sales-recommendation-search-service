@@ -13,14 +13,8 @@
           ></b-form-input>
         </b-form-group>
 
-        <b-form-group id="subject-group" label="Title" label-for="subject" >
-          <b-form-input
-            id="subject"
-            v-model="article.subject"
-            type="text"
-            required
-            placeholder="제목"
-          ></b-form-input>
+        <b-form-group id="subject-group" label="Title" label-for="subject">
+          <b-form-input id="subject" v-model="article.subject" type="text" required placeholder="제목"></b-form-input>
         </b-form-group>
 
         <b-form-group id="content-group" label="Content" label-for="content">
@@ -33,7 +27,9 @@
           ></b-form-textarea>
         </b-form-group>
 
-        <b-button type="submit" variant="primary" class="m-1" v-if="this.type === 'register'"><b-icon-check-lg></b-icon-check-lg></b-button>
+        <b-button type="submit" variant="primary" class="m-1" v-if="this.type === 'register'"
+          ><b-icon-check-lg></b-icon-check-lg
+        ></b-button>
         <b-button type="submit" variant="primary" class="m-1" v-else>글수정</b-button>
         <b-button type="reset" variant="danger" class="m-1"><b-icon-eraser-fill></b-icon-eraser-fill>초기화</b-button>
       </b-form>
@@ -42,7 +38,7 @@
 </template>
 
 <script>
-import http from "@/api/http";
+import { writeArticle, modifyArticle, getArticle } from "@/api/board";
 
 export default {
   name: "BoardInputItem",
@@ -62,13 +58,20 @@ export default {
   },
   created() {
     if (this.type === "modify") {
-      http.get(`/board/${this.$route.params.articleno}`).then(({ data }) => {
-        // this.article.articleno = data.article.articleno;
-        // this.article.userid = data.article.userid;
-        // this.article.subject = data.article.subject;
-        // this.article.content = data.article.content;
-        this.article = data;
-      });
+      let param = this.$route.params.articleno;
+      getArticle(
+        param,
+        ({ data }) => {
+          // this.article.articleno = data.article.articleno;
+          // this.article.userid = data.article.userid;
+          // this.article.subject = data.article.subject;
+          // this.article.content = data.article.content;
+          this.article = data;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
       this.isUserid = true;
     }
   },
@@ -93,30 +96,36 @@ export default {
       this.moveList();
     },
     registArticle() {
-      http
-        .post(`/board`, {
-          userid: this.article.userid,
-          subject: this.article.subject,
-          content: this.article.content,
-        })
-        .then(({ data }) => {
+      let param = {
+        userid: this.article.userid,
+        subject: this.article.subject,
+        content: this.article.content,
+      };
+      writeArticle(
+        param,
+        ({ data }) => {
           let msg = "등록 처리시 문제가 발생했습니다.";
           if (data === "success") {
             msg = "등록이 완료되었습니다.";
           }
           alert(msg);
           this.moveList();
-        });
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     },
     modifyArticle() {
-      http
-        .put(`/board`, {
-          articleno: this.article.articleno,
-          userid: this.article.userid,
-          subject: this.article.subject,
-          content: this.article.content,
-        })
-        .then(({ data }) => {
+      let param = {
+        articleno: this.article.articleno,
+        userid: this.article.userid,
+        subject: this.article.subject,
+        content: this.article.content,
+      };
+      modifyArticle(
+        param,
+        ({ data }) => {
           let msg = "수정 처리시 문제가 발생했습니다.";
           if (data === "success") {
             msg = "수정이 완료되었습니다.";
@@ -124,7 +133,11 @@ export default {
           alert(msg);
           // 현재 route를 /list로 변경.
           this.moveList();
-        });
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     },
     moveList() {
       this.$router.push({ name: "boardlist" });

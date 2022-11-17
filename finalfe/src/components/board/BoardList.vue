@@ -66,16 +66,12 @@ export default {
       param,
       ({ data }) => {
         this.articles = data;
+        this.rows = this.articles.length;
       },
       (error) => {
         console.log(error);
       }
     );
-    http.get(`/board`).then(({ data }) => {
-      //   console.log(data[0]);
-      this.articles = data;
-      this.rows = this.articles.length;
-    });
   },
   methods: {
     moveWrite() {
