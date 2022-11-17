@@ -13,7 +13,7 @@
         <b-navbar-nav>
           <b-link to="/" router-tag="b-nav-item">HOME</b-link>
           <b-link to="/board" router-tag="b-nav-item">BOARD</b-link>
-          <b-link to="/user" router-tag="b-nav-item">USER</b-link>
+          <b-link to="/member" router-tag="b-nav-item">USER</b-link>
           <b-link to="/map" router-tag="b-nav-item">MAP</b-link>
         </b-navbar-nav>
 
