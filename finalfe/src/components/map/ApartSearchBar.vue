@@ -73,6 +73,7 @@ export default {
     };
   },
   created() {
+    this.CLEAR_SIDO_LIST();
     this.CLEAR_APT_LIST();
     this.getSido(); //시도정보 불러오기(db)
   },
@@ -90,6 +91,8 @@ export default {
     ]),
     ...mapActions(mapStore, ["getSido", "getGugun", "getApt"]),
     getGuguns() {
+      this.CLEAR_GUGUN_LIST();
+      this.gugun = null;
       if (this.sido) {
         this.getGugun(this.sido);
       }
