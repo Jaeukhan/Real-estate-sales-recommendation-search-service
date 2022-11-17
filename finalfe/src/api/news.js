@@ -6,7 +6,6 @@ function getNewsList(success, fail) {
 }
 
 function newsInit(success, fail) {
-  console.log("안으로");
   api.get(`/news`).then(success).catch(fail);
 }
 

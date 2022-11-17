@@ -1,6 +1,7 @@
 <template>
   <div>
     <apart-search-bar></apart-search-bar>
+    <KakaoMap />
     <b-container v-if="aparts && aparts.length > 0" class="bv-example-row mt-3">
       <b-row>
         <b-table
@@ -32,6 +33,7 @@
 
 <script>
 import ApartSearchBar from "@/components/map/ApartSearchBar.vue";
+import KakaoMap from "@/components/map/KakaoMap";
 import { mapState } from "vuex";
 
 const mapStore = "mapStore";
@@ -40,6 +42,7 @@ export default {
   name: "ApartList",
   components: {
     ApartSearchBar,
+    KakaoMap,
   },
   data() {
     return {
@@ -61,5 +64,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

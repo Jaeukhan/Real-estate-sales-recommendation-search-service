@@ -57,17 +57,17 @@
         </div>
       </b-col>
     </b-row>
-    <b-row>
+    <!-- <b-row>
       <div>
         <img :src="cimg" alt="" />
       </div>
-    </b-row>
+    </b-row> -->
   </b-container>
 </template>
 
 <script>
 import { getNewsList, newsInit } from "@/api/news";
-import { getImage } from "@/api/naver";
+// import { getImage } from "@/api/naver";
 export default {
   name: "HomeView",
   data() {
@@ -100,19 +100,20 @@ export default {
     //     this.news_list = data;
     //   });
     // }
-    let param = "아파트";
-    getImage(
-      param,
-      ({ data }) => {
-        console.log(data);
-        this.cimg = data.items[0].link;
-        // this.news_list = data;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    // let param = "아파트";
+    // getImage(
+    //   param,
+    //   ({ data }) => {
+    //     console.log(data);
+    //     this.cimg = data.items[0].link;
+    //     // this.news_list = data;
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // );
   },
+  mounted() {},
   methods: {
     onSlideStart() {
       this.sliding = true;
