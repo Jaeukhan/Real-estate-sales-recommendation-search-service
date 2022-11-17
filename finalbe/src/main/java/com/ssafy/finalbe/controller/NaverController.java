@@ -1,10 +1,11 @@
-package com.ssafy.rest.controller;
+package com.ssafy.finalbe.controller;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -12,19 +13,14 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 @RestController
 @RequestMapping("/naver")
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 public class NaverController {
 	@GetMapping("/blog")
 	public String blog(String keyword) {
-		String clientId = "49rr4ZKrm5vTD0xCNbGg"; //애플리케이션 클라이언트 아이디
-        String clientSecret = "xQbcLf8zk8"; //애플리케이션 클라이언트 시크릿
+		String clientId = "xUnDHca_blUkKDYv2cWz"; //애플리케이션 클라이언트 아이디
+        String clientSecret = "zQ8VGS2rNa"; //애플리케이션 클라이언트 시크릿
 
 		String text = null;
 		try {
@@ -35,6 +31,29 @@ public class NaverController {
 
 		String apiURL = "https://openapi.naver.com/v1/search/blog?query=" + text; // JSON 결과
 		// String apiURL = "https://openapi.naver.com/v1/search/blog.xml?query="+ text;
+		// // XML 결과
+
+		Map<String, String> requestHeaders = new HashMap<>();
+		requestHeaders.put("X-Naver-Client-Id", clientId);
+		requestHeaders.put("X-Naver-Client-Secret", clientSecret);
+		String responseBody = get(apiURL, requestHeaders);
+		return responseBody;
+	}
+
+	@GetMapping("/image")
+	public String image(String keyword) {
+		String clientId = "xUnDHca_blUkKDYv2cWz"; //애플리케이션 클라이언트 아이디
+		String clientSecret = "zQ8VGS2rNa"; //애플리케이션 클라이언트 시크릿
+
+		String text = null;
+		try {
+			text = URLEncoder.encode(keyword, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			throw new RuntimeException("검색어 인코딩 실패", e);
+		}
+
+		String apiURL = "https://openapi.naver.com/v1/search/image.xml=" + text; // JSON 결과
+
 		// // XML 결과
 
 		Map<String, String> requestHeaders = new HashMap<>();

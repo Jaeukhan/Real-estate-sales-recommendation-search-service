@@ -9,8 +9,8 @@ function writeArticle(article, success, fail) {
   api.post(`/board`, JSON.stringify(article)).then(success).catch(fail);
 }
 
-function getArticle(articleno, success, fail) {
-  api.get(`/board/${articleno}`).then(success).then().catch(fail);
+function getArticle(articleno, success1, success2, fail) {
+  api.get(`/board/${articleno}`).then(success1).then(success2).catch(fail);
 }
 
 function modifyArticle(article, success, fail) {
