@@ -67,6 +67,8 @@ export default {
   data() {
     return {
       news_list: [],
+      slide: 0,
+      sliding: null,
     };
   },
   created() {
@@ -75,6 +77,14 @@ export default {
         this.news_list = data;
       });
     });
+  },
+  methods: {
+    onSlideStart() {
+      this.sliding = true;
+    },
+    onSlideEnd() {
+      this.sliding = false;
+    },
   },
 };
 </script>

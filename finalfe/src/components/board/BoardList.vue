@@ -66,6 +66,7 @@ export default {
       param,
       ({ data }) => {
         this.articles = data;
+        console.log(data);
         this.rows = this.articles.length;
       },
       (error) => {
