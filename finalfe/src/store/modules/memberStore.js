@@ -19,12 +19,6 @@ const memberStore = {
     },
   },
   mutations: {
-    // CREATE_USER: function (state, user) {
-    //   state.users.push(user);
-    // },
-    // SET_LOGIN_USER: function (state, user) {
-    //   state.loginUser = user;
-    // },
     SET_IS_LOGIN: (state, isLogin) => {
       state.isLogin = isLogin;
     },
@@ -40,11 +34,6 @@ const memberStore = {
     },
   },
   actions: {
-    // createUser: function ({ commit }, user) {
-    //   commit("CREATE_USER", user);
-    //   alert("회원가입이 완료되었습니다");
-    //   router.push("/user");
-    // },
     async memberConfirm({ commit }, member) {
       console.log("여기 memberConfrim: ", member);
       await login(

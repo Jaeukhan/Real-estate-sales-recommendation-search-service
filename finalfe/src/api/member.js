@@ -20,4 +20,13 @@ async function logout(userid, success, fail) {
   await api.get(`/member/logout/${userid}`).then(success).catch(fail);
 }
 
-export { login, findById, tokenRegeneration, logout };
+function regist(member, success, fail) {
+  console.log(member);
+  api.post(`/member/regist`, JSON.stringify(member)).then(success).catch(fail);
+}
+
+function modify(member, success, fail) {
+  api.put(`/member`, JSON.stringify(member)).then(success).catch(fail);
+}
+
+export { login, findById, tokenRegeneration, logout, regist, modify };

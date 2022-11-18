@@ -76,13 +76,23 @@ const routes = [
     children: [
       {
         path: "join",
-        name: "memberRegister",
-        component: () => import("@/components/member/MemberRegister"),
+        name: "memberRegist",
+        component: () => import("@/components/member/MemberRegist"),
       },
       {
         path: "login",
         name: "memberLogin",
         component: () => import("@/components/member/MemberLogin"),
+      },
+      {
+        path: "mypage",
+        name: "memberInfo",
+        component: () => import("@/components/member/MemberInfo"),
+      },
+      {
+        path: "modify",
+        name: "memberModify",
+        component: () => import("@/components/member/MemberModify"),
       },
     ],
   },

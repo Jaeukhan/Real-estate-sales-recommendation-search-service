@@ -83,7 +83,7 @@ export default {
       }
     },
     movePage() {
-      this.$router.push({name: "memberRegister"});
+      this.$router.push({name: "memberRegist"});
     },
   },
 };

@@ -17,19 +17,20 @@
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
-          <!-- 로그인 전 nav bar -->
+        <!-- 로그인 후 nav bar -->
         <b-navbar-nav class="ml-auto" v-if="memberInfo">
           <b-nav-item>
             {{memberInfo.userid}} 님 환영합니다!
           </b-nav-item>
-            <b-link to="/" router-tag="b-nav-item">MYPAGE</b-link>
+            <b-link :to="{name: 'memberInfo'}" router-tag="b-nav-item">MYPAGE</b-link>
             <b-nav-item @click.prevent="Logout">
               LOGOUT
             </b-nav-item>
         </b-navbar-nav>
+          <!-- 로그인 전 nav bar -->
         <b-navbar-nav class="ml-auto" v-else>
             <b-link to="/member" router-tag="b-nav-item">LOG IN</b-link>
-            <b-link :to="{ name: 'memberRegister' }" router-tag="b-nav-item">SIGN UP</b-link>
+            <b-link :to="{ name: 'memberRegist' }" router-tag="b-nav-item">SIGN UP</b-link>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>

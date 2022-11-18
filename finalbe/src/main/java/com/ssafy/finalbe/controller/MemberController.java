@@ -1,5 +1,6 @@
 package com.ssafy.finalbe.controller;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,9 +11,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -99,6 +102,35 @@ public class MemberController {
 		}
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
+	
+	@ApiOperation(value = "회원가입", notes = "회원가입 결과를 반환한다.", response = Map.class)
+	@PostMapping("/regist")
+	public ResponseEntity<String> regist(@RequestBody @ApiParam(value = "회원가입에 사용되는 정보") MemberDto member) throws Exception {
+		System.out.println("여기 멤버 컨트롤러 회원가입: "+member.toString());
+		if(memberService.regist(member)==1) {
+			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+		}
+		return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
+	}
+	
+	@ApiOperation(value = "회원 정보 수정", notes = "회원 정보 수정 결과를 반환한다.", response = Map.class)
+	@PutMapping
+	public ResponseEntity<String> modify(@RequestBody @ApiParam(value = "회원정보 수정에 사용되는 정보")MemberDto member) throws Exception {
+		if(memberService.updateInfo(member)==1) {
+			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+		}
+		return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
+	}
+	
+	@ApiOperation(value = "회원탈퇴", notes = "회원탈퇴 결과를 반환한다.", response = Map.class)
+	@DeleteMapping
+	public ResponseEntity<String> delete(@PathVariable("userid") @ApiParam(value="삭제할 회원 아이디") String userid) throws Exception {
+		if(memberService.delete(userid)==1) {
+			
+			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+		}
+		return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
+	}
 
 	@ApiOperation(value = "로그아웃", notes = "회원 정보를 담은 Token을 제거한다.", response = Map.class)
 	@GetMapping("/logout/{userid}")
@@ -117,6 +149,8 @@ public class MemberController {
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 
 	}
+	
+
 
 	@ApiOperation(value = "Access Token 재발급", notes = "만료된 access token을 재발급받는다.", response = Map.class)
 	@PostMapping("/refresh")

@@ -1,5 +1,6 @@
 package com.ssafy.finalbe.model.service;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,6 +28,21 @@ public class MemberServiceImpl implements MemberService {
 	public MemberDto userInfo(String userid) throws Exception {
 		return sqlSession.getMapper(MemberMapper.class).userInfo(userid);
 	}
+	
+	@Override
+	public int regist(MemberDto memberDto) throws SQLException {
+		return sqlSession.getMapper(MemberMapper.class).regist(memberDto);
+	}
+
+	@Override
+	public int updateInfo(MemberDto memberDto) throws SQLException {
+		return sqlSession.getMapper(MemberMapper.class).updateInfo(memberDto);
+	}
+
+	@Override
+	public int delete(String userid) throws SQLException {
+		return sqlSession.getMapper(MemberMapper.class).delete(userid);
+	}
 
 	@Override
 	public void saveRefreshToken(String userid, String refreshToken) throws Exception {
@@ -48,5 +64,7 @@ public class MemberServiceImpl implements MemberService {
 		map.put("token", null);
 		sqlSession.getMapper(MemberMapper.class).deleteRefreshToken(map);
 	}
+
+	
 
 }
