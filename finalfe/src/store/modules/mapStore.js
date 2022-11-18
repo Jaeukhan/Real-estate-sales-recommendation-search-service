@@ -6,7 +6,7 @@ const mapStore = {
     sidos: [{ value: null, text: "시/도 선택" }],
     guguns: [{ value: null, text: "구/군 선택" }],
     aparts: [],
-    apt: {},
+    apt: {}, //아파트 주소랑(load), 아파트 이름(aptName)
     sidoName: "",
     gugunName: "",
   },

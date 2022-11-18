@@ -2,7 +2,7 @@
   <div align-v="center" align-h="center" style="text-align: center">
     <h3 v-if="apt">{{ apt.aptName }}</h3>
     <div id="map" style="margin-right: 0" align-h="center"></div>
-    <b-button @click="movelocation()">마커</b-button>
+    <b-button @click="movelocation()">매물로 이동</b-button>
   </div>
 </template>
 
@@ -31,7 +31,7 @@ export default {
     this.CLEAR_APT();
   },
   computed: {
-    ...mapState(mapStore, ["apt"]),
+    ...mapState(mapStore, ["apt"]), //apt.load, apt.
   },
   methods: {
     ...mapMutations(mapStore, ["CLEAR_APT"]),
@@ -90,6 +90,13 @@ export default {
       // 지도 중심을 이동 시킵니다
       this.map.setCenter(moveLatLon);
     },
+    movelocation() {
+      console.log(this.apt.load);
+      this.aptAddr = this.apt.load;
+      console.log("x");
+      this.searchSubmit();
+    },
+
     searchSubmit() {
       console.log("1");
       console.log(this.aptAddr);
@@ -106,10 +113,6 @@ export default {
           this.map.setBounds(bounds);
         }
       });
-    },
-    movelocation() {
-      console.log("x");
-      this.searchSubmit();
     },
   },
   mounted() {
