@@ -8,11 +8,7 @@
       <b-card title="conditions">
         <b-row class="mt-4 mb-4 text-center">
           <b-col>
-            <b-form-select
-              v-model="sido"
-              :options="sidos"
-              @change="getGuguns()"
-            ></b-form-select>
+            <b-form-select v-model="sido" :options="sidos" @change="getGuguns()"></b-form-select>
           </b-col>
           <b-col>
             <b-form-select v-model="gugun" :options="guguns"></b-form-select>
@@ -42,30 +38,8 @@ export default {
   name: "ApartSearchBar",
   data() {
     return {
-      yearList: [
-        "2022",
-        "2021",
-        "2020",
-        "2019",
-        "2018",
-        "2017",
-        "2016",
-        "2015",
-      ],
-      monthList: [
-        "01",
-        "02",
-        "03",
-        "04",
-        "05",
-        "06",
-        "07",
-        "08",
-        "09",
-        "10",
-        "11",
-        "12",
-      ],
+      yearList: ["2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015"],
+      monthList: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
       sido: null,
       gugun: null,
       year: null,
@@ -79,6 +53,12 @@ export default {
   },
   computed: {
     ...mapState(mapStore, ["sidos", "guguns", "aparts"]),
+    sidoName: function () {
+      return this.sidos.find((option) => option.value === this.sido);
+    },
+    gugunName() {
+      return this.guguns.find((option) => option.value === this.gugun);
+    },
   },
   methods: {
     ...mapMutations(mapStore, [
@@ -101,6 +81,8 @@ export default {
       if (this.sido && this.gugun && this.year && this.month) {
         let date = this.year + this.month;
         let param = {
+          sidoName: this.sidoName.text,
+          gugunName: this.gugunName.text,
           gugun: this.gugun,
           date: date,
         };

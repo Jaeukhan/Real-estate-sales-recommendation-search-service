@@ -11,6 +11,7 @@
           id="aptlist-table"
           :per-page="perPage"
           :current-page="currentPage"
+          @row-clicked="moveloc"
         ></b-table>
       </b-row>
       <b-row class="justify-content-md-center">
@@ -34,7 +35,7 @@
 <script>
 import ApartSearchBar from "@/components/map/ApartSearchBar.vue";
 import KakaoMap from "@/components/map/KakaoMap";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 const mapStore = "mapStore";
 
@@ -57,6 +58,12 @@ export default {
       rows: 0,
       perPage: 10,
     };
+  },
+  methods: {
+    ...mapActions(mapStore, ["getAptOne"]),
+    moveloc(apart) {
+      this.getAptOne(apart);
+    },
   },
   computed: {
     ...mapState(mapStore, ["aparts"]),

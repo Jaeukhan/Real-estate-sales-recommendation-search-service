@@ -83,7 +83,7 @@ export default {
       () => {
         getNewsList(
           ({ data }) => {
-            console.log(data);
+            // console.log(data);
             this.news_list = data;
           },
           (error2) => {

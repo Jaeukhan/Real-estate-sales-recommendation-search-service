@@ -1,26 +1,40 @@
 <template>
   <div align-v="center" align-h="center" style="text-align: center">
-    <h3>지도</h3>
+    <h3 v-if="apt">{{ apt.aptName }}</h3>
     <div id="map" style="margin-right: 0" align-h="center"></div>
-    <b-button @click="displayMarker(markerPositions1)">마커</b-button>
+    <b-button @click="movelocation()">마커</b-button>
   </div>
 </template>
 
 <script>
+import { mapMutations, mapState } from "vuex";
+
+const mapStore = "mapStore";
+
 export default {
   name: "KakaoMap",
   data() {
     return {
       map: null,
+      geocoder: null,
       markers: [],
+      infowindow: null,
       markerPositions1: [
         [33.452278, 126.567803],
         [33.452671, 126.574792],
         [33.451744, 126.572441],
       ],
+      aptAddr: "",
     };
   },
+  created() {
+    this.CLEAR_APT();
+  },
+  computed: {
+    ...mapState(mapStore, ["apt"]),
+  },
   methods: {
+    ...mapMutations(mapStore, ["CLEAR_APT"]),
     initMap() {
       const mapContainer = document.getElementById("map");
       const mapOption = {
@@ -28,6 +42,7 @@ export default {
         level: 3, // 지도의 확대 레벨
       };
       this.map = new kakao.maps.Map(mapContainer, mapOption);
+      this.geocoder = new kakao.maps.services.Geocoder();
     },
     displayMarker(markerPositions) {
       if (this.markers.length > 0) {
@@ -70,19 +85,42 @@ export default {
 
       this.map.setCenter(iwPosition);
     },
+    setCenter(lat, lon) {
+      let moveLatLon = new kakao.maps.LatLng(lat, lon);
+      // 지도 중심을 이동 시킵니다
+      this.map.setCenter(moveLatLon);
+    },
+    searchSubmit() {
+      console.log("1");
+      console.log(this.aptAddr);
+      this.geocoder.addressSearch(this.aptAddr, (result, status) => {
+        console.log("2");
+        if (status === kakao.maps.services.Status.OK) {
+          let bounds = new kakao.maps.LatLngBounds();
+
+          for (let i = 0; i < result.length; i++) {
+            let data = result[i];
+            bounds.extend(new kakao.maps.LatLng(data.y, data.x));
+          }
+
+          this.map.setBounds(bounds);
+        }
+      });
+    },
+    movelocation() {
+      console.log("x");
+      this.searchSubmit();
+    },
   },
   mounted() {
-    if (!window.kakao || !window.kakao.maps) {
-      const script = document.createElement("script");
-      script.onload = () => kakao.maps.load(this.initMap);
-      script.src = `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=76f9cc9f657dbe8ff6bf3180b7a0f4db`;
-      document.head.appendChild(script);
-      /*global kakao*/
-      script.addEventListener("load", () => {
-        console.log("loaded", kakao);
-      });
-    } else {
+    if (window.kakao && window.kakao.maps) {
       this.initMap();
+    } else {
+      const script = document.createElement("script");
+      /*global kakao*/
+      script.onload = () => kakao.maps.load(this.initMap);
+      script.src = `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=76f9cc9f657dbe8ff6bf3180b7a0f4db&libraries=services`;
+      document.head.appendChild(script);
     }
   },
 };
@@ -90,7 +128,7 @@ export default {
 
 <style scoped>
 #map {
-  width: 100&;
+  width: 100%;
   height: 500px;
 }
 </style>
