@@ -106,9 +106,9 @@ export default {
           this.article = data;
         },
         () => {
-          getComment(param, ({ data2 }) => {
-            console.log(data2);
-            this.comment_list = data2;
+          getComment(param, ({ data }) => {
+            console.log(data);
+            this.comment_list = data;
           });
         },
         (error) => {
