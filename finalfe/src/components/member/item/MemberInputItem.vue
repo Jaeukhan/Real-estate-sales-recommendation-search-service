@@ -40,8 +40,8 @@
 </template>
 
 <script>
-import {regist, modify} from "@/api/member";
-import {mapState} from "vuex";
+import { regist, modify } from "@/api/member";
+import { mapState, mapActions } from "vuex";
 
 const memberStore = "memberStore";
 
@@ -59,10 +59,10 @@ export default {
     };
   },
   props: {
-    type: {type: String},
+    type: { type: String },
   },
   created() {
-    if(this.type === "modify") {
+    if (this.type === "modify") {
       this.member.id = this.memberInfo.userid;
       this.member.name = this.memberInfo.username;
       this.member.email = this.memberInfo.email;
@@ -73,54 +73,50 @@ export default {
     ...mapState(memberStore, ["memberInfo"]),
   },
   methods: {
-      onSubmit(event) {
-        event.preventDefault();
-        
-        if (this.id === "" || this.password === "" || this.name === "" || this.email === "") {
-          alert("모든 내용을 입력해주세요");
-          return;
+    ...mapActions(memberStore, ["getMemberInfo"]),
+    onSubmit(event) {
+      event.preventDefault();
+
+      if (this.id === "" || this.password === "" || this.name === "" || this.email === "") {
+        alert("모든 내용을 입력해주세요");
+        return;
+      } else this.type === "regist" ? this.memberRegist() : this.memberModify();
+    },
+    memberRegist() {
+      let param = {
+        userid: this.member.id,
+        userpwd: this.member.password,
+        username: this.member.name,
+        email: this.member.email,
+      };
+      regist(param, ({ data }) => {
+        if (data === "success") {
+          alert("회원가입이 완료되었습니다.");
+        } else {
+          alert("회원가입 오류!");
         }
-        else this.type === "regist" ? this.memberRegist() : this.memberModify();
-      },
-      memberRegist() {
-        let param = {
-          userid: this.member.id,
-          userpwd: this.member.password,
-          username: this.member.name,
-          email: this.member.email,
-        };
-        regist(
-          param, 
-          ({data}) => {
-            if(data === "success") {
-              alert("회원가입이 완료되었습니다.");
-            } else {
-              alert("회원가입 오류!");
-            }
-            this.$router.push({name: "member"});
-          },
-        );
-      },
-      memberModify() {
-        let param = {
-          userid: this.member.id,
-          userpwd: this.member.password,
-          username: this.member.name,
-          email: this.member.email,
-        };
-        modify(
-          param, 
-          ({data}) => {
-            if(data==="success") {
-              alert("회원 정보 수정 왼료!");
-            } else {
-              alert("회원 정보 수정 오류..");
-            }
-            this.$router.push({name: "memberInfo"});
-          }
-        )
+        this.$router.push({ name: "member" });
+      });
+    },
+    memberModify() {
+      let param = {
+        userid: this.member.id,
+        userpwd: this.member.password,
+        username: this.member.name,
+        email: this.member.email,
+      };
+      modify(param, ({ data }) => {
+        if (data === "success") {
+          let token = sessionStorage.getItem("access-token");
+          this.getMemberInfo(token);
+          alert("회원 정보 수정 왼료!");
+        } else {
+          alert("회원 정보 수정 오류..");
         }
-      },
+        this.$router.push({ name: "memberInfo" });
+      });
+    },
+  },
 };
 </script>
 
