@@ -123,10 +123,10 @@ public class MemberController {
 	}
 	
 	@ApiOperation(value = "회원탈퇴", notes = "회원탈퇴 결과를 반환한다.", response = Map.class)
-	@DeleteMapping
+	@DeleteMapping("/{userid}")
 	public ResponseEntity<String> delete(@PathVariable("userid") @ApiParam(value="삭제할 회원 아이디") String userid) throws Exception {
 		if(memberService.delete(userid)==1) {
-			
+			removeToken(userid);
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		}
 		return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);

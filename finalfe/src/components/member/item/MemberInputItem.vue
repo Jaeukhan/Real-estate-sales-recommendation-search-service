@@ -30,7 +30,12 @@
             </b-form-group>
 
             <b-button type="submit" class="m-1" v-if="this.type === 'regist'">SIGN UP</b-button>
-            <b-button type="submit" class="m-1" v-else>MODIFY</b-button>
+            <div v-else>
+            <b-button type="submit" class="m-1">MODIFY</b-button>
+            <b-button variant="outline-danger" size="sm" @click="memberDelete()"
+                ><b-icon-trash-fill font-scale="1.2"></b-icon-trash-fill
+                ></b-button>
+                </div>
           </b-form>
         </b-card>
       </b-col>
@@ -40,7 +45,7 @@
 </template>
 
 <script>
-import { regist, modify } from "@/api/member";
+import { regist, modify, remove } from "@/api/member";
 import { mapState, mapActions } from "vuex";
 
 const memberStore = "memberStore";
@@ -73,7 +78,7 @@ export default {
     ...mapState(memberStore, ["memberInfo"]),
   },
   methods: {
-    ...mapActions(memberStore, ["getMemberInfo"]),
+    ...mapActions(memberStore, ["getMemberInfo", "memberLogout"]),
     onSubmit(event) {
       event.preventDefault();
 
@@ -115,6 +120,26 @@ export default {
         }
         this.$router.push({ name: "memberInfo" });
       });
+    },
+    memberDelete() {
+      let param = this.memberInfo.userid;
+      if (confirm("정말 탈퇴하시겠습니까?")) {
+        remove(param, ({data}) => {
+          if(data === "success"){
+            alert("회원 탈퇴가 완료되었습니다!");
+            this.memberLogout(this.memberInfo.userid);
+            sessionStorage.removeItem("access-token");
+            sessionStorage.removeItem("refresh-token");            
+            this.$router.push({name: "home"});
+            return;
+          } else {
+            alert("회원 탈퇴 중 오류 발생");
+          }
+        });    
+      } else {
+        alert("회원 탈퇴가 취소되었습니다!");
+      }
+      this.$router.push({name: "memberInfo"});
     },
   },
 };

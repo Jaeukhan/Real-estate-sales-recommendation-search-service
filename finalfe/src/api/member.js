@@ -29,4 +29,8 @@ function modify(member, success, fail) {
   api.put(`/member`, JSON.stringify(member)).then(success).catch(fail);
 }
 
-export { login, findById, tokenRegeneration, logout, regist, modify };
+function remove(userid, success, fail) {
+  api.delete(`/member/${userid}`).then(success).catch(fail);
+}
+
+export { login, findById, tokenRegeneration, logout, regist, modify, remove };

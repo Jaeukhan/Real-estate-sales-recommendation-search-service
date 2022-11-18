@@ -8,9 +8,6 @@
                 <b-button variant="outline-info" size="sm"  class="mr-2" @click="moveModify"
                 ><b-icon-pencil-square font-scale="1.2"></b-icon-pencil-square
                 ></b-button>
-                <b-button variant="outline-danger" size="sm" 
-                ><b-icon-trash-fill font-scale="1.2"></b-icon-trash-fill
-                ></b-button>
             </b-col>
         </b-row>
         <div> id: {{ memberInfo.userid }} </div>
