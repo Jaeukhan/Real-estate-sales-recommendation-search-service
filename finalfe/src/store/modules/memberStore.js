@@ -11,7 +11,7 @@ const memberStore = {
     isValidToken: false,
   },
   getters: {
-    checkUserInfo: function (state) {
+    checkMemberInfo: function (state) {
       return state.userInfo;
     },
     checkToken: function (state) {
@@ -33,6 +33,10 @@ const memberStore = {
     },
     SET_IS_VALID_TOKEN: (state, isValidToken) => {
       state.isValidToken = isValidToken;
+    },
+    SET_MEMBER_INFO: (state, memberInfo) => {
+      state.isLogin = true;
+      state.memberInfo = memberInfo;
     },
   },
   actions: {
@@ -122,23 +126,23 @@ const memberStore = {
         }
       );
     },
-  },
-  async memberLogout({ commit }, userid) {
-    await logout(
-      userid,
-      ({ data }) => {
-        if (data.message === "success") {
-          commit("SET_IS_LOGIN", false);
-          commit("SET_MEMBER_INFO", null);
-          commit("SET_IS_VALID_TOKEN", false);
-        } else {
-          console.log("No Member Info");
+    async memberLogout({ commit }, userid) {
+      await logout(
+        userid,
+        ({ data }) => {
+          if (data.message === "success") {
+            commit("SET_IS_LOGIN", false);
+            commit("SET_MEMBER_INFO", null);
+            commit("SET_IS_VALID_TOKEN", false);
+          } else {
+            console.log("No Member Info");
+          }
+        },
+        (error) => {
+          console.log("logout error: ", error);
         }
-      },
-      (error) => {
-        console.log("logout error: ", error);
-      }
-    );
+      );
+    },
   },
 };
 

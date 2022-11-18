@@ -84,7 +84,7 @@ public class MemberController {
 			try {
 //				로그인 사용자 정보.
 				MemberDto memberDto = memberService.userInfo(userid);
-				resultMap.put("userInfo", memberDto);
+				resultMap.put("memberInfo", memberDto);
 				resultMap.put("message", SUCCESS);
 				status = HttpStatus.ACCEPTED;
 			} catch (Exception e) {

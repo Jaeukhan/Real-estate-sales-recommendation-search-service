@@ -24,12 +24,12 @@
 	</select>
 	
 	<select id="userInfo" parameterType="String" resultMap="infoMap">
-		select user_name, user_id, email, join_date
+		select user_name, user_id, user_email, join_date
 		from members
 		where user_id = #{userid}
 	</select>
 	
-		<select id="getRefreshToken" parameterType="string" resultType="string">
+	<select id="getRefreshToken" parameterType="string" resultType="string">
 		select token
 		from members
 		where user_id = #{userid}
