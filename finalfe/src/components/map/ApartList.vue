@@ -1,7 +1,8 @@
 <template>
   <div>
     <apart-search-bar></apart-search-bar>
-    <KakaoMap />
+    <kakao-map :cup="bus" />
+    <education-list :cup="bus" />
     <b-container v-if="aparts && aparts.length > 0" class="bv-example-row mt-3">
       <b-row>
         <b-table
@@ -36,14 +37,17 @@
 import ApartSearchBar from "@/components/map/ApartSearchBar.vue";
 import KakaoMap from "@/components/map/KakaoMap";
 import { mapState, mapActions } from "vuex";
+import EducationList from "./EducationList.vue";
+import Vue from "vue";
 
 const mapStore = "mapStore";
-
+var bus = new Vue();
 export default {
   name: "ApartList",
   components: {
     ApartSearchBar,
     KakaoMap,
+    EducationList,
   },
   data() {
     return {
@@ -54,6 +58,7 @@ export default {
         { key: "도로명", label: "도로명 주소" },
         { key: "거래금액", label: "거래금액(단위: 만 원)" },
       ],
+      bus: bus,
       currentPage: 1,
       rows: 0,
       perPage: 10,

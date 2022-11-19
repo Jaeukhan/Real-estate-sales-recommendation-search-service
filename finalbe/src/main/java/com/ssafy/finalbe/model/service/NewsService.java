@@ -21,8 +21,6 @@ public class NewsService {
 		return ndao.selectAll();
 	}
 	public void load() throws IOException{
-		System.out.println("news loading...");
-
 		init();
 		newscrolling();
 	}

@@ -1,4 +1,5 @@
 import { getSidoCode, getGugunsCode, getApartList } from "@/api/map";
+import { getKinderList } from "@/api/edu";
 
 const mapStore = {
   namespaced: true,
@@ -9,6 +10,7 @@ const mapStore = {
     apt: {}, //아파트 주소랑(load), 아파트 이름(aptName)
     sidoName: "",
     gugunName: "",
+    selectedsch: [],
   },
   getters: {},
   mutations: {
@@ -44,7 +46,9 @@ const mapStore = {
         load: state.sidoName + " " + state.gugunName + " " + info.load,
         aptName: info.aptName,
       };
-      console.log(state.apt.aptName);
+    },
+    SET_KINDER_LIST(state, info) {
+      state.selectedsch = info;
     },
   },
   actions: {
@@ -100,6 +104,23 @@ const mapStore = {
         aptName: apt.아파트,
       };
       commit("GET_APT_ONE", data);
+    },
+    getKinder: ({ commit }) => {
+      const SERVICE_KEY = process.env.VUE_APP_GG_SCHOOL_KEY;
+      const param = {
+        serviceKey: decodeURIComponent(SERVICE_KEY),
+      };
+      getKinderList(
+        param,
+        "경기도",
+        "41280",
+        ({ data }) => {
+          commit("SET_KINDER_LIST", data.Kndrgrschoolstus[1].row);
+        },
+        (error) => {
+          console.log("Getting KinderList error: ", error);
+        }
+      );
     },
   },
 };

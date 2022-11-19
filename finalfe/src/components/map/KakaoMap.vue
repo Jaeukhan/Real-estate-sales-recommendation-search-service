@@ -2,7 +2,7 @@
   <div align-v="center" align-h="center" style="text-align: center">
     <h3 v-if="apt">{{ apt.aptName }}</h3>
     <div id="map" style="margin-right: 0" align-h="center"></div>
-    <b-button @click="movelocation()">매물로 이동</b-button>
+    <b-button class="mt-2" @click="movelocation()">매물로 이동</b-button>
   </div>
 </template>
 
@@ -24,15 +24,22 @@ export default {
         [33.452671, 126.574792],
         [33.451744, 126.572441],
       ],
+      loc: {
+        x: "",
+        y: "",
+      },
       aptAddr: "",
     };
   },
+  props: ["cup"],
   created() {
     this.CLEAR_APT();
+    this.cup.$on("move", this.searchSubmit);
   },
   computed: {
     ...mapState(mapStore, ["apt"]), //apt.load, apt.
   },
+
   methods: {
     ...mapMutations(mapStore, ["CLEAR_APT"]),
     initMap() {
@@ -45,6 +52,7 @@ export default {
       this.geocoder = new kakao.maps.services.Geocoder();
     },
     displayMarker(markerPositions) {
+      console.log("marker");
       if (this.markers.length > 0) {
         this.markers.forEach((marker) => marker.setMap(null));
       }
@@ -73,7 +81,7 @@ export default {
       }
 
       var iwContent = '<div style="padding:5px;">Hello World!</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-        iwPosition = new kakao.maps.LatLng(33.450701, 126.570667), //인포윈도우 표시 위치입니다
+        iwPosition = new kakao.maps.LatLng(this.loc.x, this.loc.y), //인포윈도우 표시 위치입니다
         iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 
       this.infowindow = new kakao.maps.InfoWindow({
@@ -91,25 +99,23 @@ export default {
       this.map.setCenter(moveLatLon);
     },
     movelocation() {
-      console.log(this.apt.load);
       this.aptAddr = this.apt.load;
-      console.log("x");
-      this.searchSubmit();
+      this.searchSubmit(this.aptAddr);
     },
 
-    searchSubmit() {
-      console.log("1");
-      console.log(this.aptAddr);
-      this.geocoder.addressSearch(this.aptAddr, (result, status) => {
-        console.log("2");
+    searchSubmit(Addr) {
+      this.geocoder.addressSearch(Addr, (result, status) => {
         if (status === kakao.maps.services.Status.OK) {
           let bounds = new kakao.maps.LatLngBounds();
-
+          let datas = [];
           for (let i = 0; i < result.length; i++) {
             let data = result[i];
+            this.loc.x = data.x;
+            this.loc.y = data.y;
+            datas.push([data.y, data.x]);
             bounds.extend(new kakao.maps.LatLng(data.y, data.x));
           }
-
+          this.displayMarker(datas);
           this.map.setBounds(bounds);
         }
       });
