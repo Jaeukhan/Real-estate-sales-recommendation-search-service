@@ -1,5 +1,5 @@
 import { getSidoCode, getGugunsCode, getApartList } from "@/api/map";
-import { getKinderList } from "@/api/edu";
+import { getKinderList, getSchoolList } from "@/api/edu";
 
 const mapStore = {
   namespaced: true,
@@ -112,6 +112,25 @@ const mapStore = {
       };
       getKinderList(
         param,
+        "경기도",
+        "41280",
+        ({ data }) => {
+          commit("SET_KINDER_LIST", data.Kndrgrschoolstus[1].row);
+        },
+        (error) => {
+          console.log("Getting KinderList error: ", error);
+        }
+      );
+    },
+    getSchool: ({ commit }, sort) => {
+      const SERVICE_KEY = process.env.VUE_APP_GG_SCHOOL_KEY;
+      const param = {
+        serviceKey: decodeURIComponent(SERVICE_KEY),
+      };
+      const school = sort;
+      getSchoolList(
+        param,
+        school,
         "경기도",
         "41280",
         ({ data }) => {

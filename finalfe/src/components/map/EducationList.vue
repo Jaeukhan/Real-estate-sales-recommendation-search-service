@@ -35,17 +35,18 @@ export default {
   name: "EducationList",
   props: ["cup"],
   methods: {
-    ...mapActions(mapStore, ["getKinder"]),
+    ...mapActions(mapStore, ["getKinder", "getSchool"]),
     getSchList() {
       if (this.sch) {
         if (this.sch == "유치원") {
           this.getKinder();
+        } else if (this.sch == "초등학교") {
+          this.getSchool(this.sch);
+        } else if (this.sch == "중학교") {
+          this.getSchool(this.sch);
+        } else if (this.sch == "고등학교") {
+          this.getSchool(this.sch);
         }
-        // } else if ((this.sch = "초등학교")) {
-        //   this.getKinder();
-        // } else if ((this.sch = "중학교")) {
-        //   this.getKinder();
-        // }
       }
     },
 
