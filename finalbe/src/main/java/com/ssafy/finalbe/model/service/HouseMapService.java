@@ -2,7 +2,6 @@ package com.ssafy.finalbe.model.service;
 
 import java.util.List;
 
-import com.ssafy.finalbe.model.HouseInfoDto;
 import com.ssafy.finalbe.model.SidoGugunCodeDto;
 
 

@@ -169,8 +169,33 @@ UNLOCK TABLES;
 		`link` varchar(120) not null,
 		primary key(`no`)
 	 );
-
-	 insert  into newsinfo(title,press, days, link) values('원희룡 "집값 하락기 초반…가격불안 요인 남아"',  '연합뉴스', '2022.09.28','/newsRead.naver?type=headline&bss_ymd=20220928&prsco_id=001&arti_id=0013467479');
 	 
-	select * from guguncode;
+-- favorite_apt data 2022-11-19
+drop table favorite_apt;
+create table favorite_apt(
+	apt_id int auto_increment primary key,
+    user_id varchar(16),
+    apt_code varchar(45) not null,
+    apt_address varchar(45) not null,
+    apt_price varchar(45) not null,
+    apt_name varchar(45) not null,
+    apt_floor varchar(45),
+    foreign key(user_id) references members(user_id)
+);
+
+drop table favorite_house;
+create table favorite_house(
+	house_id int AUTO_INCREMENT primary key,
+    user_id varchar(16),
+    house_address varchar(45) not null,
+    house_price varchar(45) not null,
+    house_area varchar(45) not null,
+    house_type varchar(20),
+    foreign key(user_id) references members(user_id)
+);
+
+
+
+
+
 
