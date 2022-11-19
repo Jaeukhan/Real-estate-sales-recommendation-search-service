@@ -6,7 +6,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ssafy.finalbe.model.HouseInfoDto;
 import com.ssafy.finalbe.model.SidoGugunCodeDto;
 import com.ssafy.finalbe.model.mapper.HouseMapMapper;
 

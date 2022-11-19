@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.finalbe.model.HouseInfoDto;
 import com.ssafy.finalbe.model.SidoGugunCodeDto;
 import com.ssafy.finalbe.model.service.HouseMapService;
 
