@@ -1,23 +1,124 @@
 <template>
-    <b-container class="bv-example-row mt-3">
-        <b-row class="mb-1">
-            <b-col class="text-left">
-                <b-button variant="outline-primary" ><b-icon icon="list" font-scale="0.9"></b-icon></b-button>
+  <div>
+    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center profile-header"
+        style="min-height: 600px;">
+      <b-container fluid>
+        <!-- Mask -->
+        <span class="mask bg-gradient-success opacity-8"></span>
+        <!-- Header container -->
+        <b-container fluid class="d-flex align-items-center">
+          <b-row >
+            <b-col lg="7" md="10">
+              <h1 class="display-2 text-black">Hello, {{ memberInfo.username }}</h1>
+              <b-card>
+              <p class="text-black mt-0 mb-5">등록된 관심 키워드가 없습니다! 관심 키워드를 등록하고 맞춤 매물을 추천받아보세요!</p>
+              </b-card>
             </b-col>
-            <b-col class="text-right">
-                <b-button variant="outline-info" size="sm"  class="mr-2" @click="moveModify"
-                ><b-icon-pencil-square font-scale="1.2"></b-icon-pencil-square
+            <b-col lg="3" md="10">
+                <img src="../../assets/main.png" alt="">
+            </b-col>
+          </b-row> 
+        </b-container>
+      </b-container>
+    </div>
+
+    <b-container fluid class="mt--6">
+      <b-row>
+        <!-- user profile -->
+        <b-col xl="4" class="order-xl-2 mb-5">
+          <b-card no-body class="card-profile" alt="Image placeholder" img-top>
+            <b-row class="justify-content-center">
+            <b-col lg="3" class="order-lg-2">
+            </b-col>
+            </b-row>
+
+            <b-card-header class="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+            <div class="d-flex justify-content-between">
+                <a href="#" class="btn btn-sm btn-info mr-4">Connect</a>
+                <b-button @click="moveModify" variant="outline-info" style="float: right;"><b-icon-pencil-square font-scale="1.2"></b-icon-pencil-square
                 ></b-button>
-            </b-col>
-        </b-row>
-        <div> id: {{ memberInfo.userid }} </div>
-        <div> name: {{ memberInfo.username }} </div>
-        <div> email: {{ memberInfo.email }} </div>
+            </div>
+            </b-card-header>
+
+            <b-card-body class="pt-0">
+            <b-row>
+                <b-col >
+                <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                    <div>  관심 키워드 여기다?  </div>
+                </div>
+                </b-col>
+            </b-row>
+            <div class="text-center">
+                <h5 class="h3">
+                {{memberInfo.userid}}
+                </h5>
+                <div class="h5 mt-4">
+                    회원 정보 설명설명
+                </div>
+                <div>
+                    주소같은거 표시표시
+                </div>
+                <hr class="my-4">
+                <p> 추천 매물 보러갈랭? </p>
+                <a href="#">고고</a>
+
+            </div>
+            </b-card-body>
+        </b-card>
+        </b-col>
+        <b-col xl="8" class="order-xl-1">
+            <div>
+                <b-card title="관심 매물 - 아파트" body-class="text-center" header-tag="nav">
+                    <template #header>
+                    <b-nav card-header tabs>
+                        <b-nav-item active>Active</b-nav-item>
+                        <b-nav-item>Inactive</b-nav-item>
+                    </b-nav>
+                    </template>
+
+                    <b-card-body v-if="aparts && aparts.length > 0">
+                        <b-row>
+                        <b-table
+                            hover
+                            :items="aparts"
+                            :fields="fields"
+                            id="aptlist-table"
+                            :per-page="perPage"
+                            :current-page="currentPage"
+                            >
+                            <template #cell(삭제)="row">
+                                <b-button size="sm" @click="removeApt(row.item.aptid)" class="mr-2">
+                                    <b-icon icon="trash"></b-icon>
+                                </b-button>
+                            </template>
+                        </b-table>
+                        </b-row>
+                            <b-row class="justify-content-md-center">
+                                <b-pagination
+                                    v-model="currentPage"
+                                    pills
+                                    :total-rows="rows"
+                                    :per-page="perPage"
+                                    aria-controls="boardlist-table"
+                                ></b-pagination>
+                            </b-row>
+                    </b-card-body>
+                    <b-card-body v-else>
+                        <div>추가한 관심 매물이 없습니다! 관심 매물을 추가하고 한 눈에 모아보세용</div>
+                    </b-card-body>
+
+                    <b-button variant="primary">관심 매물 더 추가하러 가기</b-button>
+                </b-card>
+            </div>
+        </b-col>
+      </b-row>
     </b-container>
+  </div>
 </template>
 
 <script>
 import {mapState, mapActions} from "vuex";
+import {listApt, deleteApt} from "@/api/favorite";
 
 const memberStore = "memberStore";
 
@@ -25,12 +126,33 @@ export default {
     name: "MemberInfo",
     data() {
         return {
-
+            aparts: [],
+            fields: [
+                { key: "aptname", label: "아파트이름"},
+                { key: "aptaddress", label: "위치"},
+                "삭제",
+            ],
+            currentPage: 1,
+            rows: 0,
+            perPage: 5,
         };
     },
     create() {
         let token = sessionStorage.getItem("access-token");
         this.getMemberInfo(token);
+    },
+    created() {
+        let param = this.memberInfo.userid;
+        listApt(
+            param,
+            ({ data }) => {
+                this.aparts = data;
+                this.rows = this.aparts.length;
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
     },
     computed: {
         ...mapState(memberStore, ["memberInfo"]),
@@ -39,6 +161,26 @@ export default {
     methods: {
         moveModify() {
             this.$router.push({name: "memberModify"});
+        },
+        removeApt(aptid) {
+            if(confirm("정말 삭제하시겠습니까?")) {
+                deleteApt(
+                    aptid,
+                    ({data}) => {
+                        let msg = "오류 발생";
+                        if(data==="success"){
+                            msg = "삭제 완료!";
+                        }
+                        alert(msg);
+                        this.$router.go();
+                    },
+                    (error) => {
+                        console.log(error);
+                    }
+                );
+            } else {
+                alert("삭제가 취소되었습니다!");
+            }
         },
     },
 }

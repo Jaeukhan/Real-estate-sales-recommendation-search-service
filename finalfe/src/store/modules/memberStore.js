@@ -35,7 +35,6 @@ const memberStore = {
   },
   actions: {
     async memberConfirm({ commit }, member) {
-      console.log("여기 memberConfrim: ", member);
       await login(
         member,
         ({ data }) => {

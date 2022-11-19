@@ -198,4 +198,3 @@ create table favorite_house(
 
 
 
-

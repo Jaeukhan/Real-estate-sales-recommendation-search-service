@@ -27,11 +27,11 @@ function selectHouse(houseid, success, fail) {
 }
 
 function listApt(userid, success, fail) {
-  api.get(`/favorite/apt/${userid}`).then(success).catch(fail);
+  api.get(`/favorite/aptlist/${userid}`).then(success).catch(fail);
 }
 
 function listHouse(userid, success, fail) {
-  api.get(`/favorite/house/${userid}`).then(success).catch(fail);
+  api.get(`/favorite/houselist/${userid}`).then(success).catch(fail);
 }
 
 export { addApt, addHouse, deleteApt, deleteHouse, selectApt, selectHouse, listApt, listHouse };

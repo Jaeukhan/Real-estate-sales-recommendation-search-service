@@ -72,13 +72,10 @@ export default {
   methods: {
     ...mapActions(memberStore, ["memberConfirm", "getMemberInfo"]),
     async confirm() {
-      console.log("버튼 눌림!!!");
       await this.memberConfirm(this.user);
       let token = sessionStorage.getItem("access-token");
-      console.log("토큰 가져옴", token);
       if(this.isLogin) {
         await this.getMemberInfo(token);
-        console.log("로그인 성공!");
         this.$router.push({name: "home"});
       }
     },

@@ -31,9 +31,9 @@
 
             <b-button type="submit" class="m-1" v-if="this.type === 'regist'">SIGN UP</b-button>
             <div v-else>
-            <b-button type="submit" class="m-1">MODIFY</b-button>
-            <b-button variant="outline-danger" size="sm" @click="memberDelete()"
-                ><b-icon-trash-fill font-scale="1.2"></b-icon-trash-fill
+            <b-button type="submit" variant="outline-info" size="sm" class="m-1"><b-icon-check2></b-icon-check2></b-button>
+            <b-button variant="outline-danger" size="sm" @click="memberDelete()" class="m-1"
+                ><b-icon-trash-fill font-scale="1.2" ></b-icon-trash-fill
                 ></b-button>
                 </div>
           </b-form>
