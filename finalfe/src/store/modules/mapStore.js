@@ -1,5 +1,5 @@
 import { getSidoCode, getGugunsCode, getApartList } from "@/api/map";
-import { getKinderList, getSchoolList } from "@/api/edu";
+import { getKinderList, getElement, getMiddle, getHigh } from "@/api/edu";
 
 const mapStore = {
   namespaced: true,
@@ -46,9 +46,20 @@ const mapStore = {
         load: state.sidoName + " " + state.gugunName + " " + info.load,
         aptName: info.aptName,
       };
-    },
+    }, //SET_SCHOOL_LIST
     SET_KINDER_LIST(state, info) {
       state.selectedsch = info;
+    },
+    SET_SCHOOL_LIST(state, info) {
+      let li = [];
+      for (let d = 0; d < info.data.length; d++) {
+        let temp = {
+          REFINE_ROADNM_ADDR: info.data[d].REFINE_ROADNM_ADDR,
+          FACLT_NM: info.data[d].FACLT_NM,
+        };
+        li.push(temp);
+      }
+      state.selectedsch = li;
     },
   },
   actions: {
@@ -127,19 +138,52 @@ const mapStore = {
       const param = {
         serviceKey: decodeURIComponent(SERVICE_KEY),
       };
-      const school = sort;
-      getSchoolList(
-        param,
-        school,
-        "경기도",
-        "41280",
-        ({ data }) => {
-          commit("SET_KINDER_LIST", data.Kndrgrschoolstus[1].row);
-        },
-        (error) => {
-          console.log("Getting KinderList error: ", error);
-        }
-      );
+      if (sort == "초등학교") {
+        getElement(
+          param,
+          "경기도",
+          "41280",
+          ({ data }) => {
+            const info = {
+              data: data.ElmschlM[1].row,
+            };
+            commit("SET_SCHOOL_LIST", info);
+          },
+          (error) => {
+            console.log("Getting KinderList error: ", error);
+          }
+        );
+      } else if (sort == "중학교") {
+        getMiddle(
+          param,
+          "경기도",
+          "41280",
+          ({ data }) => {
+            const info = {
+              data: data.MskulM[1].row,
+            };
+            commit("SET_SCHOOL_LIST", info);
+          },
+          (error) => {
+            console.log("Getting KinderList error: ", error);
+          }
+        );
+      } else if (sort == "고등학교") {
+        getHigh(
+          param,
+          "경기도",
+          "41280",
+          ({ data }) => {
+            const info = {
+              data: data.HgschlM[1].row,
+            };
+            commit("SET_SCHOOL_LIST", info);
+          },
+          (error) => {
+            console.log("Getting KinderList error: ", error);
+          }
+        );
+      }
     },
   },
 };
