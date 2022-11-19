@@ -56,6 +56,9 @@ export default {
       ],
       schools: [{ value: null, text: "학교 선택" }, "유치원", "초등학교", "중학교", "고등학교"],
       sch: null,
+      currentPage: 1,
+      rows: 0,
+      perPage: 10,
     };
   },
   name: "EducationList",

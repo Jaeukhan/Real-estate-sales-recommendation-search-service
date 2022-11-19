@@ -37,9 +37,14 @@ export default {
     this.cup.$on("move", this.searchSubmit);
   },
   computed: {
-    ...mapState(mapStore, ["apt"]), //apt.load, apt.
+    ...mapState(mapStore, ["apt", "selectedsch"]), //apt.load, apt.
   },
-
+  watch: {
+    selectedsch(val, oldval) {
+      console.log(val, oldval);
+      this.searchSubmit(val.EFINE_ROADNM_ADDR);
+    },
+  },
   methods: {
     ...mapMutations(mapStore, ["CLEAR_APT"]),
     initMap() {
@@ -52,7 +57,6 @@ export default {
       this.geocoder = new kakao.maps.services.Geocoder();
     },
     displayMarker(markerPositions) {
-      console.log("marker");
       if (this.markers.length > 0) {
         this.markers.forEach((marker) => marker.setMap(null));
       }

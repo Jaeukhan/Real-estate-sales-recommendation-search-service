@@ -48,7 +48,16 @@ const mapStore = {
       };
     }, //SET_SCHOOL_LIST
     SET_KINDER_LIST(state, info) {
-      state.selectedsch = info;
+      let li = [];
+      for (let d = 0; d < info.length; d++) {
+        let temp = {
+          REFINE_ROADNM_ADDR: info[d].REFINE_ROADNM_ADDR,
+          FACLT_NM: info[d].FACLT_NM,
+        };
+        li.push(temp);
+      }
+      console.log(li);
+      state.selectedsch = li;
     },
     SET_SCHOOL_LIST(state, info) {
       let li = [];
