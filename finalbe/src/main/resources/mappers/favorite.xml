@@ -23,12 +23,12 @@
 
 						<!-- insert -->
 	<insert id="aptInsert" parameterType="FavoriteAptDto">
-		isnsert into favorite_apt (apt_code, user_id, apt_address, apt_price, apt_name, apt_floor)
-		values(#{aptcode},#{userid},#{aptaddress},#{aptprice},#{aptname},#{aptfloor})
+		insert into favorite_apt (user_id, apt_code, apt_address, apt_price, apt_name, apt_floor)
+		values(#{userid}, #{aptcode}, #{aptaddress},#{aptprice},#{aptname},#{aptfloor})
 	</insert>
 	
 	<insert id="houseInsert" parameterType="FavoriteHouseDto">
-		isnsert into favorite_hosue (user_id, house_address, house_price, house_area, house_type)
+		insert into favorite_hosue (user_id, house_address, house_price, house_area, house_type)
 		values(#{userid},#{houseaddress},#{houseprice},#{housearea},#{housetype})
 	</insert>
 
