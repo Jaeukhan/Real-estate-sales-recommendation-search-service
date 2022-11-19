@@ -56,7 +56,6 @@ const mapStore = {
         };
         li.push(temp);
       }
-      console.log(li);
       state.selectedsch = li;
     },
     SET_SCHOOL_LIST(state, info) {

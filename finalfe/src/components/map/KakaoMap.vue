@@ -24,10 +24,6 @@ export default {
         [33.452671, 126.574792],
         [33.451744, 126.572441],
       ],
-      loc: {
-        x: "",
-        y: "",
-      },
       aptAddr: "",
     };
   },
@@ -37,12 +33,25 @@ export default {
     this.cup.$on("move", this.searchSubmit);
   },
   computed: {
-    ...mapState(mapStore, ["apt", "selectedsch"]), //apt.load, apt.
+    ...mapState(mapStore, ["apt", "selectedsch", "aparts", "sidoName", "gugunName"]), //apt.load, apt.
   },
   watch: {
-    selectedsch(val, oldval) {
-      console.log(val, oldval);
-      this.searchSubmit(val.EFINE_ROADNM_ADDR);
+    selectedsch(val) {
+      this.displayMarkerAndMove(val);
+    },
+    apt(val) {
+      this.searchSubmit(val.load);
+      // this.displayMarkerAndMove(val);
+    },
+    aparts(val) {
+      let li = [];
+      for (let i = 0; i < val.length; i++) {
+        const names = this.sidoName + " " + this.gugunName + " " + val[i].법정동 + " " + val[i].도로명;
+        li.push({
+          REFINE_ROADNM_ADDR: names,
+        });
+      }
+      this.displayMarkerAndMove(li);
     },
   },
   methods: {
@@ -55,6 +64,24 @@ export default {
       };
       this.map = new kakao.maps.Map(mapContainer, mapOption);
       this.geocoder = new kakao.maps.services.Geocoder();
+    },
+    displayMarkerAndMove(Addr) {
+      let datas = [];
+      if (Addr)
+        for (let n = 0; n < Addr.length; n++) {
+          this.geocoder.addressSearch(Addr[n].REFINE_ROADNM_ADDR, (result, status) => {
+            if (status === kakao.maps.services.Status.OK) {
+              let bounds = new kakao.maps.LatLngBounds();
+              for (let i = 0; i < result.length; i++) {
+                let data = result[i];
+                datas.push([data.y, data.x]);
+                bounds.extend(new kakao.maps.LatLng(data.y, data.x));
+              }
+              this.displayMarker(datas);
+              this.map.setBounds(bounds);
+            }
+          });
+        }
     },
     displayMarker(markerPositions) {
       if (this.markers.length > 0) {
@@ -72,9 +99,8 @@ export default {
             })
         );
 
-        const bounds = positions.reduce((bounds, latlng) => bounds.extend(latlng), new kakao.maps.LatLngBounds());
-
-        this.map.setBounds(bounds);
+        // const bounds = positions.reduce((bounds, latlng) => bounds.extend(latlng), new kakao.maps.LatLngBounds());
+        // this.map.setBounds(bounds);
       }
     },
     displayInfoWindow() {
@@ -108,18 +134,16 @@ export default {
     },
 
     searchSubmit(Addr) {
+      console.log(Addr);
       this.geocoder.addressSearch(Addr, (result, status) => {
         if (status === kakao.maps.services.Status.OK) {
           let bounds = new kakao.maps.LatLngBounds();
           let datas = [];
           for (let i = 0; i < result.length; i++) {
             let data = result[i];
-            this.loc.x = data.x;
-            this.loc.y = data.y;
             datas.push([data.y, data.x]);
             bounds.extend(new kakao.maps.LatLng(data.y, data.x));
           }
-          this.displayMarker(datas);
           this.map.setBounds(bounds);
         }
       });

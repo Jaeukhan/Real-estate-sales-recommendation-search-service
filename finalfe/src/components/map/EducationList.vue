@@ -14,10 +14,6 @@
           </b-col>
         </b-row>
       </b-card>
-      <b-button class="m-1" @click="movelocation">유치원</b-button>
-      <b-button class="m-1" @click="movelocation">초등학교</b-button>
-      <b-button class="m-1" @click="movelocation">중학교</b-button>
-      <b-button class="m-1" @click="movelocation">고등학교</b-button>
       <b-container v-if="selectedsch && selectedsch.length > 0" class="bv-example-row mt-3">
         <b-row>
           <b-table
@@ -79,8 +75,7 @@ export default {
       }
     },
     moveloc(apart) {
-      console.log(apart);
-      //   this.getAptOne(apart);
+      this.cup.$emit("move", apart.REFINE_ROADNM_ADDR);
     },
 
     movelocation() {
