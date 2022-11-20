@@ -23,6 +23,9 @@ const mapStore = {
     CLEAR_APT_LIST(state) {
       state.aparts = [];
     },
+    CLEAR_SCHOOL_LIST(state) {
+      state.selectedsch = [];
+    },
     CLEAR_APT(state) {
       state.apt = {};
     },
@@ -38,6 +41,7 @@ const mapStore = {
     },
     SET_APART_LIST(state, info) {
       state.aparts = info.aparts;
+      console.log(state.aparts);
       state.sidoName = info.sidoName;
       state.gugunName = info.gugunName;
     },
@@ -46,6 +50,7 @@ const mapStore = {
         load: state.sidoName + " " + state.gugunName + " " + info.load,
         aptName: info.aptName,
       };
+      console.log(state.apt.load);
     }, //SET_SCHOOL_LIST
     SET_KINDER_LIST(state, info) {
       let li = [];

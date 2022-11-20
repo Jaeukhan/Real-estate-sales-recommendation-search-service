@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 const mapStore = "mapStore";
 export default {
   data() {
@@ -54,12 +54,16 @@ export default {
       sch: null,
       currentPage: 1,
       rows: 0,
-      perPage: 10,
+      perPage: 20,
     };
+  },
+  created() {
+    this.CLEAR_SCHOOL_LIST();
   },
   name: "EducationList",
   props: ["cup"],
   methods: {
+    ...mapMutations(mapStore, ["CLEAR_SCHOOL_LIST"]),
     ...mapActions(mapStore, ["getKinder", "getSchool"]),
     getSchList() {
       if (this.sch) {
