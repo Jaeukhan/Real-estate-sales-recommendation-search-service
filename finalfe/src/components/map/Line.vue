@@ -14,7 +14,7 @@
 
 <script>
 import { Line as LineChartGenerator } from "vue-chartjs/legacy";
-import { mapActions, mapState } from "vuex";
+import { mapState } from "vuex";
 import {
   Chart as ChartJS,
   Title,
@@ -27,8 +27,6 @@ import {
 } from "chart.js";
 
 ChartJS.register(Title, Tooltip, Legend, LineElement, LinearScale, CategoryScale, PointElement);
-
-const mapStore = "mapStore";
 const chartStore = "chartStore";
 
 export default {
@@ -66,19 +64,29 @@ export default {
       default: () => [],
     },
   },
-  ...mapActions(chartStore, ["getAvgPrice"]),
-  created() {
-    this.getAvgPrice(this.sido + " " + this.gugun);
-  },
   data() {
     return {
       chartData: {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        labels: [
+          "21.08",
+          "21.09",
+          "21.10",
+          "21.11",
+          "21.12",
+          "22.01",
+          "22.02",
+          "22.03",
+          "22.04",
+          "22.05",
+          "22.06",
+          "22.07",
+          "22.08",
+        ],
         datasets: [
           {
-            label: "Data One",
+            label: "1년간 부동산 근황",
             backgroundColor: "#f87979",
-            data: [40, 39, 10, 40, 39, 80, 40],
+            data: [], //[40, 39, 10, 40, 39, 80, 40]
           },
         ],
       },
@@ -86,19 +94,14 @@ export default {
         responsive: true,
         maintainAspectRatio: false,
       },
-      sido: "",
-      gugun: "",
     };
   },
-  computed: {
-    ...mapState(mapStore, ["sidoName", "gugunName"]),
-  },
   watch: {
-    sidoName(val) {
-      this.sidoName = val;
-    },
-    gugunName(val) {
-      this.gugunName = val;
+    ...mapState(chartStore, ["price_li"]),
+    price_li(val) {
+      console.log(val);
+      let data_li = [val.dayday2108];
+      this.datasets.data = data_li;
     },
   },
 };

@@ -4,6 +4,7 @@
 	<select id="listChart" parameterType="String" resultMap="days">
 		select * 
 		from avg_price
+		where region=#{region}
 	</select>
 	<resultMap type="ChartDto" id="days">
 		<result column="2021-08-21" property="day2108" />

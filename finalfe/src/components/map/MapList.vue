@@ -4,7 +4,7 @@
     <kakao-map :cup="bus" />
     <education-list :cup="bus" />
     <div>
-      <b-button v-b-toggle.sidebar-1>현지역 과거 부동산 동향 보기</b-button>
+      <b-button v-b-toggle.sidebar-1 @click="getChart">현지역 과거 부동산 동향 보기</b-button>
       <b-sidebar id="sidebar-1" title="Sidebar" width="700px">
         <div class="px-3 py-2">
           <line-chart />
@@ -31,12 +31,12 @@ import ApartSearchBar from "@/components/map/ApartSearchBar.vue";
 import ApartList from "@/components/map/ApartList.vue";
 import HouseList from "@/components/map/HouseList.vue";
 import KakaoMap from "@/components/map/KakaoMap";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 import EducationList from "./EducationList.vue";
 import Vue from "vue";
 import LineChart from "@/components/map/Line.vue";
-
 const mapStore = "mapStore";
+const chartStore = "chartStore";
 var bus = new Vue();
 
 export default {
@@ -52,10 +52,28 @@ export default {
   data() {
     return {
       bus: bus,
+      sido: "",
+      gugun: "",
     };
   },
   computed: {
-    ...mapState(mapStore, ["aparts", "houses"]),
+    ...mapState(mapStore, ["aparts", "houses", "sidoName", "gugunName"]),
+    returnSido() {
+      return this.sidoName;
+    },
+    returnGugun() {
+      return this.gugunName;
+    },
+  },
+  methods: {
+    ...mapActions(chartStore, ["getAvgPrice"]),
+    getChart() {
+      const param = {
+        sido: this.returnSido,
+        gugun: this.returnGugun,
+      };
+      this.getAvgPrice(param);
+    },
   },
 };
 </script>

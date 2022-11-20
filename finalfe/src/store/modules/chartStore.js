@@ -7,16 +7,17 @@ const chartStore = {
   },
   mutations: {
     GET_AVG_PRICE(state, info) {
-      console.log("info", state.price_li, info);
+      state.price_li = info;
+      console.log("state", state.price_li);
     },
   },
   actions: {
-    getAvgPrice: ({ commit }, name) => {
+    getAvgPrice: ({ commit }, param) => {
       listAvgPrice(
-        name,
+        param.sido.substr(0, 2),
+        param.gugun,
         ({ data }) => {
-          console.log(commit, data);
-          // commit("GET_AVG_PRICE", data.Kndrgrschoolstus[1].row);
+          commit("GET_AVG_PRICE", data[0]);
         },
         (error) => {
           console.log("Getting avgprice error: ", error);

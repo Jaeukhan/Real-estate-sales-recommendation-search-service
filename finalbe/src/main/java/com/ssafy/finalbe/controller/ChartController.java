@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.finalbe.model.ChartDto;
@@ -30,11 +32,11 @@ public class ChartController {
 	private ChartService service;
 
 	@ApiOperation(value = "차트 목록", notes = "모든 차트보를 반환한다.", response = List.class)
-	@GetMapping
-	public ResponseEntity<List<ChartDto>> listChart(@ApiParam(value = "차트를 얻기 위한 부가정보.", required = true) String name)
+	@GetMapping("/{sido}/{gugun}")
+	public ResponseEntity<List<ChartDto>> listChart(@PathVariable("sido")String sido,@PathVariable("gugun")String gugun)
 			throws Exception {
 		logger.info("listChart - 호출");
-		System.out.println(name);
+		String name = sido+" "+gugun;
 		return new ResponseEntity<List<ChartDto>>(service.listChart(name), HttpStatus.OK);
 	}
 }

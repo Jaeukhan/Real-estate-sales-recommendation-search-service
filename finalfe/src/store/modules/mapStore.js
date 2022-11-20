@@ -47,6 +47,7 @@ const mapStore = {
       state.aparts = info.aparts;
       state.sidoName = info.sidoName;
       state.gugunName = info.gugunName;
+      console.log(state.sidoName, state.gugunName);
     },
     SET_HOUSE_LIST(state, info) {
       state.houses = info.houses;
