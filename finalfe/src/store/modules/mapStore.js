@@ -1,5 +1,6 @@
 import { getSidoCode, getGugunsCode, getApartList, getHouseList } from "@/api/map";
 import { getKinderList, getElement, getMiddle, getHigh } from "@/api/edu";
+import { getWeatherApi } from "@/api/weather";
 
 const mapStore = {
   namespaced: true,
@@ -12,7 +13,16 @@ const mapStore = {
     sidoName: "",
     gugunName: "",
     selectedsch: [],
+    ////////////////////날씨//////////////////////
     weatherLoc: { lat: null, lon: null }, //날씨 불러올 위치: lat, lon
+    info: {
+      name: null,
+      temp: null,
+      min_temp: null,
+      max_temp: null,
+      clouds: null,
+      weather: null,
+    },
   },
   getters: {},
   mutations: {
@@ -85,13 +95,35 @@ const mapStore = {
       }
       state.selectedsch = li;
     },
-    // SET_WEATHER_LOC(state, info) {
-    //   state.weatherLoc = {
-    //     lat: info.lat,
-    //     lon: info.lon,
-    //   };
-    //   console.log("날씨 이걸로 찾을거임", state.weatherLoc);
-    // },
+    ////////////////////날씨//////////////////////
+    SET_WEATHER_LOC(state, info) {
+      state.weatherLoc = {
+        lat: info.lat,
+        lon: info.lon,
+      };
+      console.log("날씨 이걸로 찾을거임", state.weatherLoc);
+    },
+    CLEAR_DATA(state) {
+      state.info = {
+        name: null,
+        temp: null,
+        min_temp: null,
+        max_temp: null,
+        clouds: null,
+        weather: null,
+      };
+    },
+    UPDATE_DATA(state, payload) {
+      state.info = {
+        name: payload.data.name,
+        temp: payload.data.main.temp,
+        min_temp: payload.data.main.temp_min,
+        max_temp: payload.data.main.temp_max,
+        clouds: payload.data.clouds.all,
+        weather: payload.data.weather[0].main,
+      };
+      console.log("여기 weatherStore ", state.info);
+    },
   },
   actions: {
     getSido: ({ commit }) => {
@@ -230,14 +262,23 @@ const mapStore = {
         );
       }
     },
-    // setWeatherLoc: ({ commit }, loc) => {
-    //   const data = {
-    //     lat: loc.lat,
-    //     lon: loc.lon,
-    //   };
-    //   console.log("여기 액션", data);
-    //   commit("SET_WEATHER_LOC", data);
-    // },
+    ////////////////////날씨//////////////////////
+    setWeatherLoc: ({ commit }, loc) => {
+      const data = {
+        lat: loc.lat,
+        lon: loc.lon,
+      };
+      console.log("여기 액션", data);
+      commit("SET_WEATHER_LOC", data);
+    },
+    apiload(context, payload) {
+      context.commit("CLEAR_DATA");
+      console.log("들어오긴 했닝");
+      getWeatherApi(payload).then((res) => {
+        context.commit("UPDATE_DATA", res);
+      });
+      //   console.log(payload);
+    },
   },
 };
 

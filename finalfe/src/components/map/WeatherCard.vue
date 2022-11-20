@@ -1,27 +1,36 @@
 <template>
     <div id="wcard">
-        <b-card
-            overlay
-            img-alt="Card Image"
-            text-variant="white"
-            title="Image Overlay"
-            sub-title="Subtitle"
-        >
+        <b-card>
             <b-card-text>
-            Some quick example text to build on the card and make up the bulk of the card's content.
+                {{info.name}}
+                현재기온: {{info.temp}} 도
+                최저기온: {{info.min_temp}} 도
+                최고기온: {{info.max_temp}} 도
+                날씨: {{info.weather}}
             </b-card-text>
         </b-card>
     </div>
 </template>
 
 <script>
+import {mapState} from "vuex";
+
+const mapStore = "mapStore";
+
 export default {
+    data() {
+        return { 
+        };
+    },
+    computed: {
+        ...mapState(mapStore, ["weatherLoc", "info"]),
+    },
     
 }
 </script>
 
 <style>
-#wcard {
+/* #wcard {
     background-image: url('../../assets/cloud.jpeg');
-}
+} */
 </style>

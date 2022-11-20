@@ -24,7 +24,7 @@ export default {
         [33.451744, 126.572441],
       ],
       aptAddr: "",
-      temp: {},
+      temp: {lat: null, lon: null},
     };
   },
   props: ["cup"],
@@ -33,9 +33,7 @@ export default {
     this.cup.$on("move", this.searchSubmit);
   },
   computed: {
-    ...mapState(mapStore, ["apt", "selectedsch", "aparts", "sidoName", "gugunName", "weatherLoc"]), //apt.load, apt.
-    ...mapActions(mapStore, ["setWeatherLoc"]),
-    
+    ...mapState(mapStore, ["apt", "selectedsch", "aparts", "sidoName", "gugunName", "weatherLoc"]), //apt.load, apt.    
   },
   watch: {
     selectedsch(val) {
@@ -44,10 +42,11 @@ export default {
     apt(val) {
       this.searchSubmit(val.load);
       // this.displayMarkerAndMove(val.REFINE_ROADNM_ADDR);
-      this.weatherLoc.lat = this.temp.lat;
-      this.weatherLoc.lon = this.temp.lon;
-      // this.setWeatherLoc(this.temp);
-      // console.log("찐으로 바꾼거:",this.weatherLoc);
+      // this.weatherLoc.lat = this.temp.lat;
+      // this.weatherLoc.lon = this.temp.lon;
+      this.setWeatherLoc(this.temp);
+      this.apiload(this.temp);
+      console.log("찐으로 바꾼거:",this.temp);
     },
     aparts(val) {
       let li = [];
@@ -61,6 +60,7 @@ export default {
     },
   },
   methods: {
+    ...mapActions(mapStore, ["setWeatherLoc", "apiload"]),
     ...mapMutations(mapStore, ["CLEAR_APT"]),
     initMap() {
       const mapContainer = document.getElementById("map");
@@ -70,6 +70,8 @@ export default {
       };
       this.map = new kakao.maps.Map(mapContainer, mapOption);
       this.geocoder = new kakao.maps.services.Geocoder();
+      this.addEventToMap();
+
     },
     displayMarkerAndMove(Addr) {
       let positions = [];
@@ -163,23 +165,18 @@ export default {
         }
       });
     },
-    
+    addEventToMap() {
+          let _this = this;
+      kakao.maps.event.addListener(_this.map,'center_changed', function(){
+            let latlng = _this.map.getCenter(); 
+            _this.temp.lat = latlng.Ma;
+            _this.temp.lon = latlng.La;
+      });
+    },
   },
   mounted() {
-    let _this = this;
     if (window.kakao && window.kakao.maps) {
       this.initMap();
-      kakao.maps.event.addListener(_this.map,'center_changed', function(){
-          let latlng = _this.map.getCenter(); 
-          let param = {
-            lat: latlng.Ma,
-            lon: latlng.La
-          };
-          _this.temp = param;
-          // _this.setWeatherLoc(param);
-          // console.log(_this.weatherLoc);
-          // console.log("중심좌표 바뀜");
-      });
     } else {
       const script = document.createElement("script");
       /*global kakao*/

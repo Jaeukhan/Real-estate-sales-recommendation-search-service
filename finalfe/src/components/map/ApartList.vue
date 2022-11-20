@@ -60,6 +60,7 @@ import { mapState, mapActions } from "vuex";
 
 const mapStore = "mapStore";
 const memberStore = "memberStore";
+const weatherStore = "weatherStore";
 
 export default {
   name: "ApartList",
@@ -73,8 +74,11 @@ export default {
   },
   methods: {
     ...mapActions(mapStore, ["getAptOne"]),
+    ...mapActions(weatherStore, ["apiload"]),
     moveloc(apart) {
-      this.getAptOne(apart);
+        this.getAptOne(apart);
+        // console.log("여기 아파트 리스트",this.weatherLoc);
+        // this.apiload(this.weatherLoc);
     },
     addFavoriteApt(apt) {
       let param = {
@@ -101,8 +105,9 @@ export default {
     },
   },
   computed: {
-    ...mapState(mapStore, ["aparts"]),
+    ...mapState(mapStore, ["aparts", "weatherLoc"]),
     ...mapState(memberStore, ["memberInfo"]),
+    
   },
 };
 </script>
