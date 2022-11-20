@@ -14,7 +14,7 @@
 
 <script>
 import { Line as LineChartGenerator } from "vue-chartjs/legacy";
-
+import { mapActions, mapState } from "vuex";
 import {
   Chart as ChartJS,
   Title,
@@ -27,6 +27,9 @@ import {
 } from "chart.js";
 
 ChartJS.register(Title, Tooltip, Legend, LineElement, LinearScale, CategoryScale, PointElement);
+
+const mapStore = "mapStore";
+const chartStore = "chartStore";
 
 export default {
   name: "LineChart",
@@ -63,6 +66,10 @@ export default {
       default: () => [],
     },
   },
+  ...mapActions(chartStore, ["getAvgPrice"]),
+  created() {
+    this.getAvgPrice(this.sido + " " + this.gugun);
+  },
   data() {
     return {
       chartData: {
@@ -79,7 +86,20 @@ export default {
         responsive: true,
         maintainAspectRatio: false,
       },
+      sido: "",
+      gugun: "",
     };
+  },
+  computed: {
+    ...mapState(mapStore, ["sidoName", "gugunName"]),
+  },
+  watch: {
+    sidoName(val) {
+      this.sidoName = val;
+    },
+    gugunName(val) {
+      this.gugunName = val;
+    },
   },
 };
 </script>
