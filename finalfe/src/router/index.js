@@ -106,12 +106,12 @@ const routes = [
     path: "/map",
     name: "map",
     component: MapView,
-    redirect: "/map/apt",
+    redirect: "/map/maplist",
     children: [
       {
-        path: "apt",
-        name: "ApartList",
-        component: () => import("@/components/map/ApartList"),
+        path: "maplist",
+        name: "MapList",
+        component: () => import("@/components/map/MapList"),
       },
     ],
   },
