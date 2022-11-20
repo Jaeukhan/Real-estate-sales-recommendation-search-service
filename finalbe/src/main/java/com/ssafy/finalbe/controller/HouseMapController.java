@@ -75,6 +75,53 @@ public class HouseMapController {
 				"&" + URLEncoder.encode("LAWD_CD", "UTF-8") + "=" + URLEncoder.encode(lawdCd, "UTF-8")); /* 지역코드 */
 		urlBuilder.append(
 				"&" + URLEncoder.encode("DEAL_YMD", "UTF-8") + "=" + URLEncoder.encode(dealYmd, "UTF-8")); /* 계약월 */
+//		System.out.println(urlBuilder.toString());
+		URL url = new URL(urlBuilder.toString());
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setRequestMethod("GET");
+		conn.setRequestProperty("Content-type", "application/json");
+//		System.out.println("Response code: " + conn.getResponseCode());
+		BufferedReader rd;
+		if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+			rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		} else {
+			rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+		}
+		StringBuilder sb = new StringBuilder();
+		String line;
+		while ((line = rd.readLine()) != null) {
+			sb.append(line);
+		}
+		rd.close();
+		conn.disconnect();
+//		System.out.println(sb.toString());
+		
+		JSONObject json = XML.toJSONObject(sb.toString());
+		String jsonStr = json.toString();
+
+		return new ResponseEntity<String>(jsonStr, HttpStatus.OK);
+	}
+	
+	@ApiOperation(value = "주택 목록", response = List.class)
+	@GetMapping(value = "/houselist/{lawd_cd}/{deal_ymd}", produces = "application/json;charset=utf-8")
+	public ResponseEntity<String> houselist(@PathVariable("lawd_cd") String lawdCd, @PathVariable("deal_ymd") String dealYmd) throws IOException {
+		logger.info("sido - 호출");
+		String serviceKey = "cqBPAdA3C9KAtwGQSX69GvPqPNC2f4oTq7Whdk6zWTf12A4lBLwu460s0WyktnTyGBNEGnd48Wydx55UxeTdAQ%3D%3D";
+		StringBuilder urlBuilder = new StringBuilder(
+				"http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcSHTrade"); 
+												
+//		serviceKey = URLDecoder.decode(serviceKey, "UTF-8");
+		
+		urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8")
+				+ "=" + serviceKey);
+		urlBuilder
+				.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /* 페이지번호 */
+		urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "="
+				+ URLEncoder.encode("10", "UTF-8")); /* 한 페이지 결과 수 */
+		urlBuilder.append(
+				"&" + URLEncoder.encode("LAWD_CD", "UTF-8") + "=" + URLEncoder.encode(lawdCd, "UTF-8")); /* 지역코드 */
+		urlBuilder.append(
+				"&" + URLEncoder.encode("DEAL_YMD", "UTF-8") + "=" + URLEncoder.encode(dealYmd, "UTF-8")); /* 계약월 */
 		System.out.println(urlBuilder.toString());
 		URL url = new URL(urlBuilder.toString());
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -101,7 +148,6 @@ public class HouseMapController {
 
 		return new ResponseEntity<String>(jsonStr, HttpStatus.OK);
 	}
-
 	
 
 }

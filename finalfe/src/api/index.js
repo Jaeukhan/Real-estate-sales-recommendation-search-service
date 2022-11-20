@@ -1,15 +1,5 @@
 import axios from "axios";
 
-function apartInstance() {
-  const instance = axios.create({
-    baseURL: process.env.VUE_APP_APT_DEAL_URL,
-    headers: {
-      "Content-Type": "application/json;charset=utf-8",
-    },
-  });
-  return instance;
-}
-
 // local vue api axios instance
 function apiInstance() {
   const instance = axios.create({
@@ -21,4 +11,4 @@ function apiInstance() {
   return instance;
 }
 
-export { apiInstance, apartInstance };
+export { apiInstance };

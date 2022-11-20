@@ -1,4 +1,4 @@
-import { getSidoCode, getGugunsCode, getApartList } from "@/api/map";
+import { getSidoCode, getGugunsCode, getApartList, getHouseList } from "@/api/map";
 import { getKinderList, getElement, getMiddle, getHigh } from "@/api/edu";
 
 const mapStore = {
@@ -7,6 +7,7 @@ const mapStore = {
     sidos: [{ value: null, text: "시/도 선택" }],
     guguns: [{ value: null, text: "구/군 선택" }],
     aparts: [],
+    houses: [],
     apt: {}, //아파트 주소랑(load), 아파트 이름(aptName)
     sidoName: "",
     gugunName: "",
@@ -22,6 +23,9 @@ const mapStore = {
     },
     CLEAR_APT_LIST(state) {
       state.aparts = [];
+    },
+    CLEAR_HOUSE_LIST(state) {
+      state.houses = [];
     },
     CLEAR_SCHOOL_LIST(state) {
       state.selectedsch = [];
@@ -41,7 +45,11 @@ const mapStore = {
     },
     SET_APART_LIST(state, info) {
       state.aparts = info.aparts;
-      console.log(state.aparts);
+      state.sidoName = info.sidoName;
+      state.gugunName = info.gugunName;
+    },
+    SET_HOUSE_LIST(state, info) {
+      state.houses = info.houses;
       state.sidoName = info.sidoName;
       state.gugunName = info.gugunName;
     },
@@ -51,7 +59,8 @@ const mapStore = {
         aptName: info.aptName,
       };
       console.log(state.apt.load);
-    }, //SET_SCHOOL_LIST
+    },
+    //SET_SCHOOL_LIST
     SET_KINDER_LIST(state, info) {
       let li = [];
       for (let d = 0; d < info.length; d++) {
@@ -99,15 +108,10 @@ const mapStore = {
       );
     },
     getApt: ({ commit }, condition) => {
-      const SERVICE_KEY = process.env.VUE_APP_APT_DEAL_API_KEY;
-      const param = {
-        serviceKey: decodeURIComponent(SERVICE_KEY),
-      };
-      const gCode = condition.gugun;
+      const gcode = condition.gugun;
       const date = condition.date;
       getApartList(
-        param,
-        gCode,
+        gcode,
         date,
         ({ data }) => {
           const info = {
@@ -119,6 +123,25 @@ const mapStore = {
         },
         (error) => {
           console.log("Getting ApartList error: ", error);
+        }
+      );
+    },
+    getHouse: ({ commit }, condition) => {
+      const gcode = condition.gugun;
+      const date = condition.date;
+      getHouseList(
+        gcode,
+        date,
+        ({ data }) => {
+          const info = {
+            houses: data.response.body.items.item,
+            sidoName: condition.sidoName,
+            gugunName: condition.gugunName,
+          };
+          commit("SET_HOUSE_LIST", info);
+        },
+        (error) => {
+          console.log("Getting HouseList error: ", error);
         }
       );
     },
