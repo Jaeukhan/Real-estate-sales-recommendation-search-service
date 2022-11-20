@@ -2,7 +2,6 @@
   <div align-v="center" align-h="center" style="text-align: center">
     <h3 v-if="apt">{{ apt.aptName }}</h3>
     <div id="map" style="margin-right: 0" align-h="center"></div>
-    <b-button class="mt-2" @click="movelocation()">매물로 이동</b-button>
   </div>
 </template>
 
@@ -66,42 +65,51 @@ export default {
       this.geocoder = new kakao.maps.services.Geocoder();
     },
     displayMarkerAndMove(Addr) {
-      let datas = [];
+      let positions = [];
       if (Addr)
         for (let n = 0; n < Addr.length; n++) {
           this.geocoder.addressSearch(Addr[n].REFINE_ROADNM_ADDR, (result, status) => {
             if (status === kakao.maps.services.Status.OK) {
-              let bounds = new kakao.maps.LatLngBounds();
+              // let bounds = new kakao.maps.LatLngBounds();
               for (let i = 0; i < result.length; i++) {
                 let data = result[i];
-                datas.push([data.y, data.x]);
-                bounds.extend(new kakao.maps.LatLng(data.y, data.x));
+                const d = {
+                  title: data.road_address.building_name,
+                  latlng: new kakao.maps.LatLng(data.y, data.x),
+                };
+                positions.push(d);
+                this.displayMarker(positions);
+                // bounds.extend(new kakao.maps.LatLng(data.y, data.x));
               }
-              this.displayMarker(datas);
-              this.map.setBounds(bounds);
             }
           });
         }
     },
-    displayMarker(markerPositions) {
+    displayMarker(positions) {
       if (this.markers.length > 0) {
         this.markers.forEach((marker) => marker.setMap(null));
       }
-
-      const positions = markerPositions.map((position) => new kakao.maps.LatLng(...position));
-
-      if (positions.length > 0) {
-        this.markers = positions.map(
-          (position) =>
-            new kakao.maps.Marker({
-              map: this.map,
-              position,
-            })
-        );
-
-        // const bounds = positions.reduce((bounds, latlng) => bounds.extend(latlng), new kakao.maps.LatLngBounds());
-        // this.map.setBounds(bounds);
-      }
+      positions.forEach((position) => {
+        const marker = new kakao.maps.Marker({
+          map: this.map,
+          position: position.latlng,
+          title: position.title,
+          clickable: true,
+        });
+        const infowindow = new kakao.maps.InfoWindow({
+          removable: true,
+          content: `<div style="padding:50x;>${position.title}</div>`,
+        });
+        kakao.maps.event.addListener(marker, "click", function () {
+          infowindow.open(this.map, marker);
+        });
+        this.markers.push(marker);
+      });
+      const bounds = positions.reduce(
+        (bounds, position) => bounds.extend(position.latlng),
+        new kakao.maps.LatLngBounds()
+      );
+      this.map.setBounds(bounds);
     },
     displayInfoWindow() {
       if (this.infowindow && this.infowindow.getMap()) {
@@ -134,7 +142,6 @@ export default {
     },
 
     searchSubmit(Addr) {
-      console.log(Addr);
       this.geocoder.addressSearch(Addr, (result, status) => {
         if (status === kakao.maps.services.Status.OK) {
           let bounds = new kakao.maps.LatLngBounds();
