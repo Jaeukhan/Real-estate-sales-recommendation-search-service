@@ -8,7 +8,7 @@ const chartStore = {
   mutations: {
     GET_AVG_PRICE(state, info) {
       state.price_li = info;
-      console.log("state", state.price_li);
+      // console.log("state", state.price_li);
     },
   },
   actions: {

@@ -24,7 +24,7 @@ export default {
         [33.451744, 126.572441],
       ],
       aptAddr: "",
-      temp: {lat: null, lon: null},
+      temp: { lat: null, lon: null },
     };
   },
   props: ["cup"],
@@ -33,7 +33,7 @@ export default {
     this.cup.$on("move", this.searchSubmit);
   },
   computed: {
-    ...mapState(mapStore, ["apt", "selectedsch", "aparts", "sidoName", "gugunName", "weatherLoc"]), //apt.load, apt.    
+    ...mapState(mapStore, ["apt", "selectedsch", "aparts", "sidoName", "gugunName", "weatherLoc"]), //apt.load, apt.
   },
   watch: {
     selectedsch(val) {
@@ -46,7 +46,7 @@ export default {
       // this.weatherLoc.lon = this.temp.lon;
       this.setWeatherLoc(this.temp);
       this.apiload(this.temp);
-      console.log("찐으로 바꾼거:",this.temp);
+      console.log("찐으로 바꾼거:", this.temp);
     },
     aparts(val) {
       let li = [];
@@ -54,6 +54,7 @@ export default {
         const names = this.sidoName + " " + this.gugunName + " " + val[i].법정동 + " " + val[i].도로명;
         li.push({
           REFINE_ROADNM_ADDR: names,
+          title: val[i].아파트,
         });
       }
       this.displayMarkerAndMove(li);
@@ -71,10 +72,10 @@ export default {
       this.map = new kakao.maps.Map(mapContainer, mapOption);
       this.geocoder = new kakao.maps.services.Geocoder();
       this.addEventToMap();
-
     },
     displayMarkerAndMove(Addr) {
       let positions = [];
+      console.log(Addr);
       if (Addr)
         for (let n = 0; n < Addr.length; n++) {
           this.geocoder.addressSearch(Addr[n].REFINE_ROADNM_ADDR, (result, status) => {
@@ -83,7 +84,7 @@ export default {
               for (let i = 0; i < result.length; i++) {
                 let data = result[i];
                 const d = {
-                  title: data.road_address.building_name,
+                  title: Addr[n].title,
                   latlng: new kakao.maps.LatLng(data.y, data.x),
                 };
                 positions.push(d);
@@ -112,7 +113,7 @@ export default {
         kakao.maps.event.addListener(marker, "click", function () {
           infowindow.open(this.map, marker);
         });
-        
+
         this.markers.push(marker);
       });
       const bounds = positions.reduce(
@@ -166,11 +167,11 @@ export default {
       });
     },
     addEventToMap() {
-          let _this = this;
-      kakao.maps.event.addListener(_this.map,'center_changed', function(){
-            let latlng = _this.map.getCenter(); 
-            _this.temp.lat = latlng.Ma;
-            _this.temp.lon = latlng.La;
+      let _this = this;
+      kakao.maps.event.addListener(_this.map, "center_changed", function () {
+        let latlng = _this.map.getCenter();
+        _this.temp.lat = latlng.Ma;
+        _this.temp.lon = latlng.La;
       });
     },
   },

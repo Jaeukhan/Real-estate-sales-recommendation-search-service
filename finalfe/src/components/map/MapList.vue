@@ -7,7 +7,8 @@
       <b-button v-b-toggle.sidebar-1 @click="getChart">현지역 과거 부동산 동향 보기</b-button>
       <b-sidebar id="sidebar-1" title="Sidebar" width="700px">
         <div class="px-3 py-2">
-          <line-chart />
+          {{ dataChart }}
+          <line-chart :data="dataChart" :options="{ responsive: true, maintainAspectRatio: false }"></line-chart>
           <weather-card></weather-card>
           <!-- <b-img src="https://picsum.photos/500/500/?image=54" fluid thumbnail></b-img> -->
         </div>
