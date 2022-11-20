@@ -3,9 +3,9 @@
         <b-row>
             <b-table
             hover
-            :items="aparts"
+            :items="houses"
             :fields="fields"
-            id="aptlist-table"
+            id="houselist-table"
             :per-page="perPage"
             :current-page="currentPage"
             >
@@ -17,29 +17,29 @@
             <template #row-details="row">
                 <b-card>
                 <b-row class="mb-2">
-                    <b-col sm="6"><b>일련번호 </b></b-col>
-                    <b-col>{{ row.item.일련번호 }}</b-col>
+                    <b-col sm="6"><b>대지면적 </b></b-col>
+                    <b-col>{{ row.item.대지면적 }} 제곱미터</b-col>
                 </b-row>
                 <b-row class="mb-2">
-                    <b-col sm="6"><b>도로명 주소 </b></b-col>
-                    <b-col>{{ row.item.도로명 }}</b-col>
+                    <b-col sm="6"><b>연면적 </b></b-col>
+                    <b-col>{{ row.item.연면적 }} 제곱미터</b-col>
                 </b-row>
                 <b-row class="mb-2">
-                    <b-col sm="6"><b>층 수 </b></b-col>
-                    <b-col>{{ row.item.층 }}층</b-col>
+                    <b-col sm="6"><b>건축년도 </b></b-col>
+                    <b-col>{{ row.item.건축년도 }} 년</b-col>
                 </b-row>
                 <b-row class="mb-2">
                     <b-col sm="6"><b>거래금액 </b></b-col>
                     <b-col>{{ row.item.거래금액 }},000 원</b-col>
                 </b-row>
-                <b-button size="sm" @click="addFavoriteApt(row.item)"><b-icon icon="heart"></b-icon></b-button>
+                <b-button size="sm" @click="addFavoriteHouse(row.item)"><b-icon icon="heart"></b-icon></b-button>
                 </b-card>
             </template>
-            <template #cell(지도보기)="mapRow">
+            <!-- <template #cell(지도보기)="mapRow">
                 <b-button size="sm" @click="moveloc(mapRow.item)" class="mr-2">
                 <b-icon icon="pin-map"></b-icon>
                 </b-button>
-            </template>
+            </template> -->
             </b-table>
         </b-row>
         <b-row class="justify-content-md-center">
@@ -55,37 +55,36 @@
 </template>
 
 <script>
-import { addApt } from "@/api/favorite";
-import { mapState, mapActions } from "vuex";
+import { addHouse } from "@/api/favorite";
+import { mapState} from "vuex";
 
 const mapStore = "mapStore";
 const memberStore = "memberStore";
 
 export default {
-    name: "AptList",
+    name: "HouseList",
     data() {
         return {
-            fields: [{ key: "아파트", label: "아파트 이름" }, { key: "법정동" }, "자세히보기", "지도보기"],
+            fields: [{ key: "주택유형" }, { key: "법정동" }, "자세히보기"],
             currentPage: 1,
             rows: 0,
             perPage: 10,
         };
     },
     methods: {
-        ...mapActions(mapStore, ["getAptOne"]),
-        moveloc(apart) {
-            this.getAptOne(apart);
-        },
-        addFavoriteApt(apt) {
+        // ...mapActions(mapStore, ["getAptOne"]),
+        // moveloc(apart) {
+        //     this.getAptOne(apart);
+        // },
+        addFavoriteHouse(house) {
             let param = {
                 userid: this.memberInfo.userid,
-                aptcode: apt.일련번호,
-                aptaddress: apt.도로명,
-                aptprice: apt.거래금액,
-                aptname: apt.아파트,
-                aptfloor: apt.층,
+                houseaddress: house.법정동,
+                houseprice: house.거래금액,
+                housearea: house.대지면적,
+                housetype: house.주택유형,
             };
-            addApt(
+            addHouse(
                 param,
                 ({ data }) => {
                 let msg = "오류 발생";
@@ -101,7 +100,7 @@ export default {
         },
     },
     computed: {
-    ...mapState(mapStore, ["aparts"]),
+    ...mapState(mapStore, ["houses"]),
     ...mapState(memberStore, ["memberInfo"]),
   },
 }

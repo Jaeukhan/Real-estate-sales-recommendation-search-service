@@ -28,7 +28,7 @@
 	</insert>
 	
 	<insert id="houseInsert" parameterType="FavoriteHouseDto">
-		insert into favorite_hosue (user_id, house_address, house_price, house_area, house_type)
+		insert into favorite_house (user_id, house_address, house_price, house_area, house_type)
 		values(#{userid},#{houseaddress},#{houseprice},#{housearea},#{housetype})
 	</insert>
 

@@ -16,7 +16,10 @@
         </b-sidebar>
     </div>
     <b-container v-if="aparts && aparts.length > 0" class="bv-example-row mt-3">
-      <apt-list></apt-list>
+      <apart-list></apart-list>
+    </b-container>
+    <b-container v-else-if="houses && houses.length>0" class="bv-example-row mt-3">
+      <house-list></house-list>
     </b-container>
     <b-container v-else>
       <b-row style="padding: 10px">
@@ -28,7 +31,8 @@
 
 <script>
 import ApartSearchBar from "@/components/map/ApartSearchBar.vue";
-import AptList from "@/components/map/AptList.vue";
+import ApartList from "@/components/map/ApartList.vue";
+import HouseList from "@/components/map/HouseList.vue";
 import KakaoMap from "@/components/map/KakaoMap";
 import { mapState } from "vuex";
 import EducationList from "./EducationList.vue";
@@ -43,45 +47,16 @@ export default {
     ApartSearchBar,
     KakaoMap,
     EducationList,
-    AptList,
+    ApartList,
+    HouseList,
   },
   data() {
     return {
       bus: bus,
     };
   },
-  // methods: {
-  //   ...mapActions(mapStore, ["getAptOne"]),
-  //   moveloc(apart) {
-  //     this.getAptOne(apart);
-  //   },
-  //   addFavoriteApt(apt) {
-  //     let param = {
-  //       userid: this.memberInfo.userid,
-  //       aptcode: apt.일련번호,
-  //       aptaddress: apt.도로명,
-  //       aptprice: apt.거래금액,
-  //       aptname: apt.아파트,
-  //       aptfloor: apt.층,
-  //     };
-  //     addApt(
-  //       param,
-  //       ({ data }) => {
-  //         let msg = "오류 발생";
-  //         if (data === "success") {
-  //           msg = "관심 매물에 등록되었습니다!";
-  //         }
-  //         alert(msg);
-  //       },
-  //       (error) => {
-  //         console.log(error);
-  //       }
-  //     );
-  //   },
-  // },
   computed: {
-    ...mapState(mapStore, ["aparts"]),
-    // ...mapState(memberStore, ["memberInfo"]),
+    ...mapState(mapStore, ["aparts", "houses"]),
   },
 };
 </script>

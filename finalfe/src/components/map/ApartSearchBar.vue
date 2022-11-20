@@ -19,7 +19,9 @@
           <b-col>
             <b-form-select v-model="month" :options="monthList"></b-form-select>
           </b-col>
-
+          <b-col>
+            <b-form-select v-model="type" :options="searchType"></b-form-select>
+          </b-col>
           <b-col>
             <b-button @click="getAptList()">검색</b-button>
           </b-col>
@@ -40,15 +42,18 @@ export default {
     return {
       yearList: ["2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015"],
       monthList: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
+      searchType: ["주택", "아파트"],
       sido: null,
       gugun: null,
       year: null,
       month: null,
+      type: null,
     };
   },
   created() {
     this.CLEAR_SIDO_LIST();
     this.CLEAR_APT_LIST();
+    this.CLEAR_HOUSE_LIST();
     this.getSido(); //시도정보 불러오기(db)
   },
   computed: {
@@ -62,14 +67,12 @@ export default {
   },
   methods: {
     ...mapMutations(mapStore, [
-      "SET_SIDO_LIST",
-      "SET_GUGUN_LIST",
-      "SET_APART_LIST",
       "CLEAR_SIDO_LIST",
       "CLEAR_GUGUN_LIST",
       "CLEAR_APT_LIST",
+      "CLEAR_HOUSE_LIST",
     ]),
-    ...mapActions(mapStore, ["getSido", "getGugun", "getApt"]),
+    ...mapActions(mapStore, ["getSido", "getGugun", "getApt", "getHouse"]),
     getGuguns() {
       this.CLEAR_GUGUN_LIST();
       this.gugun = null;
@@ -78,7 +81,7 @@ export default {
       }
     },
     getAptList() {
-      if (this.sido && this.gugun && this.year && this.month) {
+      if (this.sido && this.gugun && this.year && this.month && this.type) {
         let date = this.year + this.month;
         let param = {
           sidoName: this.sidoName.text,
@@ -86,7 +89,14 @@ export default {
           gugun: this.gugun,
           date: date,
         };
-        this.getApt(param);
+        if(this.type==="주택"){
+          this.getHouse(param);
+        } else {
+          this.getApt(param);
+        }
+      } else {
+        alert("검색 조건을 모두 선택하세요!");
+        return;
       }
     },
   },

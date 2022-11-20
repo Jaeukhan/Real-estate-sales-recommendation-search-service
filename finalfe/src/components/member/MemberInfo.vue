@@ -76,7 +76,7 @@
                     </b-nav>
                     </template>
 
-                    <b-card-body v-if="aparts && aparts.length > 0">
+                    <!-- <b-card-body v-if="aparts && aparts.length > 0">
                         <b-row>
                         <b-table
                             hover
@@ -88,6 +88,33 @@
                             >
                             <template #cell(삭제)="row">
                                 <b-button size="sm" @click="removeApt(row.item.aptid)" class="mr-2">
+                                    <b-icon icon="trash"></b-icon>
+                                </b-button>
+                            </template>
+                        </b-table>
+                        </b-row>
+                            <b-row class="justify-content-md-center">
+                                <b-pagination
+                                    v-model="currentPage"
+                                    pills
+                                    :total-rows="rows"
+                                    :per-page="perPage"
+                                    aria-controls="boardlist-table"
+                                ></b-pagination>
+                            </b-row>
+                    </b-card-body> -->
+                    <b-card-body v-if="houses && houses.length > 0">
+                        <b-row>
+                        <b-table
+                            hover
+                            :items="houses"
+                            :fields="fields"
+                            id="aptlist-table"
+                            :per-page="perPage"
+                            :current-page="currentPage"
+                            >
+                            <template #cell(삭제)="row">
+                                <b-button size="sm" @click="removeHouse(row.item.houseid)" class="mr-2">
                                     <b-icon icon="trash"></b-icon>
                                 </b-button>
                             </template>
@@ -118,8 +145,8 @@
 
 <script>
 import {mapState, mapActions} from "vuex";
-import {listApt, deleteApt} from "@/api/favorite";
-
+import { deleteApt, listHouse, deleteHouse} from "@/api/favorite";
+//listApt
 const memberStore = "memberStore";
 
 export default {
@@ -127,9 +154,15 @@ export default {
     data() {
         return {
             aparts: [],
+            houses: [],
+            // fields: [
+            //     { key: "aptname", label: "아파트이름"},
+            //     { key: "aptaddress", label: "위치"},
+            //     "삭제",
+            // ],
             fields: [
-                { key: "aptname", label: "아파트이름"},
-                { key: "aptaddress", label: "위치"},
+                { key: "housetype", label: "주택유형"},
+                { key: "houseaddress", label: "위치"},
                 "삭제",
             ],
             currentPage: 1,
@@ -143,16 +176,26 @@ export default {
     },
     created() {
         let param = this.memberInfo.userid;
-        listApt(
+        // listApt(
+        //     param,
+        //     ({ data }) => {
+        //         this.aparts = data;
+        //         this.rows = this.aparts.length;
+        //     },
+        //     (error) => {
+        //         console.log(error);
+        //     }
+        // );
+        listHouse(
             param,
             ({ data }) => {
-                this.aparts = data;
-                this.rows = this.aparts.length;
+                this.houses = data;
+                this.rows = this.houses.length;
             },
             (error) => {
                 console.log(error);
             }
-        );
+        )
     },
     computed: {
         ...mapState(memberStore, ["memberInfo"]),
@@ -182,6 +225,26 @@ export default {
                 alert("삭제가 취소되었습니다!");
             }
         },
+        removeHouse(houseid) {
+            if(confirm("정말 삭제하시겠습니까?")) {
+                deleteHouse(
+                    houseid,
+                    ({data}) => {
+                        let msg = "오류 발생";
+                        if(data==="success"){
+                            msg = "삭제 완료!";
+                        }
+                        alert(msg);
+                        this.$router.go();
+                    },
+                    (error) => {
+                        console.log(error);
+                    }
+                );
+            } else {
+                alert("삭제가 취소되었습니다!");
+            }
+        }
     },
 }
 </script>
