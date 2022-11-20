@@ -12,6 +12,7 @@ const mapStore = {
     sidoName: "",
     gugunName: "",
     selectedsch: [],
+    weatherLoc: { lat: null, lon: null }, //날씨 불러올 위치: lat, lon
   },
   getters: {},
   mutations: {
@@ -83,6 +84,13 @@ const mapStore = {
       }
       state.selectedsch = li;
     },
+    // SET_WEATHER_LOC(state, info) {
+    //   state.weatherLoc = {
+    //     lat: info.lat,
+    //     lon: info.lon,
+    //   };
+    //   console.log("날씨 이걸로 찾을거임", state.weatherLoc);
+    // },
   },
   actions: {
     getSido: ({ commit }) => {
@@ -221,6 +229,14 @@ const mapStore = {
         );
       }
     },
+    // setWeatherLoc: ({ commit }, loc) => {
+    //   const data = {
+    //     lat: loc.lat,
+    //     lon: loc.lon,
+    //   };
+    //   console.log("여기 액션", data);
+    //   commit("SET_WEATHER_LOC", data);
+    // },
   },
 };
 

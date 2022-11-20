@@ -8,7 +8,8 @@
       <b-sidebar id="sidebar-1" title="Sidebar" width="700px">
         <div class="px-3 py-2">
           <line-chart />
-          <b-img src="https://picsum.photos/500/500/?image=54" fluid thumbnail></b-img>
+          <weather-card ></weather-card>
+          <!-- <b-img src="https://picsum.photos/500/500/?image=54" fluid thumbnail></b-img> -->
         </div>
       </b-sidebar>
     </div>
@@ -35,6 +36,7 @@ import { mapState } from "vuex";
 import EducationList from "./EducationList.vue";
 import Vue from "vue";
 import LineChart from "@/components/map/Line.vue";
+import WeatherCard from "@/components/map/WeatherCard.vue";
 
 const mapStore = "mapStore";
 var bus = new Vue();
@@ -48,6 +50,7 @@ export default {
     ApartList,
     HouseList,
     LineChart,
+    WeatherCard,
   },
   data() {
     return {

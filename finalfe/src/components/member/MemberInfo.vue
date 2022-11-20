@@ -75,7 +75,6 @@
                         <b-nav-item>Inactive</b-nav-item>
                     </b-nav>
                     </template>
-
                     <!-- <b-card-body v-if="aparts && aparts.length > 0">
                         <b-row>
                         <b-table
