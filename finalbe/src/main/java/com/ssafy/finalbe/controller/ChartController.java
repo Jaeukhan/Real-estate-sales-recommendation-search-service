@@ -33,10 +33,11 @@ public class ChartController {
 
 	@ApiOperation(value = "차트 목록", notes = "모든 차트보를 반환한다.", response = List.class)
 	@GetMapping("/{sido}/{gugun}")
-	public ResponseEntity<List<ChartDto>> listChart(@PathVariable("sido")String sido,@PathVariable("gugun")String gugun)
+	public ResponseEntity<ChartDto> listChart(@PathVariable("sido")String sido,@PathVariable("gugun")String gugun)
 			throws Exception {
 		logger.info("listChart - 호출");
 		String name = sido+" "+gugun;
-		return new ResponseEntity<List<ChartDto>>(service.listChart(name), HttpStatus.OK);
+		System.out.println(service.listChart(name));
+		return new ResponseEntity<ChartDto>(service.listChart(name), HttpStatus.OK);
 	}
 }

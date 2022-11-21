@@ -7,5 +7,5 @@ import org.springframework.stereotype.Service;
 import com.ssafy.finalbe.model.ChartDto;
 
 public interface ChartService {
-	public List<ChartDto> listChart(String name) throws Exception;
+	public ChartDto listChart(String name) throws Exception;
 }

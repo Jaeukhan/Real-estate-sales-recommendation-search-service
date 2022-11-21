@@ -16,8 +16,8 @@ public class ChartServiceImpl implements ChartService {
 	private SqlSession sqlSession;
 	
 	@Override
-	public List<ChartDto> listChart(String name) throws Exception {
-		return sqlSession.getMapper(ChartMapper.class).listChart(name);
+	public ChartDto listChart(String name) throws Exception {
+		return sqlSession.getMapper(ChartMapper.class).listChart(name); 
 	}
 
 }

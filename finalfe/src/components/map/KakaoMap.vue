@@ -46,7 +46,7 @@ export default {
       // this.weatherLoc.lon = this.temp.lon;
       this.setWeatherLoc(this.temp);
       this.apiload(this.temp);
-      console.log("찐으로 바꾼거:", this.temp);
+      // console.log("찐으로 바꾼거:", this.temp);
     },
     aparts(val) {
       let li = [];
@@ -75,7 +75,7 @@ export default {
     },
     displayMarkerAndMove(Addr) {
       let positions = [];
-      console.log(Addr);
+      // console.log(Addr);
       if (Addr)
         for (let n = 0; n < Addr.length; n++) {
           this.geocoder.addressSearch(Addr[n].REFINE_ROADNM_ADDR, (result, status) => {

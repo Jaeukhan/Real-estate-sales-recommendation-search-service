@@ -2,7 +2,7 @@ package com.ssafy.finalbe.model;
 
 public class ChartDto {
     private String region;
-    private int day2108,day2109,day2110,day2111,day2112,day2201,day2202,day2203, day2204, day2205,day2206,day2207,day2208,day2209,day2210,day2211,day2212;
+    private int day2108,day2109,day2110,day2111,day2112,day2201,day2202,day2203, day2204, day2205,day2206,day2207,day2208;
     public ChartDto(){}
 	public ChartDto(String region, int day2108, int day2109, int day2110, int day2111, int day2112, int day2201,
 			int day2202, int day2203, int day2204, int day2205, int day2206, int day2207, int day2208) {
@@ -105,37 +105,13 @@ public class ChartDto {
 	public void setDay2208(int day2208) {
 		this.day2208 = day2208;
 	}
-	public int getDay2209() {
-		return day2209;
-	}
-	public void setDay2209(int day2209) {
-		this.day2209 = day2209;
-	}
-	public int getDay2210() {
-		return day2210;
-	}
-	public void setDay2210(int day2210) {
-		this.day2210 = day2210;
-	}
-	public int getDay2211() {
-		return day2211;
-	}
-	public void setDay2211(int day2211) {
-		this.day2211 = day2211;
-	}
-	public int getDay2212() {
-		return day2212;
-	}
-	public void setDay2212(int day2212) {
-		this.day2212 = day2212;
-	}
+
 	@Override
 	public String toString() {
 		return "ChartDto [region=" + region + ", day2108=" + day2108 + ", day2109=" + day2109 + ", day2110=" + day2110
 				+ ", day2111=" + day2111 + ", day2112=" + day2112 + ", day2201=" + day2201 + ", day2202=" + day2202
 				+ ", day2203=" + day2203 + ", day2204=" + day2204 + ", day2205=" + day2205 + ", day2206=" + day2206
-				+ ", day2207=" + day2207 + ", day2208=" + day2208 + ", day2209=" + day2209 + ", day2210=" + day2210
-				+ ", day2211=" + day2211 + ", day2212=" + day2212 + "]";
+				+ ", day2207=" + day2207 + ", day2208=" + day2208+"]";
 	}
 
     

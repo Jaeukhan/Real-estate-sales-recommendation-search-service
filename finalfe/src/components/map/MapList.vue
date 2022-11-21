@@ -9,6 +9,9 @@
         <div class="px-3 py-2">
           {{ dataChart }}
           <line-chart :data="dataChart" :options="{ responsive: true, maintainAspectRatio: false }"></line-chart>
+          <br />
+          <br />
+          <br />
           <weather-card></weather-card>
           <!-- <b-img src="https://picsum.photos/500/500/?image=54" fluid thumbnail></b-img> -->
         </div>
@@ -33,14 +36,14 @@ import ApartSearchBar from "@/components/map/ApartSearchBar.vue";
 import ApartList from "@/components/map/ApartList.vue";
 import HouseList from "@/components/map/HouseList.vue";
 import KakaoMap from "@/components/map/KakaoMap";
-import { mapState, mapActions } from "vuex";
+import { mapState } from "vuex";
 import EducationList from "./EducationList.vue";
 import Vue from "vue";
 import LineChart from "@/components/map/Line.vue";
 import WeatherCard from "@/components/map/WeatherCard.vue";
 
 const mapStore = "mapStore";
-const chartStore = "chartStore";
+
 var bus = new Vue();
 
 export default {
@@ -62,23 +65,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(mapStore, ["aparts", "houses", "sidoName", "gugunName"]),
-    returnSido() {
-      return this.sidoName;
-    },
-    returnGugun() {
-      return this.gugunName;
-    },
-  },
-  methods: {
-    ...mapActions(chartStore, ["getAvgPrice"]),
-    getChart() {
-      const param = {
-        sido: this.returnSido,
-        gugun: this.returnGugun,
-      };
-      this.getAvgPrice(param);
-    },
+    ...mapState(mapStore, ["aparts", "houses"]),
   },
 };
 </script>

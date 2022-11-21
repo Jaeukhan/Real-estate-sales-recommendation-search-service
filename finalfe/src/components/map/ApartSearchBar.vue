@@ -35,6 +35,7 @@
 import { mapState, mapMutations, mapActions } from "vuex";
 
 const mapStore = "mapStore";
+const chartStore = "chartStore";
 
 export default {
   name: "ApartSearchBar",
@@ -57,21 +58,22 @@ export default {
     this.getSido(); //시도정보 불러오기(db)
   },
   computed: {
-    ...mapState(mapStore, ["sidos", "guguns", "aparts"]),
+    ...mapState(mapStore, ["sidos", "guguns", "aparts", "sidoName", "gugunName"]),
     sidoName: function () {
       return this.sidos.find((option) => option.value === this.sido);
     },
     gugunName() {
       return this.guguns.find((option) => option.value === this.gugun);
     },
+    // returnSido() {
+    //   return this.sidoName;
+    // },
+    // returnGugun() {
+    //   return this.gugunName;
+    // },
   },
   methods: {
-    ...mapMutations(mapStore, [
-      "CLEAR_SIDO_LIST",
-      "CLEAR_GUGUN_LIST",
-      "CLEAR_APT_LIST",
-      "CLEAR_HOUSE_LIST",
-    ]),
+    ...mapMutations(mapStore, ["CLEAR_SIDO_LIST", "CLEAR_GUGUN_LIST", "CLEAR_APT_LIST", "CLEAR_HOUSE_LIST"]),
     ...mapActions(mapStore, ["getSido", "getGugun", "getApt", "getHouse"]),
     getGuguns() {
       this.CLEAR_GUGUN_LIST();
@@ -80,6 +82,14 @@ export default {
         this.getGugun(this.sido);
       }
     },
+    ...mapActions(chartStore, ["getAvgPrice"]),
+    // getChart() {
+    //   const param = {
+    //     sido: this.returnSido,
+    //     gugun: this.returnGugun,
+    //   };
+    //   this.getAvgPrice(param);
+    // },
     getAptList() {
       if (this.sido && this.gugun && this.year && this.month && this.type) {
         let date = this.year + this.month;
@@ -89,10 +99,11 @@ export default {
           gugun: this.gugun,
           date: date,
         };
-        if(this.type==="주택"){
+        if (this.type === "주택") {
           this.getHouse(param);
         } else {
           this.getApt(param);
+          this.getAvgPrice(param);
         }
       } else {
         alert("검색 조건을 모두 선택하세요!");

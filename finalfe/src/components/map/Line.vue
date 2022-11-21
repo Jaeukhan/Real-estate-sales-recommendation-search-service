@@ -8,7 +8,6 @@
     :css-classes="cssClasses"
     :styles="styles"
     :width="width"
-    chart:updated="chartData"
     :height="height"
   />
 </template>
@@ -26,9 +25,8 @@ import {
   CategoryScale,
   PointElement,
 } from "chart.js";
-
-ChartJS.register(Title, Tooltip, Legend, LineElement, LinearScale, CategoryScale, PointElement);
 const chartStore = "chartStore";
+ChartJS.register(Title, Tooltip, Legend, LineElement, LinearScale, CategoryScale, PointElement);
 
 export default {
   name: "LineChart",
@@ -67,90 +65,46 @@ export default {
   },
   data() {
     return {
-      dataChart: [10, 39, 10, 40, 39, 0, 0],
+      // chartData: {
+      // labels: this.price_name,
+      // datasets: [
+      //   {
+      //     label: "Data One",
+      //     backgroundColor: "#f87979",
+      //     data: this.price_li,
+      //   },
+      // ],
+      // },
+      // chartOptions: {
+      //   responsive: true,
+      //   maintainAspectRatio: false,
+      // },
     };
   },
   computed: {
-    ...mapState(chartStore, ["price_li"]),
-    chartData: function () {
-      return this.price_li;
+    ...mapState(chartStore, ["price_li", "price_name"]),
+    chartData() {
+      const data = {
+        labels: this.price_name,
+        datasets: [
+          {
+            label: "매매가격(만 원)",
+            backgroundColor: "#f87979",
+            data: this.price_li,
+          },
+        ],
+      };
+      return data;
+      /* mutable chart data */
     },
-    // upDateData() {
-    //   const chartData = {
-    //     labels: [
-    //       "21.08",
-    //       "21.09",
-    //       "21.10",
-    //       "21.11",
-    //       "21.12",
-    //       "22.01",
-    //       "22.02",
-    //       "22.03",
-    //       "22.04",
-    //       "22.05",
-    //       "22.06",
-    //       "22.07",
-    //       "22.08",
-    //     ],
-    //     datasets: [
-    //       {
-    //         label: "1년간 부동산 근황",
-    //         backgroundColor: "#f87979",
-    //         data: [], //[40, 39, 10, 40, 39, 80, 40]
-    //       },
-    //     ],
-    //   };
-    //   return chartData; /* mutable chart data */
+    // chartOptions() {
+    //   return; /* mutable chart options */
     // },
-  },
-  mounted() {
-    this.renderLineChart();
-  },
-  methods: {
-    renderLineChart: function () {
-      this.renderChart(
-        {
-          labels: [
-            "21.08",
-            "21.09",
-            "21.10",
-            "21.11",
-            "21.12",
-            "22.01",
-            "22.02",
-            "22.03",
-            "22.04",
-            "22.05",
-            "22.06",
-            "22.07",
-            "22.08",
-          ],
-          datasets: [
-            {
-              label: "1년간 부동산 근황",
-              backgroundColor: "#f87979",
-              data: this.chartData,
-            },
-          ],
-        },
-        { responsive: true, maintainAspectRatio: false }
-      );
-    },
-    getChart: function () {
-      this.dataChart = [6, 6, 3, 5, 5, 6];
-    },
   },
   watch: {
-    price_li: function () {
-      this._chart.destroy();
-      //this.renderChart(this.data, this.options);
-      this.renderLineChart();
+    data(val) {
+      console.log(val);
     },
-    // price_li(val) {
-    //   console.log(val);
-    //   let data_li = [val.dayday2108];
-    //   this.datasets.data = data_li;
-    // },
   },
 };
 </script>

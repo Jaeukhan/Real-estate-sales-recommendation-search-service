@@ -9,5 +9,5 @@ import com.ssafy.finalbe.model.ChartDto;
 
 @Mapper
 public interface ChartMapper {
-	public List<ChartDto> listChart(String name) throws SQLException;
+	public ChartDto listChart(String name) throws SQLException;
 }
