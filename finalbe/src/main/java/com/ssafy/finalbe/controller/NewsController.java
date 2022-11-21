@@ -1,7 +1,7 @@
 package com.ssafy.finalbe.controller;
 
 import com.ssafy.finalbe.model.NewsDto;
-import com.ssafy.finalbe.model.service.NewsService;
+import com.ssafy.finalbe.model.service.NewsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ import java.util.List;
 public class NewsController {
 
 	@Autowired
-	private NewsService nservice;
+	private NewsServiceImpl nservice;
 
 
 

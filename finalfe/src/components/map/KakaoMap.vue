@@ -2,6 +2,7 @@
   <div align-v="center" align-h="center" style="text-align: center">
     <h3 v-if="apt">{{ apt.aptName }}</h3>
     <div id="map" style="margin-right: 0" align-h="center"></div>
+    <b-button class="mt-3" @click="getParkinglot">주변 주차장 검색</b-button>
   </div>
 </template>
 
@@ -33,14 +34,7 @@ export default {
     this.cup.$on("move", this.searchSubmit);
   },
   computed: {
-    ...mapState(mapStore, [
-      "apt",
-      "selectedsch",
-      "aparts",
-      "sidoName",
-      "gugunName",
-      "weatherLoc",
-    ]), //apt.load, apt.
+    ...mapState(mapStore, ["apt", "selectedsch", "aparts", "sidoName", "gugunName", "weatherLoc"]), //apt.load, apt.
   },
   watch: {
     selectedsch(val) {
@@ -58,14 +52,7 @@ export default {
     aparts(val) {
       let li = [];
       for (let i = 0; i < val.length; i++) {
-        const names =
-          this.sidoName +
-          " " +
-          this.gugunName +
-          " " +
-          val[i].법정동 +
-          " " +
-          val[i].도로명;
+        const names = this.sidoName + " " + this.gugunName + " " + val[i].법정동 + " " + val[i].도로명;
         li.push({
           REFINE_ROADNM_ADDR: names,
           title: val[i].아파트,
@@ -92,24 +79,21 @@ export default {
       // console.log(Addr);
       if (Addr)
         for (let n = 0; n < Addr.length; n++) {
-          this.geocoder.addressSearch(
-            Addr[n].REFINE_ROADNM_ADDR,
-            (result, status) => {
-              if (status === kakao.maps.services.Status.OK) {
-                // let bounds = new kakao.maps.LatLngBounds();
-                for (let i = 0; i < result.length; i++) {
-                  let data = result[i];
-                  const d = {
-                    title: Addr[n].title,
-                    latlng: new kakao.maps.LatLng(data.y, data.x),
-                  };
-                  positions.push(d);
-                  this.displayMarker(positions);
-                  // bounds.extend(new kakao.maps.LatLng(data.y, data.x));
-                }
+          this.geocoder.addressSearch(Addr[n].REFINE_ROADNM_ADDR, (result, status) => {
+            if (status === kakao.maps.services.Status.OK) {
+              // let bounds = new kakao.maps.LatLngBounds();
+              for (let i = 0; i < result.length; i++) {
+                let data = result[i];
+                const d = {
+                  title: Addr[n].title,
+                  latlng: new kakao.maps.LatLng(data.y, data.x),
+                };
+                positions.push(d);
+                this.displayMarker(positions);
+                // bounds.extend(new kakao.maps.LatLng(data.y, data.x));
               }
             }
-          );
+          });
         }
     },
     displayMarker(positions) {
@@ -196,6 +180,8 @@ export default {
         _this.temp.lon = latlng.La;
       });
     },
+    ////// 주차장
+    getParkinglot() {},
   },
   mounted() {
     if (window.kakao && window.kakao.maps) {
