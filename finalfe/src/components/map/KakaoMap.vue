@@ -62,7 +62,7 @@ export default {
         };
         positions.push(d);
       }
-      console.log(positions);
+      // console.log(positions);
       this.displayMarker(positions);
     },
     lib_li(val) {
@@ -75,7 +75,7 @@ export default {
         };
         positions.push(d);
       }
-      console.log(positions);
+      // console.log(positions);
       this.displayMarker(positions);
     },
     parking_li(val) {
@@ -140,7 +140,7 @@ export default {
       const mapContainer = document.getElementById("map");
       const mapOption = {
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 4, // 지도의 확대 레벨
+        level: 3, // 지도의 확대 레벨
       };
       this.map = new kakao.maps.Map(mapContainer, mapOption);
       this.geocoder = new kakao.maps.services.Geocoder();
@@ -180,10 +180,11 @@ export default {
         }
     },
     displayMarker(positions) {
+      // console.log(positions);
       if (this.markers.length > 0) {
         this.markers.forEach((marker) => marker.setMap(null));
       }
-      console.log(positions[0].markname);
+      // console.log(positions[0].markname);
       if (positions[0].markname == "bus") {
         this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.buststop, this.imageSize);
       } else if (positions[0].markname == "apart") {
@@ -203,7 +204,7 @@ export default {
       } else {
         this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.mart, this.imageSize);
       }
-
+      
       positions.forEach((position) => {
         const marker = new kakao.maps.Marker({
           map: this.map,
@@ -288,23 +289,22 @@ export default {
     ////// 주차장
     getParkinglot() {
       const param = {
-        siGunCode: "시흥시",
-        siGunName: "41390",
+        siGunName: "시흥시",
+        siGunCode: "41390",
       };
       this.getParking(param);
     },
     getLibloc() {
-      // getMartloc
       const param = {
-        siGunCode: "시흥시",
-        siGunName: "41390",
+        siGunName: "시흥시",
+        siGunCode: "41390",
       };
       this.getLibrary(param);
     },
     getMartloc() {
       const param = {
-        siGunCode: "시흥시",
-        siGunName: "41390",
+        siGunName: "시흥시",
+        siGunCode: "41390",
       };
       this.getMart(param);
     },

@@ -154,22 +154,22 @@
         <b-col xl="8" class="order-xl-1">
           <div>
             <b-card
-              title="관심 매물 - 주택"
               body-class="text-center"
               header-tag="nav"
             >
               <template #header>
                 <b-nav card-header tabs>
-                  <b-nav-item active>Active</b-nav-item>
-                  <b-nav-item>Inactive</b-nav-item>
+                  <b-nav-item active>좋아요 표시한 매물 리스트</b-nav-item>
+                  <b-button style="margin: 5px;" class="sm" @click="toggle('a')">Apart</b-button>
+                  <b-button style="margin: 5px;" class="sm" @click="toggle('h')">House</b-button>
                 </b-nav>
               </template>
-              <!-- <b-card-body v-if="aparts && aparts.length > 0">
-                        <b-row>
+              <b-card-body v-if="isApt==='a'">
+                        <b-row v-if="apartlist && apartlist.length > 0">
                         <b-table
                             hover
-                            :items="aparts"
-                            :fields="fields"
+                            :items="apartlist"
+                            :fields="aptfields"
                             id="aptlist-table"
                             :per-page="perPage"
                             :current-page="currentPage"
@@ -181,22 +181,28 @@
                             </template>
                         </b-table>
                         </b-row>
+                        <b-row v-else>
+                          <div>
+                            추가한 관심 매물이 없습니다! 관심 매물을 추가하고 한 눈에
+                            모아보세용
+                          </div>
+                        </b-row>
                             <b-row class="justify-content-md-center">
                                 <b-pagination
                                     v-model="currentPage"
                                     pills
-                                    :total-rows="rows"
+                                    :total-rows="apartlist.length"
                                     :per-page="perPage"
                                     aria-controls="boardlist-table"
                                 ></b-pagination>
                             </b-row>
-                    </b-card-body> -->
-              <b-card-body v-if="houses && houses.length > 0">
-                <b-row>
+                    </b-card-body>
+              <b-card-body v-else>
+                <b-row v-if="houselist && houselist.length > 0">
                   <b-table
                     hover
-                    :items="houses"
-                    :fields="fields"
+                    :items="houselist"
+                    :fields="housefields"
                     id="aptlist-table"
                     :per-page="perPage"
                     :current-page="currentPage"
@@ -212,25 +218,24 @@
                     </template>
                   </b-table>
                 </b-row>
+                <b-row v-else>
+                <div>
+                  추가한 관심 매물이 없습니다! 관심 매물을 추가하고 한 눈에
+                  모아보세용
+                </div>
+              </b-row>
                 <b-row class="justify-content-md-center">
                   <b-pagination
                     v-model="currentPage"
                     pills
-                    :total-rows="rows"
+                    :total-rows="houselist.length"
                     :per-page="perPage"
                     aria-controls="boardlist-table"
                   ></b-pagination>
                 </b-row>
               </b-card-body>
-              <b-card-body v-else>
-                <div>
-                  추가한 관심 매물이 없습니다! 관심 매물을 추가하고 한 눈에
-                  모아보세용
-                </div>
-              </b-card-body>
-
               <b-button variant="primary" @click="moveMap"
-                >관심 매물 더 추가하러 가기</b-button
+                >다른 매물 둘러보기</b-button
               >
             </b-card>
           </div>
@@ -296,13 +301,15 @@
         </b-card>
       </b-row> -->
     </b-container>
+  <br>
+  <br>
+  <br>
+  <br>
   </div>
 </template>
 
 <script>
 import { mapState, mapActions, mapMutations } from "vuex";
-import { deleteApt } from "@/api/favorite";
-//listApt
 const memberStore = "memberStore";
 const favoriteStore = "favoriteStore";
 const boardStore = "boardStore";
@@ -311,12 +318,12 @@ export default {
   name: "MemberInfo",
   data() {
     return {
-      // fields: [
-      //     { key: "aptname", label: "아파트이름"},
-      //     { key: "aptaddress", label: "위치"},
-      //     "삭제",
-      // ],
-      fields: [
+      aptfields: [
+          { key: "aptname", label: "아파트이름"},
+          { key: "aptaddress", label: "위치"},
+          "삭제",
+      ],
+      housefields: [
         { key: "housetype", label: "주택유형" },
         { key: "houseaddress", label: "위치" },
         "삭제",
@@ -328,6 +335,7 @@ export default {
       ],
       currentPage: 1,
       perPage: 5,
+      isApt: "a",
     };
   },
   create() {
@@ -338,38 +346,18 @@ export default {
   created() {
     this.CLEAR_USER_BOARD();
     this.getHouseList(this.memberInfo.userid);
+    this.getAptList(this.memberInfo.userid);
     this.getUserBoard(this.memberInfo.userid);
-    // let param = this.memberInfo.userid;
-    // listApt(
-    //     param,
-    //     ({ data }) => {
-    //         this.aparts = data;
-    //         this.rows = this.aparts.length;
-    //     },
-    //     (error) => {
-    //         console.log(error);
-    //     }
-    // );
-    // listHouse(
-    //     param,
-    //     ({ data }) => {
-    //         this.houses = data;
-    //         this.rows = this.houses.length;
-    //     },
-    //     (error) => {
-    //         console.log(error);
-    //     }
-    // )
   },
   computed: {
     ...mapState(memberStore, ["memberInfo"]),
     ...mapState(boardStore, ["user_board"]),
-    ...mapState(favoriteStore, ["aparts", "houses", "rows"]),
+    ...mapState(favoriteStore, ["apartlist", "houselist", "rows"]),
   },
   methods: {
     ...mapMutations(boardStore, ["CLEAR_USER_BOARD"]),
     ...mapActions(memberStore, ["getMemberInfo"]),
-    ...mapActions(favoriteStore, ["getHouseList", "removeFavoriteHouse"]),
+    ...mapActions(favoriteStore, ["getHouseList", "removeFavoriteHouse", "getAptList", "removeFavoriteApt"]),
     ...mapActions(boardStore, ["getUserBoard"]),
     moveModify() {
       this.$router.push({ name: "memberModify" });
@@ -386,20 +374,9 @@ export default {
     },
     removeApt(aptid) {
       if (confirm("정말 삭제하시겠습니까?")) {
-        deleteApt(
-          aptid,
-          ({ data }) => {
-            let msg = "오류 발생";
-            if (data === "success") {
-              msg = "삭제 완료!";
-            }
-            alert(msg);
-            this.$router.go();
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
+        this.removeFavoriteApt(aptid, this.memberInfo.userid);
+        alert("삭제되었습니다!");
+        this.$router.go();
       } else {
         alert("삭제가 취소되었습니다!");
       }
@@ -412,6 +389,9 @@ export default {
       } else {
         alert("삭제가 취소되었습니다!");
       }
+    },
+    toggle(word) {
+      this.isApt = word;
     },
   },
 };

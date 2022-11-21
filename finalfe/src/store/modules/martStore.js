@@ -6,7 +6,7 @@ const martStore = {
     market_li: [],
   },
   mutations: {
-    SET_Mart_LIST(state, info) {
+    SET_MART_LIST(state, info) {
       let li = [];
       for (let d = 0; d < info.length; d++) {
         let temp = {
@@ -30,7 +30,8 @@ const martStore = {
         ({ data }) => {
           //   console.log("[[[[", data);
           //   console.log("[[[[", data.ParkingPlace[1].row);
-          commit("SET_Mart_LIST", data.MrktStoreM[1].row);
+          console.log("여기 마트스토어: ", data.MrktStoreM[1].row);
+          commit("SET_MART_LIST", data.MrktStoreM[1].row);
         },
         (error) => {
           console.log("Getting Mart_LIST error: ", error);

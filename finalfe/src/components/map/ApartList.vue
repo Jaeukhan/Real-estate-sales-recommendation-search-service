@@ -61,6 +61,7 @@ import { mapState, mapActions } from "vuex";
 const mapStore = "mapStore";
 const memberStore = "memberStore";
 const weatherStore = "weatherStore";
+const favoriteStore = "favoriteStore";
 
 export default {
   name: "ApartList",
@@ -70,6 +71,7 @@ export default {
       currentPage: 1,
       rows: 0,
       perPage: 10,
+      isDuplicate: false,
     };
   },
   methods: {
@@ -89,25 +91,44 @@ export default {
         aptname: apt.아파트,
         aptfloor: apt.층,
       };
-      addApt(
-        param,
-        ({ data }) => {
-          let msg = "오류 발생";
-          if (data === "success") {
-            msg = "관심 매물에 등록되었습니다!";
+      console.log(param);
+      let _this = this;
+      this.apartlist.forEach(a => {
+        console.log(a);
+        if(_this.memberInfo.userid == param.userid 
+            && a.aptcode == param.aptcode
+            && a.aptaddress == param.aptaddress 
+            && a.aptprice == param.aptprice
+            && a.aptname == param.aptname
+            && a.aptfloor == param.aptfloor) {
+              _this.isDuplicate = true;
+              return;
+            }
+      });
+      if(this.isDuplicate) {
+        alert("이미 추가한 매물입니다.");
+      } else {
+        addApt(
+          param,
+          ({ data }) => {
+            let msg = "오류 발생";
+            if (data === "success") {
+              msg = "관심 매물에 등록되었습니다!";
+            }
+            alert(msg);
+          },
+          (error) => {
+            console.log(error);
           }
-          alert(msg);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+        );
+      }
+      this.isDuplicate = false;
     },
   },
   computed: {
     ...mapState(mapStore, ["aparts", "weatherLoc"]),
     ...mapState(memberStore, ["memberInfo"]),
-    
+    ...mapState(favoriteStore, ["apartlist"]),
   },
 };
 </script>

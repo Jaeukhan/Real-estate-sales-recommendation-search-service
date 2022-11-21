@@ -30,6 +30,7 @@ const libraryStore = {
         ({ data }) => {
           //   console.log("[[[[", data);
           //   console.log("[[[[", data.ParkingPlace[1].row);
+          console.log("여기 도서관 스토어: ", data.TBGGIBLLBR[1].row);
           commit("SET_LIBRARY_LIST", data.TBGGIBLLBR[1].row);
         },
         (error) => {
