@@ -3,12 +3,12 @@
 <mapper namespace="com.ssafy.finalbe.model.mapper.TransportMapper">
 
 	<resultMap type="com.ssafy.finalbe.model.TransportDto" id="map">
-		<result column="정류장명" property="stopname"/>
 		<result column="정류장번호" property="stopno"/>
-		<result column="도시명" property="cityname"/>
-		<result column="도시코드" property="sidocode"/>
+		<result column="정류장명" property="stopname"/>
 		<result column="위도" property="lat"/>
 		<result column="경도" property="lon"/>
+		<result column="도시코드" property="sidocode"/>
+		<result column="도시명" property="cityname"/>
 	</resultMap>
 
 	<select id="getList" parameterType="int" resultMap="map">

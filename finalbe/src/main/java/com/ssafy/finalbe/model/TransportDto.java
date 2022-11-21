@@ -1,20 +1,11 @@
 package com.ssafy.finalbe.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Builder
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class TransportDto {
 	private String stopname, stopno, cityname;
 	private int sidocode;
 	private double lat, lon;
 	
-	public TransportDto(String stopname, String stopno, String cityname, int sidocode, double lat, double lon) {
+	public TransportDto(String stopno, String stopname, double lat, double lon, int sidocode, String cityname) {
 		this.stopname = stopname;
 		this.stopno = stopno;
 		this.cityname = cityname;
