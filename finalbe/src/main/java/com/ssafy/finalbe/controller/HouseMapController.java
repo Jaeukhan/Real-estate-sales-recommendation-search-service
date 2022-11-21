@@ -75,7 +75,7 @@ public class HouseMapController {
 				"&" + URLEncoder.encode("LAWD_CD", "UTF-8") + "=" + URLEncoder.encode(lawdCd, "UTF-8")); /* 지역코드 */
 		urlBuilder.append(
 				"&" + URLEncoder.encode("DEAL_YMD", "UTF-8") + "=" + URLEncoder.encode(dealYmd, "UTF-8")); /* 계약월 */
-//		System.out.println(urlBuilder.toString());
+		System.out.println(urlBuilder.toString());
 		URL url = new URL(urlBuilder.toString());
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		conn.setRequestMethod("GET");

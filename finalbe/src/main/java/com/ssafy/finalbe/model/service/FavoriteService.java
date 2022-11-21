@@ -22,5 +22,8 @@ public interface FavoriteService {
 	//selectAll
 	public List<FavoriteAptDto> aptList(String userid) throws Exception;
 	public List<FavoriteHouseDto> houseList(String userid) throws Exception;
-		
+	
+	//check duplicate
+//	public List<FavoriteAptDto> checkAptDuplicate(String userid, int aptid) throws Exception;
+//	public List<FavoriteHouseDto> checkHouseDuplicate(String userid, int houseid) throws Exception;
 }
