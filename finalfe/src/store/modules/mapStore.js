@@ -78,6 +78,7 @@ const mapStore = {
         let temp = {
           REFINE_ROADNM_ADDR: info[d].REFINE_ROADNM_ADDR,
           title: info[d].FACLT_NM,
+          markname: "kindergarden",
         };
         li.push(temp);
       }
@@ -89,6 +90,7 @@ const mapStore = {
         let temp = {
           REFINE_ROADNM_ADDR: info.data[d].REFINE_ROADNM_ADDR,
           title: info.data[d].FACLT_NM,
+          markname: info.markname,
         };
         li.push(temp);
       }
@@ -223,6 +225,7 @@ const mapStore = {
           ({ data }) => {
             const info = {
               data: data.ElmschlM[1].row,
+              markname: "element",
             };
             commit("SET_SCHOOL_LIST", info);
           },
@@ -238,6 +241,7 @@ const mapStore = {
           ({ data }) => {
             const info = {
               data: data.MskulM[1].row,
+              markname: "middle",
             };
             commit("SET_SCHOOL_LIST", info);
           },
@@ -253,6 +257,7 @@ const mapStore = {
           ({ data }) => {
             const info = {
               data: data.HgschlM[1].row,
+              markname: "high",
             };
             commit("SET_SCHOOL_LIST", info);
           },
