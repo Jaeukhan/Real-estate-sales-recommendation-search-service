@@ -3,6 +3,9 @@
     <h3 v-if="apt">{{ apt.aptName }}</h3>
     <div id="map" style="margin-right: 0" align-h="center"></div>
     <b-button class="mt-3" @click="getParkinglot">주변 주차장 검색</b-button>
+    <b-button class="mt-3" @click="getBusStopList"
+      >근처 버스 정류장 찾기(일단 서울)</b-button
+    >
   </div>
 </template>
 
@@ -10,6 +13,7 @@
 import { mapMutations, mapState, mapActions } from "vuex";
 
 const mapStore = "mapStore";
+const transportStore = "transportStore";
 
 export default {
   name: "KakaoMap",
@@ -34,7 +38,15 @@ export default {
     this.cup.$on("move", this.searchSubmit);
   },
   computed: {
-    ...mapState(mapStore, ["apt", "selectedsch", "aparts", "sidoName", "gugunName", "weatherLoc"]), //apt.load, apt.
+    ...mapState(mapStore, [
+      "apt",
+      "selectedsch",
+      "aparts",
+      "sidoName",
+      "gugunName",
+      "weatherLoc",
+    ]), //apt.load, apt.
+    ...mapState(transportStore, ["busList"]),
   },
   watch: {
     selectedsch(val) {
@@ -52,7 +64,14 @@ export default {
     aparts(val) {
       let li = [];
       for (let i = 0; i < val.length; i++) {
-        const names = this.sidoName + " " + this.gugunName + " " + val[i].법정동 + " " + val[i].도로명;
+        const names =
+          this.sidoName +
+          " " +
+          this.gugunName +
+          " " +
+          val[i].법정동 +
+          " " +
+          val[i].도로명;
         li.push({
           REFINE_ROADNM_ADDR: names,
           title: val[i].아파트,
@@ -63,6 +82,7 @@ export default {
   },
   methods: {
     ...mapActions(mapStore, ["setWeatherLoc", "apiload"]),
+    ...mapActions(transportStore, ["getBusList"]),
     ...mapMutations(mapStore, ["CLEAR_APT"]),
     initMap() {
       const mapContainer = document.getElementById("map");
@@ -79,21 +99,24 @@ export default {
       // console.log(Addr);
       if (Addr)
         for (let n = 0; n < Addr.length; n++) {
-          this.geocoder.addressSearch(Addr[n].REFINE_ROADNM_ADDR, (result, status) => {
-            if (status === kakao.maps.services.Status.OK) {
-              // let bounds = new kakao.maps.LatLngBounds();
-              for (let i = 0; i < result.length; i++) {
-                let data = result[i];
-                const d = {
-                  title: Addr[n].title,
-                  latlng: new kakao.maps.LatLng(data.y, data.x),
-                };
-                positions.push(d);
-                this.displayMarker(positions);
-                // bounds.extend(new kakao.maps.LatLng(data.y, data.x));
+          this.geocoder.addressSearch(
+            Addr[n].REFINE_ROADNM_ADDR,
+            (result, status) => {
+              if (status === kakao.maps.services.Status.OK) {
+                // let bounds = new kakao.maps.LatLngBounds();
+                for (let i = 0; i < result.length; i++) {
+                  let data = result[i];
+                  const d = {
+                    title: Addr[n].title,
+                    latlng: new kakao.maps.LatLng(data.y, data.x),
+                  };
+                  positions.push(d);
+                  this.displayMarker(positions);
+                  // bounds.extend(new kakao.maps.LatLng(data.y, data.x));
+                }
               }
             }
-          });
+          );
         }
     },
     displayMarker(positions) {
@@ -182,6 +205,10 @@ export default {
     },
     ////// 주차장
     getParkinglot() {},
+    ////////////////////////////버스정류장//////////////////////////
+    getBusStopList() {
+      this.getBusList(11);
+    },
   },
   mounted() {
     if (window.kakao && window.kakao.maps) {
