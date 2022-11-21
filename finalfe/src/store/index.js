@@ -8,6 +8,7 @@ import chartStore from "@/store/modules/chartStore";
 import favoriteStore from "@/store/modules/favoriteStore";
 import boardStore from "@/store/modules/boardStore";
 import parkingStore from "@/store/modules/parkingStore";
+import transportStore from "@/store/modules/transportStore";
 
 Vue.use(Vuex);
 
@@ -19,6 +20,7 @@ export default new Vuex.Store({
     favoriteStore,
     boardStore,
     parkingStore,
+    transportStore,
   },
   plugins: [
     createPersistedState({

@@ -25,6 +25,7 @@
         ></b-pagination>
       </b-row>
     </b-container>
+    <b-button class="mt-3" @click="getBusStopList">근처 버스 정류장 찾기(일단 서울)</b-button>
   </div>
 </template>
 
@@ -33,6 +34,7 @@ import { mapMutations, mapState, mapActions } from "vuex";
 
 const mapStore = "mapStore";
 const parkingStore = "parkingStore";
+const transportStore = "transportStore";
 
 export default {
   name: "KakaoMap",
@@ -62,6 +64,8 @@ export default {
   computed: {
     ...mapState(mapStore, ["apt", "selectedsch", "aparts", "sidoName", "gugunName", "weatherLoc"]), //apt.load, apt.
     ...mapState(parkingStore, ["parking_li"]),
+    ...mapState(mapStore, ["apt", "selectedsch", "aparts", "sidoName", "gugunName", "weatherLoc"]), //apt.load, apt.
+    ...mapState(transportStore, ["busList"]),
   },
   watch: {
     selectedsch(val) {
@@ -91,6 +95,7 @@ export default {
   methods: {
     ...mapActions(mapStore, ["setWeatherLoc", "apiload"]),
     ...mapActions(parkingStore, ["getParking"]),
+    ...mapActions(transportStore, ["getBusList"]),
     ...mapMutations(mapStore, ["CLEAR_APT"]),
     initMap() {
       const mapContainer = document.getElementById("map");
@@ -215,6 +220,9 @@ export default {
         siGunName: "41390",
       };
       this.getParking(param);
+    },
+    getBusStopList() {
+      this.getBusList(11);
     },
   },
   mounted() {
