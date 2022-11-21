@@ -5,7 +5,9 @@
     <b-button class="mt-3" @click="getParkinglot">주변 주차장 검색</b-button>
     <b-button class="mt-3" @click="getLibloc">주변 도서관 검색</b-button>
     <b-button class="mt-3" @click="getMartloc">주변 시장 및 마트 검색</b-button>
-    <b-button class="mt-3" @click="getBusStopList">근처 버스 정류장 찾기(일단 서울)</b-button>
+    <b-button class="mt-3" @click="getBusStopList"
+      >근처 버스 정류장 찾기(일단 서울)</b-button
+    >
   </div>
 </template>
 
@@ -24,7 +26,8 @@ export default {
     return {
       map: null,
       geocoder: null,
-      markers: [],
+      markers: [], //매물 마커 담을 배열
+      inframarkers: [], //인프라 마커 담을 배열
       infowindow: null,
       markerPositions1: [
         [33.452278, 126.567803],
@@ -41,9 +44,23 @@ export default {
     this.cup.$on("move", this.searchSubmit);
   },
   computed: {
-    ...mapState(mapStore, ["apt", "selectedsch", "aparts", "sidoName", "gugunName", "weatherLoc"]), //apt.load, apt.
+    ...mapState(mapStore, [
+      "apt",
+      "selectedsch",
+      "aparts",
+      "sidoName",
+      "gugunName",
+      "weatherLoc",
+    ]), //apt.load, apt.
     ...mapState(parkingStore, ["parking_li"]),
-    ...mapState(mapStore, ["apt", "selectedsch", "aparts", "sidoName", "gugunName", "weatherLoc"]), //apt.load, apt.
+    ...mapState(mapStore, [
+      "apt",
+      "selectedsch",
+      "aparts",
+      "sidoName",
+      "gugunName",
+      "weatherLoc",
+    ]), //apt.load, apt.
     ...mapState(transportStore, ["busList"]),
   },
   watch: {
@@ -62,7 +79,14 @@ export default {
     aparts(val) {
       let li = [];
       for (let i = 0; i < val.length; i++) {
-        const names = this.sidoName + " " + this.gugunName + " " + val[i].법정동 + " " + val[i].도로명;
+        const names =
+          this.sidoName +
+          " " +
+          this.gugunName +
+          " " +
+          val[i].법정동 +
+          " " +
+          val[i].도로명;
         li.push({
           REFINE_ROADNM_ADDR: names,
           title: val[i].아파트,
@@ -84,7 +108,7 @@ export default {
       const mapContainer = document.getElementById("map");
       const mapOption = {
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 3, // 지도의 확대 레벨
+        level: 4, // 지도의 확대 레벨
       };
       this.map = new kakao.maps.Map(mapContainer, mapOption);
       this.geocoder = new kakao.maps.services.Geocoder();
@@ -95,21 +119,24 @@ export default {
       // console.log(Addr);
       if (Addr)
         for (let n = 0; n < Addr.length; n++) {
-          this.geocoder.addressSearch(Addr[n].REFINE_ROADNM_ADDR, (result, status) => {
-            if (status === kakao.maps.services.Status.OK) {
-              // let bounds = new kakao.maps.LatLngBounds();
-              for (let i = 0; i < result.length; i++) {
-                let data = result[i];
-                const d = {
-                  title: Addr[n].title,
-                  latlng: new kakao.maps.LatLng(data.y, data.x),
-                };
-                positions.push(d);
-                this.displayMarker(positions);
-                // bounds.extend(new kakao.maps.LatLng(data.y, data.x));
+          this.geocoder.addressSearch(
+            Addr[n].REFINE_ROADNM_ADDR,
+            (result, status) => {
+              if (status === kakao.maps.services.Status.OK) {
+                // let bounds = new kakao.maps.LatLngBounds();
+                for (let i = 0; i < result.length; i++) {
+                  let data = result[i];
+                  const d = {
+                    title: Addr[n].title,
+                    latlng: new kakao.maps.LatLng(data.y, data.x),
+                  };
+                  positions.push(d);
+                  this.displayMarker(positions);
+                  // bounds.extend(new kakao.maps.LatLng(data.y, data.x));
+                }
               }
             }
-          });
+          );
         }
     },
     displayMarker(positions) {

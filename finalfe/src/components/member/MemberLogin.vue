@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import {mapState, mapActions} from "vuex";
+import { mapState, mapActions } from "vuex";
 
 const memberStore = "memberStore";
 
@@ -74,13 +74,14 @@ export default {
     async confirm() {
       await this.memberConfirm(this.user);
       let token = sessionStorage.getItem("access-token");
-      if(this.isLogin) {
+      if (this.isLogin) {
         await this.getMemberInfo(token);
-        this.$router.push({name: "home"});
+        alert("로그인 되었습니다");
+        this.$router.push({ name: "home" });
       }
     },
     movePage() {
-      this.$router.push({name: "memberRegist"});
+      this.$router.push({ name: "memberRegist" });
     },
   },
 };

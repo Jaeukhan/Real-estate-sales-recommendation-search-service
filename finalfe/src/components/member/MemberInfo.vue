@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center profile-header" style="min-height: 600px">
+    <div
+      class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center profile-header"
+      style="min-height: 600px"
+    >
       <b-container fluid>
         <!-- Mask -->
         <span class="mask bg-gradient-success opacity-8"></span>
@@ -8,10 +11,13 @@
         <b-container fluid class="d-flex align-items-center">
           <b-row>
             <b-col lg="7" md="10">
-              <h1 class="display-2 text-black">Hello, {{ memberInfo.username }}</h1>
+              <h1 class="display-2 text-black">
+                Hello, {{ memberInfo.username }}
+              </h1>
               <b-card>
                 <p class="text-black mt-0 mb-5">
-                  등록된 관심 키워드가 없습니다! 관심 키워드를 등록하고 맞춤 매물을 추천받아보세요!
+                  등록된 관심 키워드가 없습니다! 관심 키워드를 등록하고 맞춤
+                  매물을 추천받아보세요!
                 </p>
               </b-card>
             </b-col>
@@ -25,56 +31,22 @@
 
     <b-container fluid class="mt--6">
       <b-row>
-        <!-- user profile -->
-        <b-col xl="4" class="order-xl-2 mb-5">
-          <b-card no-body class="card-profile" alt="Image placeholder" img-top>
-            <b-row class="justify-content-center">
-              <b-col lg="3" class="order-lg-2"> </b-col>
-            </b-row>
-
-            <b-card-header class="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-              <div class="d-flex justify-content-between"></div>
-            </b-card-header>
-
-            <b-card-body class="pt-0">
-              <b-row>
-                <b-col lg="20">
-                  <div class="card-profile-stats d-flex justify-content-center mt-md-5">
-                    <h5 class="h3">작성한 게시물</h5>
-                  </div>
-                </b-col>
-              </b-row>
-              <div class="text-center">
-                <b-table
-                  hover
-                  :items="user_board"
-                  :fields="bfields"
-                  @row-clicked="viewArticle"
-                  id="boardlist-table"
-                  :per-page="perPage"
-                  :current-page="currentPage"
-                >
-                  <template #cell(subject)="data">
-                    <router-link :to="{ name: 'boarddetail', params: { articleno: data.item.articleno } }">
-                      {{ data.item.subject }}
-                    </router-link>
-                  </template>
-                </b-table>
-              </div>
-            </b-card-body>
-          </b-card>
-        </b-col>
-
+        <!-- 사용자 프로필 -->
         <b-col class="m-3">
           <b-card no-body class="card-profile" alt="Image placeholder" img-top>
             <b-row class="justify-content-center">
               <b-col lg="3" class="order-lg-2"> </b-col>
             </b-row>
 
-            <b-card-header class="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+            <b-card-header
+              class="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4"
+            >
               <div class="d-flex justify-content-between">
                 <a href="#" class="btn btn-sm btn-info mr-4">Connect</a>
-                <b-button @click="moveModify" variant="outline-info" style="float: right"
+                <b-button
+                  @click="moveModify"
+                  variant="outline-info"
+                  style="float: right"
                   ><b-icon-pencil-square font-scale="1.2"></b-icon-pencil-square
                 ></b-button>
               </div>
@@ -83,7 +55,14 @@
             <b-card-body class="pt-0">
               <b-row>
                 <b-col>
-                  <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                  <div
+                    class="
+                      card-profile-stats
+                      d-flex
+                      justify-content-center
+                      mt-md-5
+                    "
+                  >
                     <div>관심 키워드 여기다?</div>
                   </div>
                 </b-col>
@@ -101,10 +80,84 @@
             </b-card-body>
           </b-card>
         </b-col>
-
+        <!-- 관심 키워드 설정하러 가기 -->
+        <b-col xl="8" class="order-xl-1">
+          <b-card bg-variant="light" title="Card Title">
+            <b-card-text> 관심 키워드: 원 투 쓰리 </b-card-text>
+            <b-button v-b-modal.modal-1>추가</b-button>
+            <!-- 모달창 - 관심 키워드 체크 -->
+            <b-modal id="modal-1" title="BootstrapVue">
+              <!-- 교통수단 -->
+              <b-form-group
+                label="이동 시 어떤 교통수단을 이용하시나요?"
+                v-slot="{ ariaDescribedby }"
+              >
+                <b-form-checkbox-group
+                  id="checkbox-group-1"
+                  :aria-describedby="ariaDescribedby"
+                  name="flavour-1"
+                >
+                  <b-form-checkbox value="car">자가용</b-form-checkbox>
+                  <b-form-checkbox value="transport">대중교통</b-form-checkbox>
+                </b-form-checkbox-group>
+              </b-form-group>
+              <!-- 자녀 유무 -->
+              <b-form-group
+                label="자녀가 있으신가요?"
+                v-slot="{ ariaDescribedby }"
+              >
+                <b-form-checkbox-group
+                  id="checkbox-group-2"
+                  :aria-describedby="ariaDescribedby"
+                  name="flavour-2"
+                >
+                  <b-form-checkbox value="child1">유치원생</b-form-checkbox>
+                  <b-form-checkbox value="child2">초등학생</b-form-checkbox>
+                  <b-form-checkbox value="child3">중학생</b-form-checkbox>
+                  <b-form-checkbox value="child4">고등학생</b-form-checkbox>
+                </b-form-checkbox-group>
+              </b-form-group>
+              <!-- 주거유형 -->
+              <b-form-group
+                label="어떤 주거 유형을 선호하시나요?"
+                v-slot="{ ariaDescribedby }"
+              >
+                <b-form-checkbox-group
+                  id="checkbox-group-2"
+                  :aria-describedby="ariaDescribedby"
+                  name="flavour-2"
+                >
+                  <b-form-checkbox value="apt">아파트</b-form-checkbox>
+                  <b-form-checkbox value="house">주택</b-form-checkbox>
+                </b-form-checkbox-group>
+              </b-form-group>
+              <!-- 인프라 -->
+              <b-form-group
+                label="자주 가는 장소가 어디인가요?"
+                v-slot="{ ariaDescribedby }"
+              >
+                <b-form-checkbox-group
+                  id="checkbox-group-2"
+                  :aria-describedby="ariaDescribedby"
+                  name="flavour-2"
+                >
+                  <b-form-checkbox value="library">도서관</b-form-checkbox>
+                  <b-form-checkbox value="cafe">마트</b-form-checkbox>
+                </b-form-checkbox-group>
+              </b-form-group>
+            </b-modal>
+          </b-card>
+        </b-col>
+      </b-row>
+      <b-row>
+        <!-- 관심 매물 -->
         <b-col xl="8" class="order-xl-1">
           <div>
-            <b-card title="관심 매물 - 주택" body-class="text-center" header-tag="nav">
+            <b-card
+              title="관심 매물 - 주택"
+              body-class="text-center"
+              header-tag="nav"
+            >
               <template #header>
                 <b-nav card-header tabs>
                   <b-nav-item active>Active</b-nav-item>
@@ -149,7 +202,11 @@
                     :current-page="currentPage"
                   >
                     <template #cell(삭제)="row">
-                      <b-button size="sm" @click="removeHouse(row.item.houseid)" class="mr-2">
+                      <b-button
+                        size="sm"
+                        @click="removeHouse(row.item.houseid)"
+                        class="mr-2"
+                      >
                         <b-icon icon="trash"></b-icon>
                       </b-button>
                     </template>
@@ -166,14 +223,78 @@
                 </b-row>
               </b-card-body>
               <b-card-body v-else>
-                <div>추가한 관심 매물이 없습니다! 관심 매물을 추가하고 한 눈에 모아보세용</div>
+                <div>
+                  추가한 관심 매물이 없습니다! 관심 매물을 추가하고 한 눈에
+                  모아보세용
+                </div>
               </b-card-body>
 
-              <b-button variant="primary">관심 매물 더 추가하러 가기</b-button>
+              <b-button variant="primary" @click="moveMap"
+                >관심 매물 더 추가하러 가기</b-button
+              >
             </b-card>
           </div>
         </b-col>
+        <!-- 사용자 게시판 글 목록 -->
+        <b-col xl="4" class="order-xl-2 mb-5">
+          <b-card no-body class="card-profile" alt="Image placeholder" img-top>
+            <b-row class="justify-content-center">
+              <b-col lg="3" class="order-lg-2"> </b-col>
+            </b-row>
+
+            <b-card-header
+              class="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4"
+            >
+              <div class="d-flex justify-content-between"></div>
+            </b-card-header>
+
+            <b-card-body class="pt-0">
+              <b-row>
+                <b-col lg="20">
+                  <div
+                    class="
+                      card-profile-stats
+                      d-flex
+                      justify-content-center
+                      mt-md-5
+                    "
+                  >
+                    <h5 class="h3">작성한 게시물</h5>
+                  </div>
+                </b-col>
+              </b-row>
+              <div class="text-center">
+                <b-table
+                  hover
+                  :items="user_board"
+                  :fields="bfields"
+                  @row-clicked="viewArticle"
+                  id="boardlist-table"
+                  :per-page="perPage"
+                  :current-page="currentPage"
+                >
+                  <template #cell(subject)="data">
+                    <router-link
+                      :to="{
+                        name: 'boarddetail',
+                        params: { articleno: data.item.articleno },
+                      }"
+                    >
+                      {{ data.item.subject }}
+                    </router-link>
+                  </template>
+                </b-table>
+              </div>
+            </b-card-body>
+          </b-card>
+        </b-col>
       </b-row>
+      <!-- <b-row>
+        <b-card bg-variant="dark" text-variant="white" title="Card Title">
+          <b-card-text> 관심 키워드: 원 투 쓰리 </b-card-text>
+          <b-button href="#" variant="primary">추가?</b-button>
+        </b-card>
+      </b-row> -->
     </b-container>
   </div>
 </template>
@@ -195,7 +316,11 @@ export default {
       //     { key: "aptaddress", label: "위치"},
       //     "삭제",
       // ],
-      fields: [{ key: "housetype", label: "주택유형" }, { key: "houseaddress", label: "위치" }, "삭제"],
+      fields: [
+        { key: "housetype", label: "주택유형" },
+        { key: "houseaddress", label: "위치" },
+        "삭제",
+      ],
       bfields: [
         { key: "hit", label: "조회수", tdClass: "tdClass" },
         { key: "subject", label: "제목", tdClass: "tdSubject" },
@@ -249,6 +374,9 @@ export default {
     moveModify() {
       this.$router.push({ name: "memberModify" });
     },
+    moveMap() {
+      this.$router.push({ name: "MapList" });
+    },
     viewArticle(article) {
       console.log("view", article.articleno);
       this.$router.push({
@@ -279,6 +407,7 @@ export default {
     removeHouse(houseid) {
       if (confirm("정말 삭제하시겠습니까?")) {
         this.removeFavoriteHouse(houseid, this.memberInfo.userid);
+        alert("삭제되었습니다!");
         this.$router.go();
       } else {
         alert("삭제가 취소되었습니다!");
