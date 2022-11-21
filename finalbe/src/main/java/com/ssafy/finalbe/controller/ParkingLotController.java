@@ -17,17 +17,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 @RestController
 @RequestMapping("/parking")
+@Api("주차장 컨트롤러  API V1")
 public class ParkingLotController {
 	 private final Logger logger = LoggerFactory.getLogger(HouseMapController.class);
 
 	    @ApiOperation(value = "주차장 목록", response = List.class)
 	    @GetMapping(value = "/{gugunName}/{gugunCode}", produces = "application/json;charset=utf-8")
-	    public ResponseEntity<String> kinderList(@PathVariable("gugunName") String gugunName, @PathVariable("gugunCode") String gugunCode) throws IOException {
-	        logger.info("kinder - 호출");
+	    public ResponseEntity<String> parkingList(@ApiParam(value = "구군이름 ", required = true) @PathVariable("gugunName") String gugunName,@ApiParam(value = "구군 코드 ", required = true) @PathVariable("gugunCode") String gugunCode) throws IOException {
+	        logger.info("parking - 호출");
 	        System.out.println(gugunName+" "+gugunCode);
 	        String serviceKey = "caa3a449c5c8411e910663f1df33cece";
 	        StringBuilder urlBuilder = new StringBuilder(

@@ -60,6 +60,10 @@ public class SwaggerConfiguration {
 	public Docket allApi() {
 		return getDocket("전체", Predicates.or(PathSelectors.regex("/*.*")));
 	}
+	@Bean
+	public Docket parkApi() {
+		return getDocket("주차장", Predicates.or(PathSelectors.regex("/parking.*")));
+	}
 
 	public Docket getDocket(String groupName, Predicate<String> predicate) {
 //		List<ResponseMessage> responseMessages = new ArrayList<ResponseMessage>();

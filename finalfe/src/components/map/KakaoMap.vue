@@ -3,6 +3,28 @@
     <h3 v-if="apt">{{ apt.aptName }}</h3>
     <div id="map" style="margin-right: 0" align-h="center"></div>
     <b-button class="mt-3" @click="getParkinglot">주변 주차장 검색</b-button>
+    <b-container v-if="selectedsch && selectedsch.length > 0" class="bv-example-row mt-3">
+      <b-row>
+        <b-table
+          hover
+          :items="selectedsch"
+          :fields="fields"
+          id="schlist-table"
+          :per-page="perPage"
+          :current-page="currentPage"
+          @row-clicked="moveloc"
+        ></b-table>
+      </b-row>
+      <b-row class="justify-content-md-center">
+        <b-pagination
+          v-model="currentPage"
+          pills
+          :total-rows="rows"
+          :per-page="perPage"
+          aria-controls="schlist-table"
+        ></b-pagination>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
@@ -10,6 +32,7 @@
 import { mapMutations, mapState, mapActions } from "vuex";
 
 const mapStore = "mapStore";
+const parkingStore = "parkingStore";
 
 export default {
   name: "KakaoMap",
@@ -26,6 +49,9 @@ export default {
       ],
       aptAddr: "",
       temp: { lat: null, lon: null },
+      currentPage: 1,
+      rows: 0,
+      perPage: 20,
     };
   },
   props: ["cup"],
@@ -35,6 +61,7 @@ export default {
   },
   computed: {
     ...mapState(mapStore, ["apt", "selectedsch", "aparts", "sidoName", "gugunName", "weatherLoc"]), //apt.load, apt.
+    ...mapState(parkingStore, ["parking_li"]),
   },
   watch: {
     selectedsch(val) {
@@ -63,6 +90,7 @@ export default {
   },
   methods: {
     ...mapActions(mapStore, ["setWeatherLoc", "apiload"]),
+    ...mapActions(parkingStore, ["getParking"]),
     ...mapMutations(mapStore, ["CLEAR_APT"]),
     initMap() {
       const mapContainer = document.getElementById("map");
@@ -181,7 +209,13 @@ export default {
       });
     },
     ////// 주차장
-    getParkinglot() {},
+    getParkinglot() {
+      const param = {
+        siGunCode: "시흥시",
+        siGunName: "41390",
+      };
+      this.getParking(param);
+    },
   },
   mounted() {
     if (window.kakao && window.kakao.maps) {

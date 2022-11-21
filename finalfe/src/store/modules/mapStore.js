@@ -77,7 +77,7 @@ const mapStore = {
       for (let d = 0; d < info.length; d++) {
         let temp = {
           REFINE_ROADNM_ADDR: info[d].REFINE_ROADNM_ADDR,
-          FACLT_NM: info[d].FACLT_NM,
+          title: info[d].FACLT_NM,
         };
         li.push(temp);
       }
@@ -88,7 +88,7 @@ const mapStore = {
       for (let d = 0; d < info.data.length; d++) {
         let temp = {
           REFINE_ROADNM_ADDR: info.data[d].REFINE_ROADNM_ADDR,
-          FACLT_NM: info.data[d].FACLT_NM,
+          title: info.data[d].FACLT_NM,
         };
         li.push(temp);
       }
