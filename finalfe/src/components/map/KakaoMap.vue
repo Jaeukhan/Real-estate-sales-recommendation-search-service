@@ -33,7 +33,14 @@ export default {
     this.cup.$on("move", this.searchSubmit);
   },
   computed: {
-    ...mapState(mapStore, ["apt", "selectedsch", "aparts", "sidoName", "gugunName", "weatherLoc"]), //apt.load, apt.
+    ...mapState(mapStore, [
+      "apt",
+      "selectedsch",
+      "aparts",
+      "sidoName",
+      "gugunName",
+      "weatherLoc",
+    ]), //apt.load, apt.
   },
   watch: {
     selectedsch(val) {
@@ -51,7 +58,14 @@ export default {
     aparts(val) {
       let li = [];
       for (let i = 0; i < val.length; i++) {
-        const names = this.sidoName + " " + this.gugunName + " " + val[i].법정동 + " " + val[i].도로명;
+        const names =
+          this.sidoName +
+          " " +
+          this.gugunName +
+          " " +
+          val[i].법정동 +
+          " " +
+          val[i].도로명;
         li.push({
           REFINE_ROADNM_ADDR: names,
           title: val[i].아파트,
@@ -78,21 +92,24 @@ export default {
       // console.log(Addr);
       if (Addr)
         for (let n = 0; n < Addr.length; n++) {
-          this.geocoder.addressSearch(Addr[n].REFINE_ROADNM_ADDR, (result, status) => {
-            if (status === kakao.maps.services.Status.OK) {
-              // let bounds = new kakao.maps.LatLngBounds();
-              for (let i = 0; i < result.length; i++) {
-                let data = result[i];
-                const d = {
-                  title: Addr[n].title,
-                  latlng: new kakao.maps.LatLng(data.y, data.x),
-                };
-                positions.push(d);
-                this.displayMarker(positions);
-                // bounds.extend(new kakao.maps.LatLng(data.y, data.x));
+          this.geocoder.addressSearch(
+            Addr[n].REFINE_ROADNM_ADDR,
+            (result, status) => {
+              if (status === kakao.maps.services.Status.OK) {
+                // let bounds = new kakao.maps.LatLngBounds();
+                for (let i = 0; i < result.length; i++) {
+                  let data = result[i];
+                  const d = {
+                    title: Addr[n].title,
+                    latlng: new kakao.maps.LatLng(data.y, data.x),
+                  };
+                  positions.push(d);
+                  this.displayMarker(positions);
+                  // bounds.extend(new kakao.maps.LatLng(data.y, data.x));
+                }
               }
             }
-          });
+          );
         }
     },
     displayMarker(positions) {
@@ -107,11 +124,16 @@ export default {
           clickable: true,
         });
         const infowindow = new kakao.maps.InfoWindow({
-          removable: true,
-          content: `<div style="padding:50x;>${position.title}</div>`,
+          content: `<div>${position.title}</div>`,
         });
-        kakao.maps.event.addListener(marker, "click", function () {
-          infowindow.open(this.map, marker);
+        let _this = this;
+        kakao.maps.event.addListener(marker, "mouseover", function () {
+          // console.log("마커 이벤트!");
+          // console.log(position.latlng);
+          infowindow.open(_this.map, marker);
+        });
+        kakao.maps.event.addListener(marker, "mouseout", function () {
+          infowindow.close();
         });
 
         this.markers.push(marker);
