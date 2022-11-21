@@ -6,6 +6,7 @@ import memberStore from "@/store/modules/memberStore";
 import mapStore from "@/store/modules/mapStore";
 import chartStore from "@/store/modules/chartStore";
 import favoriteStore from "@/store/modules/favoriteStore";
+import boardStore from "@/store/modules/boardStore";
 
 Vue.use(Vuex);
 
@@ -15,6 +16,7 @@ export default new Vuex.Store({
     mapStore,
     chartStore,
     favoriteStore,
+    boardStore,
   },
   plugins: [
     createPersistedState({

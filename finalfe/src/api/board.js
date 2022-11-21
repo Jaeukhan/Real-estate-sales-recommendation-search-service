@@ -29,4 +29,17 @@ function getComment(articleno, success) {
   api.get(`/comment/list/${articleno}`).then(success);
 }
 
-export { listArticle, writeArticle, getArticle, modifyArticle, deleteArticle, writeComment, getComment };
+function getUserArticle(name, success1, fail) {
+  api.get(`/board/user/${name}`).then(success1).catch(fail);
+}
+
+export {
+  getUserArticle,
+  listArticle,
+  writeArticle,
+  getArticle,
+  modifyArticle,
+  deleteArticle,
+  writeComment,
+  getComment,
+};

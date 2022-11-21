@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div
-      class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center profile-header"
-      style="min-height: 600px"
-    >
+    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center profile-header" style="min-height: 600px">
       <b-container fluid>
         <!-- Mask -->
         <span class="mask bg-gradient-success opacity-8"></span>
@@ -11,13 +8,10 @@
         <b-container fluid class="d-flex align-items-center">
           <b-row>
             <b-col lg="7" md="10">
-              <h1 class="display-2 text-black">
-                Hello, {{ memberInfo.username }}
-              </h1>
+              <h1 class="display-2 text-black">Hello, {{ memberInfo.username }}</h1>
               <b-card>
                 <p class="text-black mt-0 mb-5">
-                  등록된 관심 키워드가 없습니다! 관심 키워드를 등록하고 맞춤
-                  매물을 추천받아보세요!
+                  등록된 관심 키워드가 없습니다! 관심 키워드를 등록하고 맞춤 매물을 추천받아보세요!
                 </p>
               </b-card>
             </b-col>
@@ -38,15 +32,49 @@
               <b-col lg="3" class="order-lg-2"> </b-col>
             </b-row>
 
-            <b-card-header
-              class="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4"
-            >
+            <b-card-header class="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+              <div class="d-flex justify-content-between"></div>
+            </b-card-header>
+
+            <b-card-body class="pt-0">
+              <b-row>
+                <b-col lg="20">
+                  <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                    <h5 class="h3">작성한 게시물</h5>
+                  </div>
+                </b-col>
+              </b-row>
+              <div class="text-center">
+                <b-table
+                  hover
+                  :items="user_board"
+                  :fields="bfields"
+                  @row-clicked="viewArticle"
+                  id="boardlist-table"
+                  :per-page="perPage"
+                  :current-page="currentPage"
+                >
+                  <template #cell(subject)="data">
+                    <router-link :to="{ name: 'boarddetail', params: { articleno: data.item.articleno } }">
+                      {{ data.item.subject }}
+                    </router-link>
+                  </template>
+                </b-table>
+              </div>
+            </b-card-body>
+          </b-card>
+        </b-col>
+
+        <b-col class="m-3">
+          <b-card no-body class="card-profile" alt="Image placeholder" img-top>
+            <b-row class="justify-content-center">
+              <b-col lg="3" class="order-lg-2"> </b-col>
+            </b-row>
+
+            <b-card-header class="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
               <div class="d-flex justify-content-between">
                 <a href="#" class="btn btn-sm btn-info mr-4">Connect</a>
-                <b-button
-                  @click="moveModify"
-                  variant="outline-info"
-                  style="float: right"
+                <b-button @click="moveModify" variant="outline-info" style="float: right"
                   ><b-icon-pencil-square font-scale="1.2"></b-icon-pencil-square
                 ></b-button>
               </div>
@@ -55,14 +83,7 @@
             <b-card-body class="pt-0">
               <b-row>
                 <b-col>
-                  <div
-                    class="
-                      card-profile-stats
-                      d-flex
-                      justify-content-center
-                      mt-md-5
-                    "
-                  >
+                  <div class="card-profile-stats d-flex justify-content-center mt-md-5">
                     <div>관심 키워드 여기다?</div>
                   </div>
                 </b-col>
@@ -80,13 +101,10 @@
             </b-card-body>
           </b-card>
         </b-col>
+
         <b-col xl="8" class="order-xl-1">
           <div>
-            <b-card
-              title="관심 매물 - 주택"
-              body-class="text-center"
-              header-tag="nav"
-            >
+            <b-card title="관심 매물 - 주택" body-class="text-center" header-tag="nav">
               <template #header>
                 <b-nav card-header tabs>
                   <b-nav-item active>Active</b-nav-item>
@@ -131,11 +149,7 @@
                     :current-page="currentPage"
                   >
                     <template #cell(삭제)="row">
-                      <b-button
-                        size="sm"
-                        @click="removeHouse(row.item.houseid)"
-                        class="mr-2"
-                      >
+                      <b-button size="sm" @click="removeHouse(row.item.houseid)" class="mr-2">
                         <b-icon icon="trash"></b-icon>
                       </b-button>
                     </template>
@@ -152,10 +166,7 @@
                 </b-row>
               </b-card-body>
               <b-card-body v-else>
-                <div>
-                  추가한 관심 매물이 없습니다! 관심 매물을 추가하고 한 눈에
-                  모아보세용
-                </div>
+                <div>추가한 관심 매물이 없습니다! 관심 매물을 추가하고 한 눈에 모아보세용</div>
               </b-card-body>
 
               <b-button variant="primary">관심 매물 더 추가하러 가기</b-button>
@@ -168,11 +179,12 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 import { deleteApt } from "@/api/favorite";
 //listApt
 const memberStore = "memberStore";
 const favoriteStore = "favoriteStore";
+const boardStore = "boardStore";
 
 export default {
   name: "MemberInfo",
@@ -183,10 +195,11 @@ export default {
       //     { key: "aptaddress", label: "위치"},
       //     "삭제",
       // ],
-      fields: [
-        { key: "housetype", label: "주택유형" },
-        { key: "houseaddress", label: "위치" },
-        "삭제",
+      fields: [{ key: "housetype", label: "주택유형" }, { key: "houseaddress", label: "위치" }, "삭제"],
+      bfields: [
+        { key: "hit", label: "조회수", tdClass: "tdClass" },
+        { key: "subject", label: "제목", tdClass: "tdSubject" },
+        { key: "regtime", label: "작성일", tdClass: "tdClass" },
       ],
       currentPage: 1,
       perPage: 5,
@@ -196,8 +209,11 @@ export default {
     let token = sessionStorage.getItem("access-token");
     this.getMemberInfo(token);
   },
+
   created() {
+    this.CLEAR_USER_BOARD();
     this.getHouseList(this.memberInfo.userid);
+    this.getUserBoard(this.memberInfo.userid);
     // let param = this.memberInfo.userid;
     // listApt(
     //     param,
@@ -222,13 +238,23 @@ export default {
   },
   computed: {
     ...mapState(memberStore, ["memberInfo"]),
+    ...mapState(boardStore, ["user_board"]),
     ...mapState(favoriteStore, ["aparts", "houses", "rows"]),
   },
   methods: {
+    ...mapMutations(boardStore, ["CLEAR_USER_BOARD"]),
     ...mapActions(memberStore, ["getMemberInfo"]),
     ...mapActions(favoriteStore, ["getHouseList", "removeFavoriteHouse"]),
+    ...mapActions(boardStore, ["getUserBoard"]),
     moveModify() {
       this.$router.push({ name: "memberModify" });
+    },
+    viewArticle(article) {
+      console.log("view", article.articleno);
+      this.$router.push({
+        name: "boarddetail",
+        params: { articleno: article.articleno },
+      });
     },
     removeApt(aptid) {
       if (confirm("정말 삭제하시겠습니까?")) {
