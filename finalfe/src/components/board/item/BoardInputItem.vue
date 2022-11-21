@@ -1,16 +1,10 @@
 <template>
+  <!-- placeholder="작성자" -->
   <b-row class="mb-1">
     <b-col style="text-align: left">
       <b-form @submit="onSubmit" @reset="onReset">
         <b-form-group id="userid-group" label="Writer" label-for="userid">
-          <b-form-input
-            id="userid"
-            :disabled="isUserid"
-            v-model="article.userid"
-            type="text"
-            required
-            placeholder="작성자"
-          ></b-form-input>
+          <b-form-input id="userid" :disabled="isUserid" v-model="article.userid" type="text"></b-form-input>
         </b-form-group>
 
         <b-form-group id="subject-group" label="Title" label-for="subject">
@@ -24,6 +18,7 @@
             placeholder="내용"
             rows="10"
             max-rows="15"
+            required
           ></b-form-textarea>
         </b-form-group>
 
@@ -39,7 +34,9 @@
 
 <script>
 import { writeArticle, modifyArticle, getArticle } from "@/api/board";
+import { mapState } from "vuex";
 
+const memberStore = "memberStore";
 export default {
   name: "BoardInputItem",
   data() {
@@ -50,7 +47,7 @@ export default {
         subject: "",
         content: "",
       },
-      isUserid: false,
+      isUserid: true,
     };
   },
   props: {
@@ -73,9 +70,17 @@ export default {
         }
       );
       this.isUserid = true;
+    } else {
+      this.getUserId();
     }
   },
+  computed: {
+    ...mapState(memberStore, ["memberInfo"]),
+  },
   methods: {
+    getUserId() {
+      this.article.userid = this.memberInfo.userid;
+    },
     onSubmit(event) {
       event.preventDefault();
 

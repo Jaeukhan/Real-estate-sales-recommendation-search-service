@@ -63,6 +63,13 @@ public class BoardController {
         boardService.updateHit(articleno);
         return new ResponseEntity<BoardDto>(boardService.getArticle(articleno), HttpStatus.OK);
     }
+    
+    @ApiOperation(value = "사용자가 쓴 글보기", notes = "사용자가 쓴 게시글의 정보를 반환한다.", response = BoardDto.class)
+    @GetMapping("user/{userid}")
+    public ResponseEntity<List<BoardDto>> getUserArticle(@PathVariable("userid") @ApiParam(value = "사용자 이름", required = true) String userid) throws Exception {
+        logger.info("getUserArticle - 호출 : " + userid);
+        return new ResponseEntity<List<BoardDto>>(boardService.getUserArticle(userid),HttpStatus.OK);
+    }
 
     @ApiOperation(value = "게시판 글수정", notes = "수정할 게시글 정보를 입력한다. 그리고 DB수정 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
     @PutMapping
