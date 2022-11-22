@@ -40,6 +40,11 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardDto> getUserArticle(String userid) throws Exception{
 		return sqlSession.getMapper(BoardMapper.class).getUserArticle(userid);
 	}
+
+	@Override
+	public List<BoardDto> getPopularArticle() throws Exception{
+		return sqlSession.getMapper(BoardMapper.class).getPopularArticle();
+	}
 	
 	@Override
 	public void updateHit(int articleno) throws Exception {

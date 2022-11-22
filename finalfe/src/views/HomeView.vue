@@ -32,7 +32,55 @@
           </div>
         </b-row>
       </b-col>
-      <b-col class="justify-content-md-center">
+
+      <!-- 사용자 게시판 글 목록 -->
+      <b-col xl="6" class="order-xl-2 mb-5">
+        <b-card no-body class="card-profile" alt="Image placeholder" img-top>
+          <b-row class="justify-content-center">
+            <b-col lg="3" class="order-lg-2"> </b-col>
+          </b-row>
+
+          <b-card-header class="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+            <div class="d-flex justify-content-between"></div>
+          </b-card-header>
+
+          <b-card-body class="pt-0">
+            <b-row>
+              <b-col lg="20">
+                <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                  <h5 class="h3">인기 게시물</h5>
+                </div>
+              </b-col>
+            </b-row>
+            <div class="text-center">
+              <b-table
+                hover
+                :items="popular_board"
+                :fields="fields"
+                @row-clicked="viewArticle"
+                id="boardlist-table"
+                :per-page="perPage"
+                :current-page="currentPage"
+              >
+                <template #cell(subject)="data">
+                  <router-link
+                    :to="{
+                      name: 'boarddetail',
+                      params: { articleno: data.item.articleno },
+                    }"
+                  >
+                    {{ data.item.subject }}
+                  </router-link>
+                </template>
+              </b-table>
+            </div>
+          </b-card-body>
+        </b-card>
+      </b-col>
+    </b-row>
+    <b-row align-h="center">
+      <!-- Text slides with image -->
+      <b-col class="justify-content-md-center" cols="8">
         <div>
           <b-carousel
             id="carousel-1"
@@ -47,7 +95,6 @@
             @sliding-start="onSlideStart"
             @sliding-end="onSlideEnd"
           >
-            <!-- Text slides with image -->
             <b-carousel-slide v-for="(item, idx) in news_list" :key="idx" :img-src="require(`@/assets/news${idx}.png`)">
               <div class="p-2" style="background-color: white">
                 <a :href="`https://land.naver.com${item.link}`">{{ item.title }}</a>
@@ -57,17 +104,15 @@
         </div>
       </b-col>
     </b-row>
-    <!-- <b-row>
-      <div>
-        <img :src="cimg" alt="" />
-      </div>
-    </b-row> -->
   </b-container>
 </template>
 
 <script>
 import { getNewsList, newsInit } from "@/api/news";
+import { mapState, mapActions, mapMutations } from "vuex";
 // import { getImage } from "@/api/naver";
+
+const boardStore = "boardStore";
 export default {
   name: "HomeView",
   data() {
@@ -76,9 +121,18 @@ export default {
       slide: 0,
       sliding: null,
       cimg: "",
+      fields: [
+        { key: "subject", label: "제목" },
+        { key: "userid", label: "글쓴이" },
+        { key: "regtime", label: "작성일" },
+      ],
+      currentPage: 1,
+      perPage: 5,
     };
   },
   created() {
+    this.CLEAR_POPULAR_BOARD();
+    this.getPopularBoard();
     newsInit(
       () => {
         getNewsList(
@@ -113,14 +167,18 @@ export default {
     //   }
     // );
   },
-  mounted() {},
   methods: {
+    ...mapMutations(boardStore, ["CLEAR_POPULAR_BOARD"]),
+    ...mapActions(boardStore, ["getPopularBoard"]),
     onSlideStart() {
       this.sliding = true;
     },
     onSlideEnd() {
       this.sliding = false;
     },
+  },
+  computed: {
+    ...mapState(boardStore, ["popular_board"]),
   },
 };
 </script>

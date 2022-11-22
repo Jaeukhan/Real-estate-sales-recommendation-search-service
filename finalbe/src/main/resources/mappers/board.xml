@@ -48,16 +48,23 @@
 
 	<select id="getArticle" parameterType="int" resultMap="la">
 		select
-		article_no, user_id, subject, content, hit, register_time
+			article_no, user_id, subject, content, hit, register_time
 		from board
 		where article_no = #{articleno}
 	</select>
 	
+	<select id="getPopularArticle" resultMap="la">
+		select article_no, user_id, subject, content, hit, register_time
+		from board
+		order by hit desc limit 1, 3;
+	</select>
+
 	<select id="getUserArticle" parameterType="String" resultMap="la">
 		select
-		article_no, user_id, subject, content, hit, register_time
+			article_no, user_id, subject, content, hit, register_time
 		from board
 		where user_id = #{userid}
+		order by register_time desc;
 	</select>
 	
 	<update id="updateHit" parameterType="int">

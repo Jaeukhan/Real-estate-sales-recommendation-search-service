@@ -71,6 +71,13 @@ public class BoardController {
         return new ResponseEntity<List<BoardDto>>(boardService.getUserArticle(userid),HttpStatus.OK);
     }
 
+    @ApiOperation(value = "인기글보기", notes = "인기글의 정보를 반환한다.", response = BoardDto.class)
+    @GetMapping("/popular")
+    public ResponseEntity<List<BoardDto>> getPopularArticle() throws Exception {
+        logger.info("getPopularArticle - 호출 : " );
+        return new ResponseEntity<List<BoardDto>>(boardService.getPopularArticle(),HttpStatus.OK);
+    }
+
     @ApiOperation(value = "게시판 글수정", notes = "수정할 게시글 정보를 입력한다. 그리고 DB수정 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
     @PutMapping
     public ResponseEntity<String> modifyArticle(@RequestBody @ApiParam(value = "수정할 글정보.", required = true) BoardDto boardDto) throws Exception {

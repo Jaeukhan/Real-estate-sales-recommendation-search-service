@@ -32,6 +32,9 @@ function getComment(articleno, success) {
 function getUserArticle(name, success1, fail) {
   api.get(`/board/user/${name}`).then(success1).catch(fail);
 }
+function getPopularArticle(success, fail) {
+  api.get(`/board/popular`).then(success).catch(fail);
+}
 
 export {
   getUserArticle,
@@ -42,4 +45,5 @@ export {
   deleteArticle,
   writeComment,
   getComment,
+  getPopularArticle,
 };

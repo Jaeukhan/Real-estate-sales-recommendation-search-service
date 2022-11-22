@@ -15,7 +15,8 @@ public interface BoardMapper {
 	public List<BoardDto> listArticle(BoardParameterDto boardParameterDto) throws SQLException;
 	public int getTotalCount(BoardParameterDto boardParameterDto) throws SQLException;
 	public BoardDto getArticle(int articleno) throws SQLException;
-	public List<BoardDto> getUserArticle(String userid) throws SQLException;	
+	public List<BoardDto> getUserArticle(String userid) throws SQLException;
+	public List<BoardDto> getPopularArticle() throws SQLException;
 	public void updateHit(int articleno) throws SQLException;
 	public int modifyArticle(BoardDto boardDto) throws SQLException;
 	public void deleteMemo(int articleno) throws SQLException;
