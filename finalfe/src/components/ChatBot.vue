@@ -1,12 +1,10 @@
 <template>
-  <div>
+  <b-container class="bv-example-row mt-3 text-center" style="background-color: rgba(255,255,255,0.2); padding: 3em;">
     <b-embed
       type="iframe"
-      height="200"
-      width="100"
       src="https://console.dialogflow.com/api-client/demo/embedded/9f599198-912b-4720-b355-37e613c01da9"
     ></b-embed>
-  </div>
+  </b-container>
 </template>
 
 <script>

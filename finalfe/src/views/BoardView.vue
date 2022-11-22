@@ -1,5 +1,5 @@
 <template>
-  <b-container class="bv-example-row mt-3 text-center">
+  <b-container class="bv-example-row mt-3 text-center" style="background-color: rgba(255,255,255); padding: 3em 5em;">
     <br>
     <br>
     <b-row class="justify-content-md-center">

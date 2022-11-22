@@ -2,13 +2,13 @@
   <b-container class="bv-example-row mt-3">
     <b-row>
       <b-col>
-        <b-alert style="background-color: rgba(94, 100, 114, 0.7)" show><h3>SIGN UP</h3></b-alert>
+        <div><h3 style="color: white;">SIGN UP</h3></div>
       </b-col>
     </b-row>
-    <b-row>
+    <b-row >
       <b-col></b-col>
-      <b-col cols="8">
-        <b-card class="text-center mt-3" style="max-width: 40rem" align="left">
+      <b-col cols="8" style="background-color: rgba(255,255,255,0.4); padding: 1em; ">
+        <b-card class="text-center mt-3" style="max-width: 40rem; " align="left">
           <b-form @submit="onSubmit" class="text-left">
             <b-form-group label="id:" label-for="id">
               <b-form-input id="id" v-model="member.id" required placeholder="ID" :disabled="isModify"></b-form-input>
@@ -28,14 +28,15 @@
             <b-form-group label="email:" label-for="email">
               <b-form-input type="email" id="email" v-model="member.email" required placeholder="email"></b-form-input>
             </b-form-group>
-
-            <b-button type="submit" class="m-1" v-if="this.type === 'regist'">SIGN UP</b-button>
-            <div v-else>
-            <b-button type="submit" variant="outline-info" size="sm" class="m-1"><b-icon-check2></b-icon-check2></b-button>
-            <b-button variant="outline-danger" size="sm" @click="memberDelete()" class="m-1"
-                ><b-icon-trash-fill font-scale="1.2" ></b-icon-trash-fill
-                ></b-button>
-                </div>
+            <div v-if="this.type === 'regist'" style="padding-left: 14.3em;">
+              <b-button type="submit" class="m-1">SIGN UP</b-button>  
+            </div>
+            <div v-else style="padding-left: 10.6em;">
+              <b-button type="submit" variant="outline-info" size="sm" class="m-1"><b-icon-check2></b-icon-check2></b-button>
+              <b-button variant="outline-danger" size="sm" @click="memberDelete()" class="m-1"
+                  ><b-icon-trash-fill font-scale="1.2" ></b-icon-trash-fill
+                  ></b-button>
+            </div>
           </b-form>
         </b-card>
       </b-col>
@@ -145,4 +146,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+
+</style>

@@ -1,90 +1,26 @@
 <template>
   <div>
-    <div
-      class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center profile-header"
-      style="min-height: 600px"
-    >
-      <b-container fluid>
-        <!-- Mask -->
-        <span class="mask bg-gradient-success opacity-8"></span>
-        <!-- Header container -->
-        <b-container fluid class="d-flex align-items-center">
-          <b-row>
-            <b-col lg="7" md="10">
-              <h1 class="display-2 text-black">
-                Hello, {{ memberInfo.username }}
-              </h1>
-              <b-card>
-                <p class="text-black mt-0 mb-5">
+    <b-row style="padding-left: 3.3em;">
+      <p style="font-family: 'Abril Fatface', monospace; font-size: 100px; color: #faf3dd;">My Page</p>
+    </b-row>
+    <b-row style="padding-bottom: 8em;">
+      <p style="font-family: 'Amatic SC', monospace; font-size: 30px; color: #faf3dd;">
+        THIS PAGE IS JUST FOR YOU! <br>
+        CHECK OUT YOUR FAVORITE APARTMENT/HOUSE PRODUCTS.<br>
+        OF COURSE, YOU CAN EDIT YOUR INFORMATION!
+      </p>
+    </b-row>
+    <b-row>
+      <b-col>
+        <img src="../../assets/main.png" alt="" />
+      </b-col>
+      <b-col style="padding-top: 7em;">
+        <div style="background-color: white; padding: 3em;">
+          <p>
                   등록된 관심 키워드가 없습니다! 관심 키워드를 등록하고 맞춤
                   매물을 추천받아보세요!
-                </p>
-              </b-card>
-            </b-col>
-            <b-col lg="3" md="10">
-              <img src="../../assets/main.png" alt="" />
-            </b-col>
-          </b-row>
-        </b-container>
-      </b-container>
-    </div>
-
-    <b-container fluid class="mt--6">
-      <b-row>
-        <!-- 사용자 프로필 -->
-        <b-col class="m-3">
-          <b-card no-body class="card-profile" alt="Image placeholder" img-top>
-            <b-row class="justify-content-center">
-              <b-col lg="3" class="order-lg-2"> </b-col>
-            </b-row>
-
-            <b-card-header
-              class="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4"
-            >
-              <div class="d-flex justify-content-between">
-                <a href="#" class="btn btn-sm btn-info mr-4">Connect</a>
-                <b-button
-                  @click="moveModify"
-                  variant="outline-info"
-                  style="float: right"
-                  ><b-icon-pencil-square font-scale="1.2"></b-icon-pencil-square
-                ></b-button>
-              </div>
-            </b-card-header>
-
-            <b-card-body class="pt-0">
-              <b-row>
-                <b-col>
-                  <div
-                    class="
-                      card-profile-stats
-                      d-flex
-                      justify-content-center
-                      mt-md-5
-                    "
-                  >
-                    <div>관심 키워드 여기다?</div>
-                  </div>
-                </b-col>
-              </b-row>
-              <div class="text-center">
-                <h5 class="h3">
-                  {{ memberInfo.userid }}
-                </h5>
-                <div class="h5 mt-4">회원 정보 설명설명</div>
-                <div>주소같은거 표시표시</div>
-                <hr class="my-4" />
-                <p>추천 매물 보러갈랭?</p>
-                <a href="#">고고</a>
-              </div>
-            </b-card-body>
-          </b-card>
-        </b-col>
-        <!-- 관심 키워드 설정하러 가기 -->
-        <b-col xl="8" class="order-xl-1">
-          <b-card bg-variant="light" title="Card Title">
-            <b-card-text> 관심 키워드: 원 투 쓰리 </b-card-text>
-            <b-button v-b-modal.modal-1>추가</b-button>
+          </p>
+          <b-button v-b-modal.modal-1>추가</b-button>
             <!-- 모달창 - 관심 키워드 체크 -->
             <b-modal id="modal-1" title="BootstrapVue">
               <!-- 교통수단 -->
@@ -146,6 +82,67 @@
                 </b-form-checkbox-group>
               </b-form-group>
             </b-modal>
+        </div>
+      </b-col>
+    </b-row>
+
+
+    <b-container fluid class="mt--6">
+      <b-row>
+        <!-- 사용자 프로필 -->
+        <b-col class="m-3">
+          <b-card no-body class="card-profile" alt="Image placeholder" img-top>
+            <b-row class="justify-content-center">
+              <b-col lg="3" class="order-lg-2"> </b-col>
+            </b-row>
+
+            <b-card-header
+              class="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4"
+            >
+              <div class="d-flex justify-content-between">
+                <a href="#" class="btn btn-sm btn-info mr-4">Connect</a>
+                <b-button
+                  @click="moveModify"
+                  variant="outline-info"
+                  style="float: right"
+                  ><b-icon-pencil-square font-scale="1.2"></b-icon-pencil-square
+                ></b-button>
+              </div>
+            </b-card-header>
+
+            <b-card-body class="pt-0">
+              <b-row>
+                <b-col>
+                  <div
+                    class="
+                      card-profile-stats
+                      d-flex
+                      justify-content-center
+                      mt-md-5
+                    "
+                  >
+                    <div>관심 키워드 여기다?</div>
+                  </div>
+                </b-col>
+              </b-row>
+              <div class="text-center">
+                <h5 class="h3">
+                  {{ memberInfo.userid }}
+                </h5>
+                <div class="h5 mt-4">회원 정보 설명설명</div>
+                <div>주소같은거 표시표시</div>
+                <hr class="my-4" />
+                <p>추천 매물 보러갈랭?</p>
+                <a href="#">고고</a>
+              </div>
+            </b-card-body>
+          </b-card>
+        </b-col>
+        <!-- 관심 키워드 설정하러 가기 -->
+        <b-col xl="8" class="order-xl-1">
+          <b-card bg-variant="light" title="Card Title">
+            <b-card-text> 관심 키워드: 원 투 쓰리 </b-card-text>
+            
           </b-card>
         </b-col>
       </b-row>

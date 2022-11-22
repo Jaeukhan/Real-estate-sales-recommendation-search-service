@@ -3,34 +3,32 @@
     <b-navbar
       toggleable="lg"
       type="light"
-      style="background-color: rgba(174, 217, 224, 0.7)"
+      style="background-color: rgba(174, 217, 224, 0)"
     >
-      <b-navbar-brand href="/">Where is my home?</b-navbar-brand>
-
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
+    <!--  -->
       <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav>
-          <b-link to="/" router-tag="b-nav-item">HOME</b-link>
-          <b-link to="/board" router-tag="b-nav-item">BOARD</b-link>
-          <b-link to="/map" router-tag="b-nav-item">MAP</b-link>
-          <b-link to="/chat" router-tag="b-nav-item">CHAT</b-link>
-        </b-navbar-nav>
+      <b-navbar-brand href="/" id="navItem" style="font-size: 23px;">Where Is My HOME?  </b-navbar-brand>
+
+          <b-navbar-nav>
+            <b-link to="/" router-tag="b-nav-item" id="navItem">  HOME  |</b-link> 
+            <b-link to="/board" router-tag="b-nav-item" id="navItem">  BOARD  |</b-link> 
+            <b-link to="/map" router-tag="b-nav-item" id="navItem">  MAP  |</b-link> 
+            <b-link to="/chat" router-tag="b-nav-item" id="navItem">  CHAT  |</b-link>
+          </b-navbar-nav>
 
         <!-- Right aligned nav items -->
         <!-- 로그인 후 nav bar -->
-        <b-navbar-nav class="ml-auto" v-if="memberInfo">
-          <b-nav-item> {{ memberInfo.userid }} 님 환영합니다! </b-nav-item>
-          <b-link :to="{ name: 'memberInfo' }" router-tag="b-nav-item"
-            >MYPAGE</b-link
+        <b-navbar-nav v-if="memberInfo">
+          <b-nav-item @click.prevent="Logout" id="navItem">  LOGOUT  |</b-nav-item>
+          <b-link :to="{ name: 'memberInfo' }" router-tag="b-nav-item" id="navItem"
+            >  MYPAGE </b-link
           >
-          <b-nav-item @click.prevent="Logout"> LOGOUT </b-nav-item>
         </b-navbar-nav>
         <!-- 로그인 전 nav bar -->
-        <b-navbar-nav class="ml-auto" v-else>
-          <b-link to="/member" router-tag="b-nav-item">LOG IN</b-link>
-          <b-link :to="{ name: 'memberRegist' }" router-tag="b-nav-item"
-            >SIGN UP</b-link
+        <b-navbar-nav v-else>
+          <b-link to="/member" router-tag="b-nav-item" id="navItem">  LOGIN  |</b-link>
+          <b-link :to="{ name: 'memberRegist' }" router-tag="b-nav-item" id="navItem"
+            >  SIGNUP</b-link
           >
         </b-navbar-nav>
       </b-collapse>
@@ -66,4 +64,13 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+#navItem {
+  font-family: 'Titan One', monospace;
+  color: #2b3752;
+}
+#logo {
+  height: 50px;
+  width: 250px;
+}
+</style>
