@@ -45,9 +45,9 @@ public class MartController {
         urlBuilder.append("&" + URLEncoder.encode("pSize", "UTF-8") + "="
                 + URLEncoder.encode("1000", "UTF-8")); /* 한 페이지 결과 수 */
         urlBuilder.append(
-                "&" + URLEncoder.encode("SIGUN_NM", "UTF-8") + "=" + URLEncoder.encode("고양시", "UTF-8")); /* 지역코드 */
+                "&" + URLEncoder.encode("SIGUN_NM", "UTF-8") + "=" + URLEncoder.encode(gugunName, "UTF-8")); /* 구군네임 */
         urlBuilder.append(
-                "&" + URLEncoder.encode("SIGUN_CD", "UTF-8") + "=" + URLEncoder.encode("41280", "UTF-8")); /* 계약월 */
+                "&" + URLEncoder.encode("SIGUN_CD", "UTF-8") + "=" + URLEncoder.encode(gugunCode, "UTF-8")); /* 구군코드*/
         System.out.println(urlBuilder.toString());
         URL url = new URL(urlBuilder.toString());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
