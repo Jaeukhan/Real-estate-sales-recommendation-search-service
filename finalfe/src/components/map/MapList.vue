@@ -1,12 +1,14 @@
 <template>
   <div>
     <apart-search-bar></apart-search-bar>
-    <kakao-map :cup="bus" />
+    <kakao-map :cup="bus" class="m-3" />
     <b-container v-if="aparts && aparts.length > 0" class="bv-example-row mt-3">
       <education-list :cup="bus" />
       <div>
-        <b-button v-b-toggle.sidebar-1>현지역 과거 부동산 동향 보기</b-button>
-        <b-sidebar id="sidebar-1" title="Sidebar" width="700px">
+        <b-button v-b-toggle.sidebar-1 style="background-color: #5e6472; font-family: 'Titan One'"
+          >현지역 과거 부동산 동향 보기</b-button
+        >
+        <b-sidebar id="sidebar-1" title="최근 1년 가격동향" width="600px">
           <div class="px-3 py-2">
             <line-chart></line-chart>
             <br />
@@ -19,10 +21,7 @@
       </div>
       <apart-list></apart-list>
     </b-container>
-    <b-container
-      v-else-if="houses && houses.length > 0"
-      class="bv-example-row mt-3"
-    >
+    <b-container v-else-if="houses && houses.length > 0" class="bv-example-row mt-3">
       <house-list></house-list>
     </b-container>
     <b-container v-else>
@@ -67,7 +66,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(mapStore, ["aparts", "houses"]),
+    ...mapState(mapStore, ["aparts", "houses", "apt"]),
   },
 };
 </script>

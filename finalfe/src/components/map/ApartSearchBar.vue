@@ -1,18 +1,14 @@
 <template>
   <div>
     <div class="mb-3">
-      <b-button v-b-toggle.searchBar> 매물 찾기 </b-button>
+      <b-button v-b-toggle.searchBar style="background-color: #5e6472; font-family: 'Titan One'"> 매물 찾기 </b-button>
     </div>
 
     <b-collapse id="searchBar">
-      <b-card title="conditions">
+      <b-card style="background-color: rgba(255, 255, 255, 0.7)">
         <b-row class="mt-4 mb-4 text-center">
           <b-col>
-            <b-form-select
-              v-model="sido"
-              :options="sidos"
-              @change="getGuguns()"
-            ></b-form-select>
+            <b-form-select v-model="sido" :options="sidos" @change="getGuguns()"></b-form-select>
           </b-col>
           <b-col>
             <b-form-select v-model="gugun" :options="guguns"></b-form-select>
@@ -45,30 +41,8 @@ export default {
   name: "ApartSearchBar",
   data() {
     return {
-      yearList: [
-        "2022",
-        "2021",
-        "2020",
-        "2019",
-        "2018",
-        "2017",
-        "2016",
-        "2015",
-      ],
-      monthList: [
-        "01",
-        "02",
-        "03",
-        "04",
-        "05",
-        "06",
-        "07",
-        "08",
-        "09",
-        "10",
-        "11",
-        "12",
-      ],
+      yearList: ["2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015"],
+      monthList: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
       searchType: ["주택", "아파트"],
       sido: null,
       gugun: null,
@@ -84,14 +58,7 @@ export default {
     this.getSido(); //시도정보 불러오기(db)
   },
   computed: {
-    ...mapState(mapStore, [
-      "sidos",
-      "guguns",
-      "aparts",
-      "sidoName",
-      "gugunName",
-      "rows",
-    ]),
+    ...mapState(mapStore, ["sidos", "guguns", "aparts", "sidoName", "gugunName", "rows"]),
     sidoName: function () {
       return this.sidos.find((option) => option.value === this.sido);
     },
@@ -106,12 +73,7 @@ export default {
     // },
   },
   methods: {
-    ...mapMutations(mapStore, [
-      "CLEAR_SIDO_LIST",
-      "CLEAR_GUGUN_LIST",
-      "CLEAR_APT_LIST",
-      "CLEAR_HOUSE_LIST",
-    ]),
+    ...mapMutations(mapStore, ["CLEAR_SIDO_LIST", "CLEAR_GUGUN_LIST", "CLEAR_APT_LIST", "CLEAR_HOUSE_LIST"]),
     ...mapActions(mapStore, ["getSido", "getGugun", "getApt", "getHouse"]),
     getGuguns() {
       this.CLEAR_GUGUN_LIST();

@@ -11,7 +11,15 @@ const chartStore = {
       state.price_li = Object.values(info);
       state.price_li.shift();
       state.price_name = Object.keys(info);
-      state.price_name.shift();
+      let temp = Object.keys(info);
+      temp.shift();
+      let valname = [];
+      for (let i = 0; i < temp.length; i++) {
+        valname.push(temp[i].substring(3, 5) + "." + temp[i].substring(5, temp[i].length) + "월");
+      }
+      state.price_name = valname;
+      console.log(state.price_name);
+      // state.price_name.shift();
       // console.log("state", state.price_name);
     },
   },

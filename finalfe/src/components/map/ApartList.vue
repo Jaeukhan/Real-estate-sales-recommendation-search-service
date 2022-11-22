@@ -2,6 +2,7 @@
   <div>
     <b-row>
       <b-table
+        class="mt-4 mb-2"
         hover
         :items="aparts"
         :fields="fields"
@@ -32,9 +33,7 @@
               <b-col sm="6"><b>거래금액 </b></b-col>
               <b-col>{{ row.item.거래금액 }},000 원</b-col>
             </b-row>
-            <b-button size="sm" @click="addFavoriteApt(row.item)"
-              ><b-icon icon="heart"></b-icon
-            ></b-button>
+            <b-button size="sm" @click="addFavoriteApt(row.item)"><b-icon icon="heart"></b-icon></b-button>
           </b-card>
         </template>
         <template #cell(지도보기)="mapRow">
@@ -69,12 +68,7 @@ export default {
   name: "ApartList",
   data() {
     return {
-      fields: [
-        { key: "아파트", label: "아파트 이름" },
-        { key: "법정동" },
-        "자세히보기",
-        "지도보기",
-      ],
+      fields: [{ key: "아파트", label: "아파트 이름" }, { key: "법정동" }, "자세히보기", "지도보기"],
       currentPage: 1,
       perPage: 10,
       isDuplicate: false,

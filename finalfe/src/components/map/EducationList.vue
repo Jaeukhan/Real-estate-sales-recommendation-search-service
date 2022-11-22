@@ -1,7 +1,9 @@
 <template>
   <div>
     <div>
-      <b-button class="m-3" v-b-toggle.edc> 주변 교육 시설 찾기 </b-button>
+      <b-button class="m-3" style="background-color: #5e6472; font-family: 'Titan One'" v-b-toggle.edc>
+        주변 교육 시설 찾기
+      </b-button>
     </div>
     <b-collapse id="edc">
       <b-card title="주변 학교 찾기" class="mb-2">

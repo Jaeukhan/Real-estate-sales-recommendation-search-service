@@ -25,15 +25,7 @@ import {
   PointElement,
 } from "chart.js";
 const chartStore = "chartStore";
-ChartJS.register(
-  Title,
-  Tooltip,
-  Legend,
-  LineElement,
-  LinearScale,
-  CategoryScale,
-  PointElement
-);
+ChartJS.register(Title, Tooltip, Legend, LineElement, LinearScale, CategoryScale, PointElement);
 
 export default {
   name: "LineChart",
@@ -51,11 +43,11 @@ export default {
     },
     width: {
       type: Number,
-      default: 400,
+      default: 200,
     },
     height: {
       type: Number,
-      default: 400,
+      default: 100,
     },
     cssClasses: {
       default: "",
@@ -96,7 +88,7 @@ export default {
         datasets: [
           {
             label: "매매가격(만 원)",
-            backgroundColor: "#f87979",
+            backgroundColor: "#2b3752   ",
             data: this.price_li,
           },
         ],
