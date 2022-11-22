@@ -22,6 +22,7 @@ const martStore = {
   },
   actions: {
     getMart: ({ commit }, param) => {
+      console.log("para", param);
       getMartlist(
         param.siGunCode,
         param.siGunName,

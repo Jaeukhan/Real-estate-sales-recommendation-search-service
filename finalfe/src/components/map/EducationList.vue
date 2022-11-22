@@ -66,15 +66,23 @@ export default {
     ...mapMutations(mapStore, ["CLEAR_SCHOOL_LIST"]),
     ...mapActions(mapStore, ["getKinder", "getSchool"]),
     getSchList() {
+      const param = {
+        siGunName: this.gugunName,
+        siGunCode: this.gugunCodeForInfra,
+      };
       if (this.sch) {
         if (this.sch == "유치원") {
-          this.getKinder();
+          param.sort = "유치원";
+          this.getKinder(param);
         } else if (this.sch == "초등학교") {
-          this.getSchool(this.sch);
+          param.sort = "초등학교";
+          this.getSchool(param);
         } else if (this.sch == "중학교") {
-          this.getSchool(this.sch);
+          param.sort = "중학교";
+          this.getSchool(param);
         } else if (this.sch == "고등학교") {
-          this.getSchool(this.sch);
+          param.sort = "고등학교";
+          this.getSchool(param);
         }
       }
     },
@@ -88,7 +96,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(mapStore, ["selectedsch"]),
+    ...mapState(mapStore, ["selectedsch", "gugunName", "gugunCodeForInfra"]),
   },
 };
 </script>

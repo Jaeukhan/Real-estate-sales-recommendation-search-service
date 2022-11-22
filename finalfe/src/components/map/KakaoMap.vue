@@ -176,14 +176,11 @@ export default {
       } else if (Addr[0].markname == "high") {
         this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.high, this.imageSize);
       }
-      console.log("addr", Addr);
       let bounds = new kakao.maps.LatLngBounds();
       for (let n = 0; n < Addr.length; n++) {
         this.geocoder.addressSearch(Addr[n].REFINE_ROADNM_ADDR, (result, status) => {
           if (status === kakao.maps.services.Status.OK) {
-            console.log("reulst", Addr[n].REFINE_ROADNM_ADDR, result[0]);
             const position = new kakao.maps.LatLng(result[0].y, result[0].x);
-            console.log(position);
 
             const marker = new kakao.maps.Marker({
               map: this.map,
@@ -254,7 +251,6 @@ export default {
         line.setPath(path);
         let dist = line.getLength();
         const radius = 400;
-        console.log("이거좌표", position.latlng);
         if (radius > dist) {
           const marker = new kakao.maps.Marker({
             map: this.map,
@@ -401,15 +397,15 @@ export default {
     },
     getLibloc() {
       const param = {
-        siGunName: "시흥시",
-        siGunCode: "41390",
+        siGunName: this.gugunName,
+        siGunCode: this.gugunCodeForInfra,
       };
       this.getLibrary(param);
     },
     getMartloc() {
       const param = {
-        siGunName: "시흥시",
-        siGunCode: "41390",
+        siGunName: this.gugunName,
+        siGunCode: this.gugunCodeForInfra,
       };
       this.getMart(param);
     },

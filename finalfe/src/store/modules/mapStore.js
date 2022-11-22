@@ -59,7 +59,7 @@ const mapStore = {
       state.sidoName = info.sidoName;
       state.gugunName = info.gugunName;
       state.gugunCodeForInfra = info.gcode;
-      console.log("apart, mutations", state.aparts);
+      // console.log("apart, mutations", state.aparts);
     },
     SET_HOUSE_LIST(state, info) {
       state.houses = info.houses;
@@ -195,15 +195,15 @@ const mapStore = {
       };
       commit("GET_APT_ONE", data);
     },
-    getKinder: ({ commit }) => {
+    getKinder: ({ commit }, params) => {
       const SERVICE_KEY = process.env.VUE_APP_GG_SCHOOL_KEY;
       const param = {
         serviceKey: decodeURIComponent(SERVICE_KEY),
       };
       getKinderList(
         param,
-        "경기도",
-        "41280",
+        params.siGunName,
+        params.siGunCode,
         ({ data }) => {
           console.log("dd", data);
           commit("SET_KINDER_LIST", data.Kndrgrschoolstus[1].row);
@@ -213,16 +213,16 @@ const mapStore = {
         }
       );
     },
-    getSchool: ({ commit }, sort) => {
+    getSchool: ({ commit }, params) => {
       const SERVICE_KEY = process.env.VUE_APP_GG_SCHOOL_KEY;
       const param = {
         serviceKey: decodeURIComponent(SERVICE_KEY),
       };
-      if (sort == "초등학교") {
+      if (params.sort == "초등학교") {
         getElement(
           param,
-          "경기도",
-          "41280", // (41+구군코드)
+          params.siGunName,
+          params.siGunCode, // (41+구군코드)
           ({ data }) => {
             const info = {
               data: data.ElmschlM[1].row,
@@ -234,11 +234,11 @@ const mapStore = {
             console.log("Getting KinderList error: ", error);
           }
         );
-      } else if (sort == "중학교") {
+      } else if (params.sort == "중학교") {
         getMiddle(
           param,
-          "경기도",
-          "41280",
+          params.siGunName,
+          params.siGunCode,
           ({ data }) => {
             const info = {
               data: data.MskulM[1].row,
@@ -250,11 +250,11 @@ const mapStore = {
             console.log("Getting KinderList error: ", error);
           }
         );
-      } else if (sort == "고등학교") {
+      } else if (params.sort == "고등학교") {
         getHigh(
           param,
-          "경기도",
-          "41280",
+          params.siGunName,
+          params.siGunCode,
           ({ data }) => {
             const info = {
               data: data.HgschlM[1].row,

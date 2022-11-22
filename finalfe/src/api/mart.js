@@ -2,7 +2,7 @@ import { apiInstance } from "./index";
 
 const api = apiInstance();
 //getSchoolList
-function getMartlist(gugunName, gugunCode, success, fail) {
+function getMartlist(gugunCode, gugunName, success, fail) {
   api.get(`/mart/${gugunName}/${gugunCode}`).then(success).catch(fail);
 }
 
