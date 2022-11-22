@@ -1,6 +1,10 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" type="light" style="background-color: rgba(174, 217, 224, 0.7)">
+    <b-navbar
+      toggleable="lg"
+      type="light"
+      style="background-color: rgba(174, 217, 224, 0.7)"
+    >
       <b-navbar-brand href="/">Where is my home?</b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -10,19 +14,24 @@
           <b-link to="/" router-tag="b-nav-item">HOME</b-link>
           <b-link to="/board" router-tag="b-nav-item">BOARD</b-link>
           <b-link to="/map" router-tag="b-nav-item">MAP</b-link>
+          <b-link to="/chat" router-tag="b-nav-item">CHAT</b-link>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
         <!-- 로그인 후 nav bar -->
         <b-navbar-nav class="ml-auto" v-if="memberInfo">
           <b-nav-item> {{ memberInfo.userid }} 님 환영합니다! </b-nav-item>
-          <b-link :to="{ name: 'memberInfo' }" router-tag="b-nav-item">MYPAGE</b-link>
+          <b-link :to="{ name: 'memberInfo' }" router-tag="b-nav-item"
+            >MYPAGE</b-link
+          >
           <b-nav-item @click.prevent="Logout"> LOGOUT </b-nav-item>
         </b-navbar-nav>
         <!-- 로그인 전 nav bar -->
         <b-navbar-nav class="ml-auto" v-else>
           <b-link to="/member" router-tag="b-nav-item">LOG IN</b-link>
-          <b-link :to="{ name: 'memberRegist' }" router-tag="b-nav-item">SIGN UP</b-link>
+          <b-link :to="{ name: 'memberRegist' }" router-tag="b-nav-item"
+            >SIGN UP</b-link
+          >
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>

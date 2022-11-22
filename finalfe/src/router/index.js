@@ -5,6 +5,7 @@ import HomeView from "../views/HomeView.vue";
 import BoardView from "../views/BoardView.vue";
 import MemberView from "../views/MemberView.vue";
 import MapView from "../views/MapView.vue";
+import ChatBot from "../components/ChatBot.vue";
 
 import store from "@/store";
 
@@ -115,6 +116,11 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/chat",
+    name: "ChatBot",
+    component: ChatBot,
+  }
 ];
 
 const router = new VueRouter({
