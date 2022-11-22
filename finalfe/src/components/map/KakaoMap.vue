@@ -61,6 +61,7 @@ export default {
       "sidoName",
       "gugunName",
       "weatherLoc",
+      "gugunCodeForInfra",
     ]), //apt.load, apt.
     ...mapState(parkingStore, ["parking_li"]),
     ...mapState(transportStore, ["busList"]),
@@ -206,7 +207,7 @@ export default {
       if (this.markers.length > 0) {
         this.markers.forEach((marker) => marker.setMap(null));
       }
-      console.log(positions[0].markname);
+      // console.log(positions[0].markname);
       if (positions[0].markname == "bus") {
         this.markerImage = new kakao.maps.MarkerImage(
           this.imageSrc.buststop,
@@ -290,7 +291,7 @@ export default {
       if (this.markers.length > 0) {
         this.markers.forEach((marker) => marker.setMap(null));
       }
-      console.log(positions[0].markname);
+      // console.log(positions[0].markname);
       if (positions[0].markname == "bus") {
         this.markerImage = new kakao.maps.MarkerImage(
           this.imageSrc.buststop,
@@ -415,7 +416,7 @@ export default {
             this.tempLoc.y = data.y;
             bounds.extend(new kakao.maps.LatLng(data.y, data.x));
           }
-          console.log("loc 찍음", this.tempLoc);
+          // console.log("loc 찍음", this.tempLoc);
           this.map.setBounds(bounds);
         }
       });
@@ -431,8 +432,8 @@ export default {
     ////// 주차장
     getParkinglot() {
       const param = {
-        siGunName: "시흥시",
-        siGunCode: "41390",
+        siGunName: this.gugunName,
+        siGunCode: this.gugunCodeForInfra,
       };
       this.getParking(param);
     },

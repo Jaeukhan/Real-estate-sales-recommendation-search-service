@@ -12,6 +12,7 @@ const mapStore = {
     apt: null, //아파트 주소랑(load), 아파트 이름(aptName)
     sidoName: "",
     gugunName: "",
+    gugunCodeForInfra: null,
     selectedsch: [],
     ////////////////////날씨//////////////////////
     weatherLoc: { lat: null, lon: null }, //날씨 불러올 위치: lat, lon
@@ -54,10 +55,10 @@ const mapStore = {
       });
     },
     SET_APART_LIST(state, info) {
-      console.log("길이", info.aparts);
       state.aparts = info.aparts;
       state.sidoName = info.sidoName;
       state.gugunName = info.gugunName;
+      state.gugunCodeForInfra = info.gcode;
     },
     SET_HOUSE_LIST(state, info) {
       state.houses = info.houses;
@@ -159,6 +160,7 @@ const mapStore = {
             aparts: data.response.body.items.item,
             sidoName: condition.sidoName,
             gugunName: condition.gugunName,
+            gcode: gcode,
           };
           commit("SET_APART_LIST", info);
         },

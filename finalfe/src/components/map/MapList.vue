@@ -1,8 +1,8 @@
 <template>
   <div>
     <apart-search-bar></apart-search-bar>
+    <kakao-map :cup="bus" />
     <b-container v-if="aparts && aparts.length > 0" class="bv-example-row mt-3">
-      <kakao-map :cup="bus" />
       <education-list :cup="bus" />
       <div>
         <b-button v-b-toggle.sidebar-1>현지역 과거 부동산 동향 보기</b-button>

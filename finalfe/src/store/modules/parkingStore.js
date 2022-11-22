@@ -7,6 +7,7 @@ const parkingStore = {
   },
   mutations: {
     SET_PARKING_LIST(state, info) {
+      state.parking_li = [];
       let li = [];
       for (let d = 0; d < info.length; d++) {
         let temp = {
@@ -18,7 +19,7 @@ const parkingStore = {
         li.push(temp);
       }
       state.parking_li = li;
-      console.log("mut", state.parking_li);
+      // console.log("mut", state.parking_li);
     },
   },
   actions: {
