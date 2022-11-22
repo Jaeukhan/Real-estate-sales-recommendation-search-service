@@ -59,6 +59,7 @@ const mapStore = {
       state.sidoName = info.sidoName;
       state.gugunName = info.gugunName;
       state.gugunCodeForInfra = info.gcode;
+      console.log("apart, mutations", state.aparts);
     },
     SET_HOUSE_LIST(state, info) {
       state.houses = info.houses;
@@ -141,7 +142,6 @@ const mapStore = {
       getGugunsCode(
         param,
         ({ data }) => {
-          console.log(data);
           commit("SET_GUGUN_LIST", data);
         },
         (error) => {
@@ -205,6 +205,7 @@ const mapStore = {
         "경기도",
         "41280",
         ({ data }) => {
+          console.log("dd", data);
           commit("SET_KINDER_LIST", data.Kndrgrschoolstus[1].row);
         },
         (error) => {
