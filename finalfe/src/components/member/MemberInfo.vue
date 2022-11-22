@@ -1,28 +1,90 @@
 <template>
   <div>
+    <!-- Header Start -->
     <b-row style="padding-left: 3.3em;">
-      <p style="font-family: 'Abril Fatface', monospace; font-size: 100px; color: #faf3dd;">My Page</p>
+      <p style="font-family: 'Abril Fatface', monospace; font-size: 100px; color: #B86565;">My Page</p>
     </b-row>
-    <b-row style="padding-bottom: 8em;">
+    <b-row style="padding-bottom: 20em;">
       <p style="font-family: 'Amatic SC', monospace; font-size: 30px; color: #faf3dd;">
         THIS PAGE IS JUST FOR YOU! <br>
         CHECK OUT YOUR FAVORITE APARTMENT/HOUSE PRODUCTS.<br>
         OF COURSE, YOU CAN EDIT YOUR INFORMATION!
       </p>
     </b-row>
+    <!-- Header End -->
+    <!-- User Profile Start -->
     <b-row>
+      <p style="font-family: 'Abril Fatface', monospace; font-size: 80px; color: #B86565;">Information</p>
+    </b-row>
+    <b-row style="padding-bottom: 20em;">
+        <b-col class="m-3" style="background-color: rgba(225,225,225,0.3); padding: 3em;">
+          <b-card no-body class="card-profile" alt="Image placeholder" img-top>
+            <b-row class="justify-content-center">
+              <b-col lg="3" class="order-lg-2"> </b-col>
+            </b-row>
+
+            <b-card-header
+              class="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4"
+            >
+              <div class="d-flex justify-content-between">
+                <b-button
+                  @click="moveModify"
+                  variant="outline-info"
+                  style="float: right"
+                  ><b-icon-pencil-square font-scale="1.2"></b-icon-pencil-square
+                >  MODIFY</b-button>
+              </div>
+            </b-card-header>
+
+            <b-card-body class="pt-0">
+              <b-row>
+                <b-col>
+                  <div
+                    class="
+                      card-profile-stats
+                      d-flex
+                      justify-content-center
+                      mt-md-5
+                    "
+                  >
+                    <div style="font-size: 30px;">WELCOME!</div>
+                  </div>
+                </b-col>
+              </b-row>
+              <div class="text-center">
+                <br>
+                <b-icon icon="person-circle" font-scale="3"></b-icon>
+                <h5 class="h3">
+                  {{ memberInfo.userid }}
+                </h5>
+                <div>{{ memberInfo.username }}</div>
+                <div class="h5 mt-4">{{memberInfo.email}}</div>
+              </div>
+            </b-card-body>
+          </b-card>
+        </b-col>
+      </b-row>
+      <!-- User Profile End -->
+      <!-- Favorite Keyword Start -->
+    <b-row>
+      <p style="font-family: 'Abril Fatface', monospace; font-size: 80px; color: #B86565;">Custom Keyword</p>
+    </b-row>
+    <b-row style="padding-bottom: 20em;">
       <b-col>
         <img src="../../assets/main.png" alt="" />
       </b-col>
       <b-col style="padding-top: 7em;">
-        <div style="background-color: white; padding: 3em;">
+        <div style="background-color: white; padding: 3em;" v-if="keyword && keyword.length>0">
+          {{ keyword }}
+        </div>
+        <div style="background-color: white; padding: 3em;" v-else>
           <p>
                   등록된 관심 키워드가 없습니다! 관심 키워드를 등록하고 맞춤
                   매물을 추천받아보세요!
           </p>
           <b-button v-b-modal.modal-1>추가</b-button>
             <!-- 모달창 - 관심 키워드 체크 -->
-            <b-modal id="modal-1" title="BootstrapVue">
+            <b-modal id="modal-1" title="BootstrapVue" @submit="onSubmit">
               <!-- 교통수단 -->
               <b-form-group
                 label="이동 시 어떤 교통수단을 이용하시나요?"
@@ -30,6 +92,7 @@
               >
                 <b-form-checkbox-group
                   id="checkbox-group-1"
+                  v-model="selected"
                   :aria-describedby="ariaDescribedby"
                   name="flavour-1"
                 >
@@ -44,6 +107,7 @@
               >
                 <b-form-checkbox-group
                   id="checkbox-group-2"
+                  v-model="selected"
                   :aria-describedby="ariaDescribedby"
                   name="flavour-2"
                 >
@@ -60,6 +124,7 @@
               >
                 <b-form-checkbox-group
                   id="checkbox-group-2"
+                  v-model="selected"
                   :aria-describedby="ariaDescribedby"
                   name="flavour-2"
                 >
@@ -74,6 +139,7 @@
               >
                 <b-form-checkbox-group
                   id="checkbox-group-2"
+                  v-model="selected"
                   :aria-describedby="ariaDescribedby"
                   name="flavour-2"
                 >
@@ -85,70 +151,14 @@
         </div>
       </b-col>
     </b-row>
+          <!-- Favorite Keyword End -->
 
-
-    <b-container fluid class="mt--6">
-      <b-row>
-        <!-- 사용자 프로필 -->
-        <b-col class="m-3">
-          <b-card no-body class="card-profile" alt="Image placeholder" img-top>
-            <b-row class="justify-content-center">
-              <b-col lg="3" class="order-lg-2"> </b-col>
-            </b-row>
-
-            <b-card-header
-              class="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4"
-            >
-              <div class="d-flex justify-content-between">
-                <a href="#" class="btn btn-sm btn-info mr-4">Connect</a>
-                <b-button
-                  @click="moveModify"
-                  variant="outline-info"
-                  style="float: right"
-                  ><b-icon-pencil-square font-scale="1.2"></b-icon-pencil-square
-                ></b-button>
-              </div>
-            </b-card-header>
-
-            <b-card-body class="pt-0">
-              <b-row>
-                <b-col>
-                  <div
-                    class="
-                      card-profile-stats
-                      d-flex
-                      justify-content-center
-                      mt-md-5
-                    "
-                  >
-                    <div>관심 키워드 여기다?</div>
-                  </div>
-                </b-col>
-              </b-row>
-              <div class="text-center">
-                <h5 class="h3">
-                  {{ memberInfo.userid }}
-                </h5>
-                <div class="h5 mt-4">회원 정보 설명설명</div>
-                <div>주소같은거 표시표시</div>
-                <hr class="my-4" />
-                <p>추천 매물 보러갈랭?</p>
-                <a href="#">고고</a>
-              </div>
-            </b-card-body>
-          </b-card>
-        </b-col>
-        <!-- 관심 키워드 설정하러 가기 -->
-        <b-col xl="8" class="order-xl-1">
-          <b-card bg-variant="light" title="Card Title">
-            <b-card-text> 관심 키워드: 원 투 쓰리 </b-card-text>
-            
-          </b-card>
-        </b-col>
-      </b-row>
-      <b-row>
         <!-- 관심 매물 -->
-        <b-col xl="8" class="order-xl-1">
+    <b-row>
+      <p style="font-family: 'Abril Fatface', monospace; font-size: 80px; color: #B86565;">Favorites</p>
+    </b-row>
+          <b-row style="padding-bottom: 20em;">
+        <b-col class="m-3" style="background-color: rgba(225,225,225,0.3); padding: 3em;">
           <div>
             <b-card
               body-class="text-center"
@@ -157,8 +167,8 @@
               <template #header>
                 <b-nav card-header tabs>
                   <b-nav-item active>좋아요 표시한 매물 리스트</b-nav-item>
-                  <b-button style="margin: 5px;" class="sm" @click="toggle('a')">Apart</b-button>
-                  <b-button style="margin: 5px;" class="sm" @click="toggle('h')">House</b-button>
+                  <b-button style="margin: 5px;background-color: #aed9e0; color: black;" class="sm" @click="toggle('a')">Apart</b-button>
+                  <b-button style="margin: 5px;background-color: #aed9e0; color: black;" class="sm" @click="toggle('h')">House</b-button>
                 </b-nav>
               </template>
               <b-card-body v-if="isApt==='a'">
@@ -231,24 +241,23 @@
                   ></b-pagination>
                 </b-row>
               </b-card-body>
-              <b-button variant="primary" @click="moveMap"
+              <b-button variant="secondary" @click="moveMap" style="background-color: #aed9e0; color: black;"
                 >다른 매물 둘러보기</b-button
               >
             </b-card>
           </div>
         </b-col>
+      </b-row>
         <!-- 사용자 게시판 글 목록 -->
-        <b-col xl="4" class="order-xl-2 mb-5">
+       <b-row>
+      <p style="font-family: 'Abril Fatface', monospace; font-size: 80px; color: #B86565;">Your Board</p>
+    </b-row>
+          <b-row style="padding-bottom: 20em;">
+        <b-col class="m-3" style="background-color: rgba(225,225,225,0.3); padding: 3em;">
           <b-card no-body class="card-profile" alt="Image placeholder" img-top>
             <b-row class="justify-content-center">
               <b-col lg="3" class="order-lg-2"> </b-col>
             </b-row>
-
-            <b-card-header
-              class="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4"
-            >
-              <div class="d-flex justify-content-between"></div>
-            </b-card-header>
 
             <b-card-body class="pt-0">
               <b-row>
@@ -261,7 +270,7 @@
                       mt-md-5
                     "
                   >
-                    <h5 class="h3">작성한 게시물</h5>
+                    <h5 class="h3" style="font-size: 20px; padding-left: 16em; padding-bottom: 2em;"> {{memberInfo.username}} 님이 작성한 게시글 </h5>
                   </div>
                 </b-col>
               </b-row>
@@ -291,13 +300,6 @@
           </b-card>
         </b-col>
       </b-row>
-      <!-- <b-row>
-        <b-card bg-variant="dark" text-variant="white" title="Card Title">
-          <b-card-text> 관심 키워드: 원 투 쓰리 </b-card-text>
-          <b-button href="#" variant="primary">추가?</b-button>
-        </b-card>
-      </b-row> -->
-    </b-container>
   <br>
   <br>
   <br>
@@ -333,6 +335,7 @@ export default {
       currentPage: 1,
       perPage: 5,
       isApt: "a",
+      selected: [],
     };
   },
   create() {
@@ -347,15 +350,20 @@ export default {
     this.getUserBoard(this.memberInfo.userid);
   },
   computed: {
-    ...mapState(memberStore, ["memberInfo"]),
+    ...mapState(memberStore, ["memberInfo", "keyword"]),
     ...mapState(boardStore, ["user_board"]),
     ...mapState(favoriteStore, ["apartlist", "houselist", "rows"]),
   },
   methods: {
     ...mapMutations(boardStore, ["CLEAR_USER_BOARD"]),
-    ...mapActions(memberStore, ["getMemberInfo"]),
+    ...mapActions(memberStore, ["getMemberInfo", "saveKeyword"]),
     ...mapActions(favoriteStore, ["getHouseList", "removeFavoriteHouse", "getAptList", "removeFavoriteApt"]),
     ...mapActions(boardStore, ["getUserBoard"]),
+    onSubmit(event) {
+      console.log("이벤트!");
+      event.preventDefault();
+      this.saveKeyword(this.selected);
+    },
     moveModify() {
       this.$router.push({ name: "memberModify" });
     },

@@ -146,6 +146,8 @@ export default {
 };
 </script>
 
-<style>
-
+<style scoped>
+* {
+  font-family: 'Pathway Gothic One', monospace;
+}
 </style>

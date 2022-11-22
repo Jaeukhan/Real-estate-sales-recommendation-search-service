@@ -9,6 +9,7 @@ const memberStore = {
     isLoginError: false,
     memberInfo: null,
     isValidToken: false,
+    keyword: [],
   },
   getters: {
     checkMemberInfo: function (state) {
@@ -31,6 +32,10 @@ const memberStore = {
     SET_MEMBER_INFO: (state, memberInfo) => {
       state.isLogin = true;
       state.memberInfo = memberInfo;
+    },
+    SET_KEYWORD: (state, arr) => {
+      if (state.keyword.length > 0) state.keyword = null;
+      state.keyword = arr;
     },
   },
   actions: {
@@ -130,6 +135,9 @@ const memberStore = {
           console.log("logout error: ", error);
         }
       );
+    },
+    saveKeyword({ commit }, arr) {
+      commit("SET_KEYWORD", arr);
     },
   },
 };
