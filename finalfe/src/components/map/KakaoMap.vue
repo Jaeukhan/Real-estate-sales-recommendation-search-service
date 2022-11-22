@@ -5,7 +5,9 @@
     <b-button class="mt-3" @click="getParkinglot">주변 주차장 검색</b-button>
     <b-button class="mt-3" @click="getLibloc">주변 도서관 검색</b-button>
     <b-button class="mt-3" @click="getMartloc">주변 시장 및 마트 검색</b-button>
-    <!-- <b-button class="mt-3" @click="getBusStopList">근처 버스 정류장 찾기(일단 서울)</b-button> -->
+    <b-button class="mt-3" @click="getBusStopList"
+      >근처 버스 정류장 찾기(일단 서울)</b-button
+    >
   </div>
 </template>
 
@@ -52,7 +54,14 @@ export default {
     this.cup.$on("move", this.searchSubmit);
   },
   computed: {
-    ...mapState(mapStore, ["apt", "selectedsch", "aparts", "sidoName", "gugunName", "weatherLoc", "isReady"]), //apt.load, apt.
+    ...mapState(mapStore, [
+      "apt",
+      "selectedsch",
+      "aparts",
+      "sidoName",
+      "gugunName",
+      "weatherLoc",
+    ]), //apt.load, apt.
     ...mapState(parkingStore, ["parking_li"]),
     ...mapState(transportStore, ["busList"]),
     ...mapState(libraryStore, ["lib_li"]),
@@ -69,7 +78,6 @@ export default {
         };
         positions.push(d);
       }
-      // console.log(positions);
       this.displayMarker(positions);
     },
     lib_li(val) {
@@ -82,7 +90,6 @@ export default {
         };
         positions.push(d);
       }
-      // console.log(positions);
       this.displayMarker(positions);
     },
     parking_li(val) {
@@ -115,19 +122,22 @@ export default {
     apt(val) {
       if (val.load) {
         this.searchSubmit(val.load);
-        // this.displayMarkerAndMove(val.REFINE_ROADNM_ADDR);
-        // this.weatherLoc.lat = this.temp.lat;
-        // this.weatherLoc.lon = this.temp.lon;
         this.setWeatherLoc(this.temp);
         this.apiload(this.temp);
-        // console.log("찐으로 바꾼거:", this.temp);
       }
     },
     aparts(val) {
       if (val) {
         let li = [];
         for (let i = 0; i < val.length; i++) {
-          const names = this.sidoName + " " + this.gugunName + " " + val[i].법정동 + " " + val[i].도로명;
+          const names =
+            this.sidoName +
+            " " +
+            this.gugunName +
+            " " +
+            val[i].법정동 +
+            " " +
+            val[i].도로명;
           li.push({
             REFINE_ROADNM_ADDR: names,
             title: val[i].아파트,
@@ -171,25 +181,25 @@ export default {
     },
     displayMarkerAndMove(Addr) {
       let positions = [];
-      // console.log(Addr);
       if (Addr)
         for (let n = 0; n < Addr.length; n++) {
-          this.geocoder.addressSearch(Addr[n].REFINE_ROADNM_ADDR, (result, status) => {
-            if (status === kakao.maps.services.Status.OK) {
-              // let bounds = new kakao.maps.LatLngBounds();
-              for (let i = 0; i < result.length; i++) {
-                let data = result[i];
-                const d = {
-                  title: Addr[n].title,
-                  latlng: new kakao.maps.LatLng(data.y, data.x),
-                  markname: Addr[0].markname,
-                };
-                positions.push(d);
-                this.displayMarkerApart(positions);
-                // bounds.extend(new kakao.maps.LatLng(data.y, data.x));
+          this.geocoder.addressSearch(
+            Addr[n].REFINE_ROADNM_ADDR,
+            (result, status) => {
+              if (status === kakao.maps.services.Status.OK) {
+                for (let i = 0; i < result.length; i++) {
+                  let data = result[i];
+                  const d = {
+                    title: Addr[n].title,
+                    latlng: new kakao.maps.LatLng(data.y, data.x),
+                    markname: Addr[0].markname,
+                  };
+                  positions.push(d);
+                  this.displayMarkerApart(positions);
+                }
               }
             }
-          });
+          );
         }
     },
     displayMarker(positions) {
@@ -198,23 +208,50 @@ export default {
       }
       console.log(positions[0].markname);
       if (positions[0].markname == "bus") {
-        this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.buststop, this.imageSize);
+        this.markerImage = new kakao.maps.MarkerImage(
+          this.imageSrc.buststop,
+          this.imageSize
+        );
       } else if (positions[0].markname == "apart") {
-        this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.apart, this.imageSize);
+        this.markerImage = new kakao.maps.MarkerImage(
+          this.imageSrc.apart,
+          this.imageSize
+        );
       } else if (positions[0].markname == "parking") {
-        this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.parking, this.imageSize);
+        this.markerImage = new kakao.maps.MarkerImage(
+          this.imageSrc.parking,
+          this.imageSize
+        );
       } else if (positions[0].markname == "library") {
-        this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.library, this.imageSize);
+        this.markerImage = new kakao.maps.MarkerImage(
+          this.imageSrc.library,
+          this.imageSize
+        );
       } else if (positions[0].markname == "high") {
-        this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.high, this.imageSize);
+        this.markerImage = new kakao.maps.MarkerImage(
+          this.imageSrc.high,
+          this.imageSize
+        );
       } else if (positions[0].markname == "middle") {
-        this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.middle, this.imageSize);
+        this.markerImage = new kakao.maps.MarkerImage(
+          this.imageSrc.middle,
+          this.imageSize
+        );
       } else if (positions[0].markname == "element") {
-        this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.element, this.imageSize);
+        this.markerImage = new kakao.maps.MarkerImage(
+          this.imageSrc.element,
+          this.imageSize
+        );
       } else if (positions[0].markname == "kindergarden") {
-        this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.kindergarden, this.imageSize);
+        this.markerImage = new kakao.maps.MarkerImage(
+          this.imageSrc.kindergarden,
+          this.imageSize
+        );
       } else {
-        this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.mart, this.imageSize);
+        this.markerImage = new kakao.maps.MarkerImage(
+          this.imageSrc.mart,
+          this.imageSize
+        );
       }
 
       positions.forEach((position) => {
@@ -238,8 +275,6 @@ export default {
           });
           let _this = this;
           kakao.maps.event.addListener(marker, "mouseover", function () {
-            // console.log("마커 이벤트!");
-            // console.log(position.latlng);
             infowindow.open(_this.map, marker);
           });
           kakao.maps.event.addListener(marker, "mouseout", function () {
@@ -249,10 +284,7 @@ export default {
           this.markers.push(marker);
         }
       });
-      // const bounds = this.tempLoc; //       console.log("선택한 아파트 매물 위치 주변으로 boudning", bounds);
       this.clustererAddMark();
-      // this.map.setCenter(new kakao.maps.LatLng(bounds.qa, bounds.oa));
-      // this.map.setBounds(bounds);
     },
     displayMarkerApart(positions) {
       if (this.markers.length > 0) {
@@ -260,23 +292,50 @@ export default {
       }
       console.log(positions[0].markname);
       if (positions[0].markname == "bus") {
-        this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.buststop, this.imageSize);
+        this.markerImage = new kakao.maps.MarkerImage(
+          this.imageSrc.buststop,
+          this.imageSize
+        );
       } else if (positions[0].markname == "apart") {
-        this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.apart, this.imageSize);
+        this.markerImage = new kakao.maps.MarkerImage(
+          this.imageSrc.apart,
+          this.imageSize
+        );
       } else if (positions[0].markname == "parking") {
-        this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.parking, this.imageSize);
+        this.markerImage = new kakao.maps.MarkerImage(
+          this.imageSrc.parking,
+          this.imageSize
+        );
       } else if (positions[0].markname == "library") {
-        this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.library, this.imageSize);
+        this.markerImage = new kakao.maps.MarkerImage(
+          this.imageSrc.library,
+          this.imageSize
+        );
       } else if (positions[0].markname == "high") {
-        this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.high, this.imageSize);
+        this.markerImage = new kakao.maps.MarkerImage(
+          this.imageSrc.high,
+          this.imageSize
+        );
       } else if (positions[0].markname == "middle") {
-        this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.middle, this.imageSize);
+        this.markerImage = new kakao.maps.MarkerImage(
+          this.imageSrc.middle,
+          this.imageSize
+        );
       } else if (positions[0].markname == "element") {
-        this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.element, this.imageSize);
+        this.markerImage = new kakao.maps.MarkerImage(
+          this.imageSrc.element,
+          this.imageSize
+        );
       } else if (positions[0].markname == "kindergarden") {
-        this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.kindergarden, this.imageSize);
+        this.markerImage = new kakao.maps.MarkerImage(
+          this.imageSrc.kindergarden,
+          this.imageSize
+        );
       } else {
-        this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.mart, this.imageSize);
+        this.markerImage = new kakao.maps.MarkerImage(
+          this.imageSrc.mart,
+          this.imageSize
+        );
       }
 
       positions.forEach((position) => {
@@ -326,10 +385,6 @@ export default {
 
       this.map.setCenter(iwPosition);
     },
-    // movelocation() {
-    //   this.aptAddr = this.apt.load;
-    //   this.searchSubmit+_+(this.aptAddr);
-    // },
     clustererAddMark() {
       if (this.circle) {
         this.circle.setMap(null);
@@ -347,50 +402,11 @@ export default {
         fillColor: "#00EEEE",
         fillOpacity: 0.1,
       });
-      // let center = this.circle.getPosition();
-      // let radius = this.circle.getRadius();
-      // let line = new kakao.maps.Polyline();
-      // console.log(this.totalCoordinate);
-
-      // this.totalCoordinate.forEach(function (marker) {
-      //   console.log("마커마커", marker.n);
-      //   // 마커의 위치와 원의 중심을 경로로 하는 폴리라인 설정
-      //   console.log("센터", center);
-      //   console.log("마커마커", marker);
-      //   console;
-      //   var path = [marker.n, center];
-      //   line.setPath(path);
-      //   console.log("라인", path);
-      //   // 마커와 원의 중심 사이의 거리
-
-      //   // this.drawLine = new kakao.maps.Polyline({
-      //   //   map: this.map, // 선을 표시할 지도입니다
-      //   //   path: path,
-      //   //   strokeWeight: 3, // 선의 두께입니다
-      //   //   strokeColor: "#db4040", // 선의 색깔입니다
-      //   //   strokeOpacity: 0.5, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
-      //   //   strokeStyle: "solid", // 선의 스타일입니다
-      //   // });
-
-      //   var dist = line.getLength();
-      //   console.log("dist", dist);
-
-      //   // 이 거리가 원의 반지름보다 작거나 같다면
-      //   if (dist < radius) {
-      //     // 해당 marker는 원 안에 있는 것
-      //     marker.setMap(this.map);
-      //   } else {
-      //     marker.setMap(null);
-      //   }
-      //   // this.drawLine.setMap(this.map);
-      // });
     },
     searchSubmit(Addr) {
       this.geocoder.addressSearch(Addr, (result, status) => {
         if (status === kakao.maps.services.Status.OK) {
           let bounds = new kakao.maps.LatLngBounds();
-          // let datas = result[0];
-          // bounds.extend(new kakao.maps.LatLng(datas.y, datas.x));
           let datas = [];
           for (let i = 0; i < result.length; i++) {
             let data = result[i];

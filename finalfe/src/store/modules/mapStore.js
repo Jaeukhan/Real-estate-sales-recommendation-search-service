@@ -23,9 +23,7 @@ const mapStore = {
       clouds: null,
       weather: null,
     },
-    isReady: null,
   },
-  getters: {},
   mutations: {
     CLEAR_SIDO_LIST(state) {
       state.sidos = [{ value: null, text: "선택하세요" }];
@@ -56,23 +54,21 @@ const mapStore = {
       });
     },
     SET_APART_LIST(state, info) {
+      console.log("길이", info.aparts);
       state.aparts = info.aparts;
       state.sidoName = info.sidoName;
       state.gugunName = info.gugunName;
-      state.isReady = "apart";
     },
     SET_HOUSE_LIST(state, info) {
       state.houses = info.houses;
       state.sidoName = info.sidoName;
       state.gugunName = info.gugunName;
-      // this.isReady = "house";
     },
     GET_APT_ONE(state, info) {
       state.apt = {
         load: state.sidoName + " " + state.gugunName + " " + info.load,
         aptName: info.aptName,
       };
-      // console.log(state.apt.load);
     },
     //SET_SCHOOL_LIST
     SET_KINDER_LIST(state, info) {
@@ -126,7 +122,6 @@ const mapStore = {
         clouds: payload.data.clouds.all,
         weather: payload.data.weather[0].main,
       };
-      // console.log("여기 weatherStore ", state.info);
     },
   },
   actions: {
@@ -224,7 +219,7 @@ const mapStore = {
         getElement(
           param,
           "경기도",
-          "41280",
+          "41280", // (41+구군코드)
           ({ data }) => {
             const info = {
               data: data.ElmschlM[1].row,
@@ -276,16 +271,13 @@ const mapStore = {
         lat: loc.lat,
         lon: loc.lon,
       };
-      // console.log("여기 액션", data);
       commit("SET_WEATHER_LOC", data);
     },
     apiload(context, payload) {
       context.commit("CLEAR_DATA");
-      // console.log("들어오긴 했닝");
       getWeatherApi(payload).then((res) => {
         context.commit("UPDATE_DATA", res);
       });
-      //   console.log(payload);
     },
   },
 };

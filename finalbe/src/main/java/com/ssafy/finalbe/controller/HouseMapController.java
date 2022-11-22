@@ -70,7 +70,7 @@ public class HouseMapController {
 		urlBuilder
 				.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /* 페이지번호 */
 		urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "="
-				+ URLEncoder.encode("10", "UTF-8")); /* 한 페이지 결과 수 */
+				+ URLEncoder.encode("100", "UTF-8")); /* 한 페이지 결과 수 */
 		urlBuilder.append(
 				"&" + URLEncoder.encode("LAWD_CD", "UTF-8") + "=" + URLEncoder.encode(lawdCd, "UTF-8")); /* 지역코드 */
 		urlBuilder.append(
@@ -117,7 +117,7 @@ public class HouseMapController {
 		urlBuilder
 				.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /* 페이지번호 */
 		urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "="
-				+ URLEncoder.encode("10", "UTF-8")); /* 한 페이지 결과 수 */
+				+ URLEncoder.encode("100", "UTF-8")); /* 한 페이지 결과 수 */
 		urlBuilder.append(
 				"&" + URLEncoder.encode("LAWD_CD", "UTF-8") + "=" + URLEncoder.encode(lawdCd, "UTF-8")); /* 지역코드 */
 		urlBuilder.append(

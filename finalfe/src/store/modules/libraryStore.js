@@ -1,7 +1,5 @@
 import { getLiblist } from "@/api/library";
-import { mapState } from "vuex";
 
-const mapStore = "mapStore";
 
 const libraryStore = {
   namespaced: true,
@@ -21,13 +19,8 @@ const libraryStore = {
         li.push(temp);
       }
       state.lib_li = li;
-      // console.log("mut", state.lib_li);
-      // console.log("state", state.price_name);
-      this.isReady = "library";
+
     },
-  },
-  computed: {
-    ...mapState(mapStore, ["isReady"]),
   },
   actions: {
     getLibrary: ({ commit }, param) => {

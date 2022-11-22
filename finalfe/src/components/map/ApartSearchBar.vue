@@ -8,7 +8,11 @@
       <b-card title="conditions">
         <b-row class="mt-4 mb-4 text-center">
           <b-col>
-            <b-form-select v-model="sido" :options="sidos" @change="getGuguns()"></b-form-select>
+            <b-form-select
+              v-model="sido"
+              :options="sidos"
+              @change="getGuguns()"
+            ></b-form-select>
           </b-col>
           <b-col>
             <b-form-select v-model="gugun" :options="guguns"></b-form-select>
@@ -23,7 +27,7 @@
             <b-form-select v-model="type" :options="searchType"></b-form-select>
           </b-col>
           <b-col>
-            <b-button @click="getAptList()">검색</b-button>
+            <b-button @click="getList()">검색</b-button>
           </b-col>
         </b-row>
       </b-card>
@@ -41,8 +45,30 @@ export default {
   name: "ApartSearchBar",
   data() {
     return {
-      yearList: ["2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015"],
-      monthList: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
+      yearList: [
+        "2022",
+        "2021",
+        "2020",
+        "2019",
+        "2018",
+        "2017",
+        "2016",
+        "2015",
+      ],
+      monthList: [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+      ],
       searchType: ["주택", "아파트"],
       sido: null,
       gugun: null,
@@ -58,7 +84,14 @@ export default {
     this.getSido(); //시도정보 불러오기(db)
   },
   computed: {
-    ...mapState(mapStore, ["sidos", "guguns", "aparts", "sidoName", "gugunName"]),
+    ...mapState(mapStore, [
+      "sidos",
+      "guguns",
+      "aparts",
+      "sidoName",
+      "gugunName",
+      "rows",
+    ]),
     sidoName: function () {
       return this.sidos.find((option) => option.value === this.sido);
     },
@@ -73,7 +106,12 @@ export default {
     // },
   },
   methods: {
-    ...mapMutations(mapStore, ["CLEAR_SIDO_LIST", "CLEAR_GUGUN_LIST", "CLEAR_APT_LIST", "CLEAR_HOUSE_LIST"]),
+    ...mapMutations(mapStore, [
+      "CLEAR_SIDO_LIST",
+      "CLEAR_GUGUN_LIST",
+      "CLEAR_APT_LIST",
+      "CLEAR_HOUSE_LIST",
+    ]),
     ...mapActions(mapStore, ["getSido", "getGugun", "getApt", "getHouse"]),
     getGuguns() {
       this.CLEAR_GUGUN_LIST();
@@ -90,7 +128,7 @@ export default {
     //   };
     //   this.getAvgPrice(param);
     // },
-    getAptList() {
+    getList() {
       if (this.sido && this.gugun && this.year && this.month && this.type) {
         let date = this.year + this.month;
         let param = {
@@ -100,8 +138,10 @@ export default {
           date: date,
         };
         if (this.type === "주택") {
+          this.CLEAR_APT_LIST();
           this.getHouse(param);
         } else {
+          this.CLEAR_HOUSE_LIST();
           this.getApt(param);
           this.getAvgPrice(param);
         }
