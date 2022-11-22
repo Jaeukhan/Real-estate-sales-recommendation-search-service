@@ -1,5 +1,7 @@
 import { getMartlist } from "@/api/mart";
+import { mapState } from "vuex";
 
+const mapStore = "mapStore";
 const martStore = {
   namespaced: true,
   state: {
@@ -18,9 +20,14 @@ const martStore = {
         li.push(temp);
       }
       state.market_li = li;
-      console.log("mut", state.market_li);
+      // console.log("mut", state.market_li);
       // console.log("state", state.price_name);
+      console.log("마트스토어");
+      this.isReady = "mart";
     },
+  },
+  computed: {
+    ...mapState(mapStore, ["isReady"]),
   },
   actions: {
     getMart: ({ commit }, param) => {
@@ -28,9 +35,8 @@ const martStore = {
         param.siGunCode,
         param.siGunName,
         ({ data }) => {
-          //   console.log("[[[[", data);
+            console.log("[[[[mart", data);
           //   console.log("[[[[", data.ParkingPlace[1].row);
-          console.log("여기 마트스토어: ", data.MrktStoreM[1].row);
           commit("SET_MART_LIST", data.MrktStoreM[1].row);
         },
         (error) => {

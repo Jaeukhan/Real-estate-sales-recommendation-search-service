@@ -1,5 +1,7 @@
 import { getParkingList } from "@/api/parking";
+import { mapState } from "vuex";
 
+const mapStore = "mapStore";
 const parkingStore = {
   namespaced: true,
   state: {
@@ -18,9 +20,13 @@ const parkingStore = {
         li.push(temp);
       }
       state.parking_li = li;
-      console.log("mut", state.parking_li);
+      // console.log("mut", state.parking_li);
       // console.log("state", state.price_name);
+      this.isReady = "parking";
     },
+  },
+  computed: {
+    ...mapState(mapStore, ["isReady"]),
   },
   actions: {
     getParking: ({ commit }, param) => {
@@ -28,7 +34,7 @@ const parkingStore = {
         param.siGunCode,
         param.siGunName,
         ({ data }) => {
-          //   console.log("[[[[", data);
+            console.log("[[[[parking", data);
           //   console.log("[[[[", data.ParkingPlace[1].row);
           commit("SET_PARKING_LIST", data.ParkingPlace[1].row);
         },

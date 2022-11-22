@@ -9,7 +9,7 @@ const mapStore = {
     guguns: [{ value: null, text: "구/군 선택" }],
     aparts: [],
     houses: [],
-    apt: {}, //아파트 주소랑(load), 아파트 이름(aptName)
+    apt: null, //아파트 주소랑(load), 아파트 이름(aptName)
     sidoName: "",
     gugunName: "",
     selectedsch: [],
@@ -23,6 +23,7 @@ const mapStore = {
       clouds: null,
       weather: null,
     },
+    isReady: null,
   },
   getters: {},
   mutations: {
@@ -58,11 +59,13 @@ const mapStore = {
       state.aparts = info.aparts;
       state.sidoName = info.sidoName;
       state.gugunName = info.gugunName;
+      state.isReady = "apart";
     },
     SET_HOUSE_LIST(state, info) {
       state.houses = info.houses;
       state.sidoName = info.sidoName;
       state.gugunName = info.gugunName;
+      // this.isReady = "house";
     },
     GET_APT_ONE(state, info) {
       state.apt = {
