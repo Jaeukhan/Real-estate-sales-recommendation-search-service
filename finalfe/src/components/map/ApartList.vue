@@ -69,7 +69,7 @@ export default {
     return {
       fields: [{ key: "아파트", label: "아파트 이름" }, { key: "법정동" }, "자세히보기", "지도보기"],
       currentPage: 1,
-      rows: 0,
+      rosw: 0,
       perPage: 10,
       isDuplicate: false,
     };
@@ -78,9 +78,9 @@ export default {
     ...mapActions(mapStore, ["getAptOne"]),
     ...mapActions(weatherStore, ["apiload"]),
     moveloc(apart) {
-        this.getAptOne(apart);
-        // console.log("여기 아파트 리스트",this.weatherLoc);
-        // this.apiload(this.weatherLoc);
+      this.getAptOne(apart);
+      // console.log("여기 아파트 리스트",this.weatherLoc);
+      // this.apiload(this.weatherLoc);
     },
     addFavoriteApt(apt) {
       let param = {
@@ -93,19 +93,21 @@ export default {
       };
       console.log(param);
       let _this = this;
-      this.apartlist.forEach(a => {
+      this.apartlist.forEach((a) => {
         console.log(a);
-        if(_this.memberInfo.userid == param.userid 
-            && a.aptcode == param.aptcode
-            && a.aptaddress == param.aptaddress 
-            && a.aptprice == param.aptprice
-            && a.aptname == param.aptname
-            && a.aptfloor == param.aptfloor) {
-              _this.isDuplicate = true;
-              return;
-            }
+        if (
+          _this.memberInfo.userid == param.userid &&
+          a.aptcode == param.aptcode &&
+          a.aptaddress == param.aptaddress &&
+          a.aptprice == param.aptprice &&
+          a.aptname == param.aptname &&
+          a.aptfloor == param.aptfloor
+        ) {
+          _this.isDuplicate = true;
+          return;
+        }
       });
-      if(this.isDuplicate) {
+      if (this.isDuplicate) {
         alert("이미 추가한 매물입니다.");
       } else {
         addApt(
