@@ -116,7 +116,7 @@ export default {
       this.displayMarker(positions);
     },
     selectedsch(val) {
-      this.displayMarkerAndMove(val);
+      if (val != "undefined" && val.length > 0) this.SchoolgeolocDisplayMarker(val);
     },
     apt(val) {
       if (val.load) {
@@ -154,8 +154,8 @@ export default {
     initMap() {
       const mapContainer = document.getElementById("map");
       const mapOption = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 3, // 지도의 확대 레벨
+        center: new kakao.maps.LatLng(37.8183044593, 127.3529658183), // 지도의 중심좌표
+        level: 4, // 지도의 확대 레벨
       };
       this.map = new kakao.maps.Map(mapContainer, mapOption);
       this.geocoder = new kakao.maps.services.Geocoder();
@@ -171,11 +171,11 @@ export default {
       this.imageSrc.mart = require("@/assets/kakaomap/mart.png");
       this.addEventToMap();
     },
-    displayMarkerAndMove(Addr) {
-      // let positions = [];
-      if (Addr[0].markname == "apart") {
-        this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.apart, this.imageSize);
-      } else if (Addr[0].markname == "kindergarden") {
+    SchoolgeolocDisplayMarker(Addr) {
+      for (let n = 0; n < Addr.length; n++) {
+        console.log(Addr[n]);
+      }
+      if (Addr[0].markname == "kindergarden") {
         this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.kindergarden, this.imageSize);
       } else if (Addr[0].markname == "element") {
         this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.element, this.imageSize);
@@ -184,6 +184,50 @@ export default {
       } else if (Addr[0].markname == "high") {
         this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.high, this.imageSize);
       }
+      let line = new kakao.maps.Polyline();
+      const coords = new kakao.maps.LatLng(this.tempLoc.y, this.tempLoc.x);
+      const radius = 400;
+      this.markers = [];
+      for (let n = 0; n < Addr.length; n++) {
+        if (Addr[n].REFINE_ROADNM_ADDR != null) {
+          this.geocoder.addressSearch(Addr[n].REFINE_ROADNM_ADDR, (result, status) => {
+            if (status === kakao.maps.services.Status.OK) {
+              const position = new kakao.maps.LatLng(result[0].y, result[0].x);
+              let path = [position, coords];
+              line.setPath(path);
+              let dist = line.getLength();
+              // console.log(Addr[n].REFINE_ROADNM_ADDR);
+              if (radius > dist) {
+                const marker = new kakao.maps.Marker({
+                  map: this.map,
+                  position: position,
+                  title: Addr[n].title,
+                  clickable: true,
+                  image: this.markerImage,
+                });
+                const infowindow = new kakao.maps.InfoWindow({
+                  content: `<div>${Addr[n].title}</div>`,
+                });
+                let _this = this;
+                kakao.maps.event.addListener(marker, "mouseover", function () {
+                  infowindow.open(_this.map, marker);
+                });
+                kakao.maps.event.addListener(marker, "mouseout", function () {
+                  infowindow.close();
+                });
+
+                this.markers.push(marker);
+              }
+            }
+          });
+        }
+      }
+      this.clustererAddMark();
+    },
+    displayMarkerAndMove(Addr) {
+      // let positions = [];
+      console.log(Addr[0]);
+      this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.apart, this.imageSize);
       let bounds = new kakao.maps.LatLngBounds();
       for (let n = 0; n < Addr.length; n++) {
         this.geocoder.addressSearch(Addr[n].REFINE_ROADNM_ADDR, (result, status) => {

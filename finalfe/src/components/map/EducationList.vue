@@ -9,7 +9,7 @@
       <b-card title="주변 학교 찾기" class="mb-2">
         <b-row class="mt-4 mb-4 text-center">
           <b-col>
-            <b-form-select v-model="sch" :options="schools" @change="getGuguns()"></b-form-select>
+            <b-form-select v-model="sch" :options="schools"></b-form-select>
           </b-col>
           <b-col>
             <b-button @click="getSchList()">검색</b-button>
@@ -50,7 +50,7 @@ export default {
     return {
       fields: [
         { key: "REFINE_ROADNM_ADDR", label: "주소" },
-        { key: "FACLT_NM", label: "시설 이름" },
+        { key: "title", label: "시설 이름" },
       ],
       schools: [{ value: null, text: "학교 선택" }, "유치원", "초등학교", "중학교", "고등학교"],
       sch: null,

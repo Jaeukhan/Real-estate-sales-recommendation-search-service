@@ -44,6 +44,9 @@ const mapStore = {
     CLEAR_APT(state) {
       state.apt = {};
     },
+    CLEAR_SELECT_SCHOOL(state) {
+      state.selectedsch = [];
+    },
     SET_SIDO_LIST(state, sidos) {
       sidos.forEach((sido) => {
         state.sidos.push({ value: sido.sidoCode, text: sido.sidoName });
@@ -127,6 +130,9 @@ const mapStore = {
     },
   },
   actions: {
+    clearSelectSchool({ commit }) {
+      commit("CLEAR_SELECT_SCHOOL");
+    },
     getSido: ({ commit }) => {
       getSidoCode(
         ({ data }) => {
