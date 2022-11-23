@@ -3,7 +3,8 @@
     <div>
       <b-button
         class="m-3"
-        style="background-color: #5e6472; font-family: 'Titan One'"
+        style="background-color: #faf3dd; color: black;"
+
         v-b-toggle.edc
         v-if="
           keyword.includes('유치원생') ||

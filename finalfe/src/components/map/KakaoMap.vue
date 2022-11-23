@@ -13,28 +13,28 @@
       </td>
     </table>
     <b-button
-      style="background-color: #faf3dd; font-family: 'Titan One'"
+      style="background-color: #faf3dd; color: black;"
       class="mt-3 m-2"
       @click="getParkinglot"
       v-if="keyword.includes('자가용')"
       >주차장 찾기</b-button
     >
     <b-button
-      style="background-color: #faf3dd; font-family: 'Titan One'"
+      style="background-color: #faf3dd; color: black;"
       class="mt-3 m-2"
       @click="getLibloc"
       v-if="keyword.includes('도서관')"
       >도서관 찾기</b-button
     >
     <b-button
-      style="background-color: #faf3dd; font-family: 'Titan One'"
+      style="background-color: #faf3dd; color: black;"
       class="mt-3 m-2"
       @click="getMartloc"
       v-if="keyword.includes('마트')"
       >시장 및 마트 찾기</b-button
     >
     <b-button
-      style="background-color: #faf3dd; font-family: 'Titan One'"
+      style="background-color: #faf3dd; color: black;"
       class="mt-3 m-2"
       @click="getBusStopList"
       v-if="keyword.includes('대중교통')"
