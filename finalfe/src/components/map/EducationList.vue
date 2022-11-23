@@ -26,10 +26,7 @@
           </b-col>
         </b-row>
       </b-card>
-      <b-container
-        v-if="selectedsch && selectedsch.length > 0"
-        class="bv-example-row mt-3"
-      >
+      <b-container v-if="selectedsch && selectedsch.length > 0" class="bv-example-row mt-3">
         <b-row>
           <b-table
             hover
@@ -67,20 +64,15 @@ export default {
         { key: "REFINE_ROADNM_ADDR", label: "주소" },
         { key: "title", label: "시설 이름" },
       ],
-      schools: [
-        { value: null, text: "학교 선택" },
-        "유치원",
-        "초등학교",
-        "중학교",
-        "고등학교",
-      ],
+      schools: [{ value: null, text: "학교 선택" }, "유치원", "초등학교", "중학교", "고등학교"],
       sch: null,
       currentPage: 1,
       rows: 0,
-      perPage: 20,
+      perPage: 10,
     };
   },
   created() {
+    this.rows = this.selectedsch.length;
     this.CLEAR_SCHOOL_LIST();
   },
   name: "EducationList",
