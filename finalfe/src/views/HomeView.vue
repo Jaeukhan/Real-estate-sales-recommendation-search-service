@@ -80,17 +80,17 @@
         <b-row>
           <div style="padding-left: 3.1em" class="mb-2">
             <p style="font-family: 'Pathway Gothic One', monospace; font-size: 30px; color: #d3e7ac">LATEST NEWS</p>
-            <b-button href="/map" variant="outline-light" @click="moveLink(0)" style="margin-bottom: 10px"
+            <b-button variant="outline-light" @click="moveLink(0)" style="margin-bottom: 10px"
               ><b-icon-newspaper></b-icon-newspaper
             ></b-button>
             <p>{{ news_list[0].title }}</p>
             <br />
-            <b-button href="/map" variant="outline-light" @click="moveLink(1)" style="margin-bottom: 10px"
+            <b-button variant="outline-light" @click="moveLink(1)" style="margin-bottom: 10px"
               ><b-icon-newspaper></b-icon-newspaper
             ></b-button>
             <p>{{ news_list[1].title }}</p>
             <br />
-            <b-button href="/map" variant="outline-light" @click="moveLink(2)" style="margin-bottom: 10px"
+            <b-button variant="outline-light" @click="moveLink(2)" style="margin-bottom: 10px"
               ><b-icon-newspaper></b-icon-newspaper
             ></b-button>
             <p>{{ news_list[2].title }}</p>
