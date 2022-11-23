@@ -106,7 +106,6 @@ const mapStore = {
         lat: info.lat,
         lon: info.lon,
       };
-      console.log("날씨 이걸로 찾을거임", state.weatherLoc);
     },
     CLEAR_DATA(state) {
       state.info = {
@@ -127,6 +126,7 @@ const mapStore = {
         clouds: payload.data.clouds.all,
         weather: payload.data.weather[0].main,
       };
+      console.log(state.info);
     },
   },
   actions: {

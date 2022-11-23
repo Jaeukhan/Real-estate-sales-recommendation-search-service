@@ -1,24 +1,29 @@
 <template>
   <div id="wcard">
-    <b-card>
+    <b-card :style="{ backgroundImage: `url(` + require(`@/assets/backgroundweather/${info.weather}.jpeg`) + `)` }">
       <b-card-text>
         <div class="mb-3" style="font-family: 'Titan One', monospace; font-size: 20px; color: #2b3752">
           {{ info.name }}
         </div>
         <div>{{ days }}</div>
         <div>
-          <img style="display: inline-block; width: 50px; height: 40px" src="@/assets/cloud.jpeg" alt="" />
-          <div class="m-2" style="display: inline-block; font-size: 23px">{{ info.temp }}°</div>
+          <img
+            style="display: inline-block; width: 50px; height: 40px"
+            :src="require(`@/assets/weather/${info.weather}.gif`)"
+            alt=""
+          />
+          <h2 class="m-2" style="display: inline-block; font-size: 23px">{{ info.temp }}°</h2>
           <!-- 현재기온 -->
           <div style="display: inline-block">{{ info.min_temp }}° / {{ info.max_temp }}°</div>
           <!-- 최고/최저기온 -->
         </div>
         <div>
+          {{ info.weather }}
           <!-- 현재기온: {{ info.temp }} 도 최저기온: {{ info.min_temp }} 도 최고기온: {{ info.max_temp }} 도 날씨:
-          {{ info.weather }} -->
+         -->
         </div>
-      </b-card-text> </b-card
-    >°
+      </b-card-text>
+    </b-card>
   </div>
 </template>
 
@@ -42,6 +47,7 @@ export default {
   computed: {
     ...mapState(mapStore, ["weatherLoc", "info", "apt"]),
   },
+
   methods: {
     getDays() {
       this.days = "";
