@@ -66,16 +66,12 @@ const favoriteStore = "favoriteStore";
 
 export default {
   name: "ApartList",
-  created() {
-    this.rows = this.aparts.length;
-  },
   data() {
     return {
       fields: [{ key: "아파트", label: "아파트 이름" }, { key: "법정동" }, "자세히보기", "지도보기"],
       currentPage: 1,
       perPage: 10,
       isDuplicate: false,
-      rows: 0,
     };
   },
   methods: {
@@ -138,10 +134,10 @@ export default {
     ...mapState(mapStore, ["aparts", "weatherLoc"]),
     ...mapState(memberStore, ["memberInfo"]),
     ...mapState(favoriteStore, ["apartlist"]),
-    // rows() {
-    //   console.log(this.aparts.length);
-    //   return this.aparts.length;
-    // },
+    rows() {
+      console.log(this.aparts.length);
+      return this.aparts.length;
+    },
   },
 };
 </script>
