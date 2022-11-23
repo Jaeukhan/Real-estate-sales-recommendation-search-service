@@ -20,15 +20,13 @@
     </b-row>
     <b-row class="mb-1">
       <b-col>
-        <b-card
-          :header-html="`<h3 style='background-color: #faf3dd '> ${article.subject}</h3>
-                          <div>조회수: ${article.hit}</div>
-                          <div>작성자: ${article.userid}</div>
-                          <div>작성 일시: ${article.regtime}</div>`"
-          class="mb-2"
-          border-variant="dark"
-          no-body
-        >
+        <b-card class="mb-2" border-variant="dark" no-body>
+          <b-card-header style="background-color: #faf3dd" class="mb-2">
+            <h3>{{ article.subject }}</h3>
+            <div>조회수: {{ article.hit }}</div>
+            <div>작성자: {{ article.userid }}</div>
+            <div>작성 일시: {{ article.regtime }}</div>
+          </b-card-header>
           <b-card-body class="text-left">
             <div v-html="message"></div>
           </b-card-body>
@@ -162,7 +160,6 @@ export default {
 
 <style>
 .card-header > h3 {
-  background-color: rgba(94, 100, 114, 0.3);
   color: balck;
   padding: 0.75rem 1.25rem;
   border-radius: 0.25rem;
