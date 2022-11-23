@@ -56,7 +56,7 @@
 	<select id="getPopularArticle" resultMap="la">
 		select article_no, user_id, subject, content, hit, register_time
 		from board
-		order by hit desc limit 1, 3;
+		order by hit desc limit 0, 3;
 	</select>
 
 	<select id="getUserArticle" parameterType="String" resultMap="la">

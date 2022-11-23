@@ -21,7 +21,7 @@
     <b-row class="mb-1">
       <b-col>
         <b-card
-          :header-html="`<h3> ${article.subject}</h3>
+          :header-html="`<h3 style='background-color: #faf3dd '> ${article.subject}</h3>
                           <div>조회수: ${article.hit}</div>
                           <div>작성자: ${article.userid}</div>
                           <div>작성 일시: ${article.regtime}</div>`"
