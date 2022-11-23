@@ -14,9 +14,8 @@
           <!-- 최고/최저기온 -->
         </div>
         <div>
-          <!--곧 지움-->
-          현재기온: {{ info.temp }} 도 최저기온: {{ info.min_temp }} 도 최고기온: {{ info.max_temp }} 도 날씨:
-          {{ info.weather }}
+          <!-- 현재기온: {{ info.temp }} 도 최저기온: {{ info.min_temp }} 도 최고기온: {{ info.max_temp }} 도 날씨:
+          {{ info.weather }} -->
         </div>
       </b-card-text> </b-card
     >°

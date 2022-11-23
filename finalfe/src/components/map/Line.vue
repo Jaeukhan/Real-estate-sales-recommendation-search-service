@@ -1,14 +1,16 @@
 <template>
-  <LineChartGenerator
-    :chart-data="chartData"
-    :chart-id="chartId"
-    :dataset-id-key="datasetIdKey"
-    :plugins="plugins"
-    :css-classes="cssClasses"
-    :styles="styles"
-    :width="width"
-    :height="height"
-  />
+  <div style="width: 560px; padding: 1em">
+    <LineChartGenerator
+      :chart-data="chartData"
+      :chart-id="chartId"
+      :dataset-id-key="datasetIdKey"
+      :plugins="plugins"
+      :css-classes="cssClasses"
+      :styles="styles"
+      :width="width"
+      :height="height"
+    />
+  </div>
 </template>
 
 <script>
@@ -47,7 +49,7 @@ export default {
     },
     height: {
       type: Number,
-      default: 100,
+      default: 120,
     },
     cssClasses: {
       default: "",
@@ -87,7 +89,7 @@ export default {
         labels: this.price_name,
         datasets: [
           {
-            label: "매매가격(만 원)",
+            label: "매매가격(천 원)",
             backgroundColor: "#2b3752   ",
             data: this.price_li,
           },
