@@ -1,22 +1,55 @@
 <template>
   <div>
     <b-row>
-      <b-container class="bv-example-row mt-3 text-center" id="home" fluid="true">
+      <b-container
+        class="bv-example-row mt-3 text-center"
+        id="home"
+        fluid="true"
+      >
         <b-row style="padding-bottom: 1.6em; padding-top: 5.5em">
-          <p style="font-family: 'Lobster', monospace; font-size: 100px; color: #faf3dd">
+          <p
+            style="
+              font-family: 'Lobster', monospace;
+              font-size: 100px;
+              color: #faf3dd;
+            "
+          >
             Where Is My <br />
             House?
           </p>
         </b-row>
+        <img
+          src="../assets/airPlane.png"
+          style="
+            position: absolute;
+            left: 250px;
+            top: 100px;
+            width: 200px;
+            height: 200px; ;
+          "
+        />
 
         <b-row>
-          <p style="font-family: 'Pathway Gothic One', monospace; font-size: 30px; color: #a7804a; padding-left: 1.3em">
+          <p
+            style="
+              font-family: 'Pathway Gothic One', monospace;
+              font-size: 30px;
+              color: #a7804a;
+              padding-left: 1.3em;
+            "
+          >
             Be our member and Find your dream house!
           </p>
         </b-row>
-
         <b-row>
-          <p style="font-family: 'Pathway Gothic One', monospace; font-size: 20px; color: #a7804a; padding-left: 8.5em">
+          <p
+            style="
+              font-family: 'Pathway Gothic One', monospace;
+              font-size: 20px;
+              color: #a7804a;
+              padding-left: 8.5em;
+            "
+          >
             JUST SCROLL DOWN
           </p>
         </b-row>
@@ -31,98 +64,149 @@
               padding-bottom: 3em;
             "
           >
-            <b-icon icon="arrow-down" animation="cylon-vertical" font-scale="4"></b-icon>
+            <b-icon
+              icon="arrow-down"
+              animation="cylon-vertical"
+              font-scale="4"
+            ></b-icon>
           </p>
         </b-row>
-
+        <img
+          src="../assets/BoardAndComment.png"
+          style="
+            position: absolute;
+            left: 200px;
+            top: 670px;
+            width: 250px;
+            height: 170px; ;
+          "
+        />
         <b-row>
           <div
-            style="font-family: 'Pathway Gothic One', monospace; font-size: 30px; color: #5e6472; padding-left: 5em"
+            style="
+              font-family: 'Pathway Gothic One', monospace;
+              font-size: 30px;
+              color: #5e6472;
+              padding-left: 5em;
+            "
             class="mb-2"
           >
             <p>Board & Comment</p>
-            <b-button href="/board" variant="outline-secondary"><b-icon-cursor></b-icon-cursor></b-button>
+            <b-button href="/board" variant="outline-secondary"
+              ><b-icon-cursor></b-icon-cursor
+            ></b-button>
           </div>
         </b-row>
 
         <br />
         <br />
         <br />
-
+        <img
+          src="../assets/BeOurUser.png"
+          style="
+            position: absolute;
+            left: 700px;
+            top: 870px;
+            width: 200px;
+            height: 170px; ;
+          "
+        />
         <b-row>
           <div
-            style="font-family: 'Pathway Gothic One', monospace; font-size: 30px; color: #5e6472; padding-left: 6em"
+            style="
+              font-family: 'Pathway Gothic One', monospace;
+              font-size: 30px;
+              color: #5e6472;
+              padding-left: 6em;
+            "
             class="mb-2"
           >
             <p>Be our user!</p>
-            <b-button href="/member" variant="outline-secondary"><b-icon-cursor></b-icon-cursor></b-button>
+            <b-button href="/member" variant="outline-secondary"
+              ><b-icon-cursor></b-icon-cursor
+            ></b-button>
           </div>
         </b-row>
 
         <br />
         <br />
         <br />
-
+        <img
+          src="../assets/FindYourDreamHouse.png"
+          style="
+            position: absolute;
+            left: 240px;
+            top: 1150px;
+            width: 250px;
+            height: 230px; ;
+          "
+        />
         <b-row>
           <div
-            style="font-family: 'Pathway Gothic One', monospace; font-size: 30px; color: #5e6472; padding-left: 4.3em"
+            style="
+              font-family: 'Pathway Gothic One', monospace;
+              font-size: 30px;
+              color: #5e6472;
+              padding-left: 4.3em;
+            "
             class="mb-2"
           >
             <p>Find your dream house!</p>
-            <b-button href="/map" variant="outline-secondary"><b-icon-cursor></b-icon-cursor></b-button>
+            <b-button href="/map" variant="outline-secondary"
+              ><b-icon-cursor></b-icon-cursor
+            ></b-button>
           </div>
         </b-row>
 
         <br />
         <br />
         <br />
-
+        <img
+          src="../assets/news.gif"
+          style="
+            position: absolute;
+            width: 300px;
+            height: 230px;
+            left: 100px;
+            top: 1550px;
+          "
+        />
         <b-row>
           <div style="padding-left: 3.1em" class="mb-2">
-            <p style="font-family: 'Pathway Gothic One', monospace; font-size: 30px; color: #d3e7ac">LATEST NEWS</p>
-            <b-button variant="outline-light" @click="moveLink(0)" style="margin-bottom: 10px"
+            <p
+              style="
+                font-family: 'Pathway Gothic One', monospace;
+                font-size: 30px;
+                color: #d3e7ac;
+              "
+            >
+              LATEST NEWS
+            </p>
+            <b-button
+              variant="outline-light"
+              @click="moveLink(0)"
+              style="margin-bottom: 10px"
               ><b-icon-newspaper></b-icon-newspaper
             ></b-button>
             <p>{{ news_list[0].title }}</p>
             <br />
-            <b-button variant="outline-light" @click="moveLink(1)" style="margin-bottom: 10px"
+            <b-button
+              variant="outline-light"
+              @click="moveLink(1)"
+              style="margin-bottom: 10px"
               ><b-icon-newspaper></b-icon-newspaper
             ></b-button>
             <p>{{ news_list[1].title }}</p>
             <br />
-            <b-button variant="outline-light" @click="moveLink(2)" style="margin-bottom: 10px"
+            <b-button
+              variant="outline-light"
+              @click="moveLink(2)"
+              style="margin-bottom: 10px"
               ><b-icon-newspaper></b-icon-newspaper
             ></b-button>
             <p>{{ news_list[2].title }}</p>
           </div>
         </b-row>
-
-        <!-- <b-row>
-      Text slides with image
-      <b-col class="justify-content-md-center" cols="8">
-        <div>
-          <b-carousel
-            id="carousel-1"
-            v-model="slide"
-            :interval="4000"
-            controls
-            indicators
-            background="#ababab"
-            img-width="1024"
-            img-height="480"
-            style="text-shadow: 1px 1px 2px #333"
-            @sliding-start="onSlideStart"
-            @sliding-end="onSlideEnd"
-          >
-            <b-carousel-slide v-for="(item, idx) in news_list" :key="idx" :img-src="require(`@/assets/news.png`)" style="background-color: rgba(0,0,0,0);">
-              <div class="p-2" style="background-color: white">
-                <a :href="`https://land.naver.com${item.link}`">{{ item.ti1tle }}</a>
-              </div>
-            </b-carousel-slide>
-          </b-carousel>
-        </div>
-      </b-col>
-    </b-row> -->
       </b-container>
     </b-row>
   </div>

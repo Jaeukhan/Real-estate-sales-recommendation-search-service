@@ -24,6 +24,10 @@
         CHECK OUT YOUR FAVORITE APARTMENT/HOUSE PRODUCTS.<br />
         OF COURSE, YOU CAN EDIT YOUR INFORMATION!
       </p>
+      <img
+        src="../../assets/mypage.gif"
+        style="position: relative; right: 800px; top: 30px"
+      />
     </b-row>
     <!-- Header End -->
     <!-- User Profile Start -->
@@ -104,99 +108,101 @@
     </b-row>
     <b-row style="padding-bottom: 20em">
       <b-col>
-        <img src="../../assets/main.png" alt="" />
+        <img src="../../assets/find.gif" alt="" />
       </b-col>
       <b-col style="padding-top: 7em">
-        <div style="background-color: white; padding: 3em">
-          <div v-if="keyword && keyword.length > 0">
-            <p>{{ memberInfo.userid }} 님이 선택한 키워드</p>
-            <table border="1" style="border-collapse: collapse">
-              <tr v-for="k in keyword" :key="k">
-                <td>{{ k }}</td>
-              </tr>
-            </table>
+        <div style="background-color: rgba(225, 225, 225, 0.3); padding: 1.5em">
+          <div style="background-color: white; padding: 3em">
+            <div v-if="keyword && keyword.length > 0">
+              <p>{{ memberInfo.userid }} 님이 선택한 키워드</p>
+              <table border="1" style="border-collapse: collapse">
+                <tr v-for="k in keyword" :key="k">
+                  <td>{{ k }}</td>
+                </tr>
+              </table>
+            </div>
+            <div v-else>
+              <p>
+                등록된 관심 키워드가 없습니다! 관심 키워드를 등록하고 맞춤
+                매물을 추천받아보세요!
+              </p>
+            </div>
+            <b-button v-b-modal.modal-1>추가</b-button>
+            <!-- 모달창 - 관심 키워드 체크 -->
+            <b-modal id="modal-1" title="BootstrapVue">
+              <!-- 교통수단 -->
+              <b-form-group
+                label="이동 시 어떤 교통수단을 이용하시나요?"
+                v-slot="{ ariaDescribedby }"
+              >
+                <b-form-checkbox-group
+                  id="checkbox-group-1"
+                  v-model="selected"
+                  :aria-describedby="ariaDescribedby"
+                  name="flavour-1"
+                >
+                  <b-form-checkbox value="자가용">자가용</b-form-checkbox>
+                  <b-form-checkbox value="대중교통">대중교통</b-form-checkbox>
+                </b-form-checkbox-group>
+              </b-form-group>
+              <!-- 자녀 유무 -->
+              <b-form-group
+                label="자녀가 있으신가요?"
+                v-slot="{ ariaDescribedby }"
+              >
+                <b-form-checkbox-group
+                  id="checkbox-group-2"
+                  v-model="selected"
+                  :aria-describedby="ariaDescribedby"
+                  name="flavour-2"
+                >
+                  <b-form-checkbox value="유치원생">유치원생</b-form-checkbox>
+                  <b-form-checkbox value="초등학생">초등학생</b-form-checkbox>
+                  <b-form-checkbox value="중학생">중학생</b-form-checkbox>
+                  <b-form-checkbox value="고등학생">고등학생</b-form-checkbox>
+                </b-form-checkbox-group>
+              </b-form-group>
+              <!-- 주거유형 -->
+              <b-form-group
+                label="어떤 주거 유형을 선호하시나요?"
+                v-slot="{ ariaDescribedby }"
+              >
+                <b-form-checkbox-group
+                  id="checkbox-group-2"
+                  v-model="selected"
+                  :aria-describedby="ariaDescribedby"
+                  name="flavour-2"
+                >
+                  <b-form-checkbox value="아파트">아파트</b-form-checkbox>
+                  <b-form-checkbox value="주택">주택</b-form-checkbox>
+                </b-form-checkbox-group>
+              </b-form-group>
+              <!-- 인프라 -->
+              <b-form-group
+                label="자주 가는 장소가 어디인가요?"
+                v-slot="{ ariaDescribedby }"
+              >
+                <b-form-checkbox-group
+                  id="checkbox-group-2"
+                  v-model="selected"
+                  :aria-describedby="ariaDescribedby"
+                  name="flavour-2"
+                >
+                  <b-form-checkbox value="도서관">도서관</b-form-checkbox>
+                  <b-form-checkbox value="마트">마트</b-form-checkbox>
+                </b-form-checkbox-group>
+              </b-form-group>
+              <b-button
+                style="margin: 5px; background-color: #aed9e0; color: black"
+                class="sm"
+                @click="keywordClick()"
+                >SAVE</b-button
+              >
+              <p style="font-size; 10x; text-align: right;">
+                반드시 저장 버트까지 눌러주세요!
+              </p>
+            </b-modal>
           </div>
-          <div v-else>
-            <p>
-              등록된 관심 키워드가 없습니다! 관심 키워드를 등록하고 맞춤 매물을
-              추천받아보세요!
-            </p>
-          </div>
-          <b-button v-b-modal.modal-1>추가</b-button>
-          <!-- 모달창 - 관심 키워드 체크 -->
-          <b-modal id="modal-1" title="BootstrapVue">
-            <!-- 교통수단 -->
-            <b-form-group
-              label="이동 시 어떤 교통수단을 이용하시나요?"
-              v-slot="{ ariaDescribedby }"
-            >
-              <b-form-checkbox-group
-                id="checkbox-group-1"
-                v-model="selected"
-                :aria-describedby="ariaDescribedby"
-                name="flavour-1"
-              >
-                <b-form-checkbox value="자가용">자가용</b-form-checkbox>
-                <b-form-checkbox value="대중교통">대중교통</b-form-checkbox>
-              </b-form-checkbox-group>
-            </b-form-group>
-            <!-- 자녀 유무 -->
-            <b-form-group
-              label="자녀가 있으신가요?"
-              v-slot="{ ariaDescribedby }"
-            >
-              <b-form-checkbox-group
-                id="checkbox-group-2"
-                v-model="selected"
-                :aria-describedby="ariaDescribedby"
-                name="flavour-2"
-              >
-                <b-form-checkbox value="유치원생">유치원생</b-form-checkbox>
-                <b-form-checkbox value="초등학생">초등학생</b-form-checkbox>
-                <b-form-checkbox value="중학생">중학생</b-form-checkbox>
-                <b-form-checkbox value="고등학생">고등학생</b-form-checkbox>
-              </b-form-checkbox-group>
-            </b-form-group>
-            <!-- 주거유형 -->
-            <b-form-group
-              label="어떤 주거 유형을 선호하시나요?"
-              v-slot="{ ariaDescribedby }"
-            >
-              <b-form-checkbox-group
-                id="checkbox-group-2"
-                v-model="selected"
-                :aria-describedby="ariaDescribedby"
-                name="flavour-2"
-              >
-                <b-form-checkbox value="아파트">아파트</b-form-checkbox>
-                <b-form-checkbox value="주택">주택</b-form-checkbox>
-              </b-form-checkbox-group>
-            </b-form-group>
-            <!-- 인프라 -->
-            <b-form-group
-              label="자주 가는 장소가 어디인가요?"
-              v-slot="{ ariaDescribedby }"
-            >
-              <b-form-checkbox-group
-                id="checkbox-group-2"
-                v-model="selected"
-                :aria-describedby="ariaDescribedby"
-                name="flavour-2"
-              >
-                <b-form-checkbox value="도서관">도서관</b-form-checkbox>
-                <b-form-checkbox value="마트">마트</b-form-checkbox>
-              </b-form-checkbox-group>
-            </b-form-group>
-            <b-button
-              style="margin: 5px; background-color: #aed9e0; color: black"
-              class="sm"
-              @click="keywordClick()"
-              >SAVE</b-button
-            >
-            <p style="font-size; 10x; text-align: right;">
-              반드시 저장 버트까지 눌러주세요!
-            </p>
-          </b-modal>
         </div>
       </b-col>
     </b-row>
