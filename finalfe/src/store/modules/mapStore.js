@@ -107,7 +107,7 @@ const mapStore = {
         lon: info.lon,
       };
     },
-    CLEAR_DATA(state) {
+    CLEAR_WEATHER_DATA(state) {
       state.info = {
         name: null,
         temp: null,
@@ -275,6 +275,11 @@ const mapStore = {
       }
     },
     ////////////////////날씨//////////////////////
+
+    clearWeatherData: ({ commit }) => {
+      console.log("clear weather");
+      commit("CLEAR_WEATHER_DATA");
+    },
     setWeatherLoc: ({ commit }, loc) => {
       const data = {
         lat: loc.lat,
@@ -283,7 +288,7 @@ const mapStore = {
       commit("SET_WEATHER_LOC", data);
     },
     apiload(context, payload) {
-      context.commit("CLEAR_DATA");
+      // this.clearWeatherData();
       getWeatherApi(payload).then((res) => {
         context.commit("UPDATE_DATA", res);
       });

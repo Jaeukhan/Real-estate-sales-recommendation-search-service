@@ -8,6 +8,7 @@
     <b-row>
       <b-col>
         <b-table
+          striped
           hover
           :items="articles"
           :fields="fields"
@@ -128,7 +129,7 @@ export default {
     },
     viewArticle(article) {
       this.$router.push({
-        name: "boardview",
+        name: "boarddetail",
         params: { articleno: article.articleno },
       });
     },

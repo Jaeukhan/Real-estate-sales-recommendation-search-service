@@ -120,7 +120,7 @@ const routes = [
     path: "/chat",
     name: "ChatBot",
     component: ChatBot,
-  }
+  },
 ];
 
 const router = new VueRouter({

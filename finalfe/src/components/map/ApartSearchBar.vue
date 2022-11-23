@@ -74,7 +74,7 @@ export default {
   },
   methods: {
     ...mapMutations(mapStore, ["CLEAR_SIDO_LIST", "CLEAR_GUGUN_LIST", "CLEAR_APT_LIST", "CLEAR_HOUSE_LIST"]),
-    ...mapActions(mapStore, ["getSido", "getGugun", "getApt", "getHouse", "clearSelectSchool"]),
+    ...mapActions(mapStore, ["getSido", "getGugun", "getApt", "getHouse", "clearSelectSchool", "clearWeatherData"]),
     getGuguns() {
       this.CLEAR_GUGUN_LIST();
       this.gugun = null;
@@ -93,6 +93,7 @@ export default {
     getList() {
       if (this.sido && this.gugun && this.year && this.month && this.type) {
         this.clearSelectSchool();
+        this.clearWeatherData();
         let date = this.year + this.month;
         let param = {
           sidoName: this.sidoName.text,

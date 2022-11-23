@@ -15,7 +15,7 @@ const chartStore = {
       temp.shift();
       let valname = [];
       for (let i = 0; i < temp.length; i++) {
-        valname.push(temp[i].substring(3, 5) + "." + temp[i].substring(5, temp[i].length) + "월");
+        valname.push(temp[i].substring(3, 5) + "." + temp[i].substring(5, temp[i].length));
       }
       state.price_name = valname;
       console.log(state.price_name);
