@@ -1,79 +1,103 @@
 <template>
-<div>
-
-  <b-row>
-  <b-container class="bv-example-row mt-3 text-center" id="home" fluid=true>
-
-    <b-row style="padding-bottom: 1.6em; padding-top: 5.5em;">
-    <p style="font-family: 'Lobster', monospace; font-size: 100px; color: #faf3dd;">Where Is My <br> House?</p>
-    </b-row>
-
+  <div>
     <b-row>
-      <p style="font-family: 'Pathway Gothic One', monospace; font-size: 30px; color: #A7804A; padding-left: 1.3em;">
-          Be our member and Find your dream house!
-      </p>
-    </b-row>
+      <b-container class="bv-example-row mt-3 text-center" id="home" fluid="true">
+        <b-row style="padding-bottom: 1.6em; padding-top: 5.5em">
+          <p style="font-family: 'Lobster', monospace; font-size: 100px; color: #faf3dd">
+            Where Is My <br />
+            House?
+          </p>
+        </b-row>
 
-    <b-row>
-      <p style="font-family: 'Pathway Gothic One', monospace; font-size: 20px; color: #A7804A; padding-left: 8.5em;">
-        JUST SCROLL DOWN
-      </p>
-    </b-row>
+        <b-row>
+          <p style="font-family: 'Pathway Gothic One', monospace; font-size: 30px; color: #a7804a; padding-left: 1.3em">
+            Be our member and Find your dream house!
+          </p>
+        </b-row>
 
-    <b-row>
-      <p style="font-family: 'Pathway Gothic One', monospace; color: #A7804A; padding-left: 12.3em; padding-top: 2em; padding-bottom: 3em;">
-        <b-icon icon="arrow-down" animation="cylon-vertical" font-scale="4"></b-icon>
-      </p>
-    </b-row>
+        <b-row>
+          <p style="font-family: 'Pathway Gothic One', monospace; font-size: 20px; color: #a7804a; padding-left: 8.5em">
+            JUST SCROLL DOWN
+          </p>
+        </b-row>
 
-    <b-row>
-      <div 
-        style="font-family: 'Pathway Gothic One', monospace; font-size: 30px; color: #5e6472; padding-left: 5em;;"
-        class="mb-2">
-        <p> Board & Comment </p>
-        <b-button href="/board" variant="outline-secondary"><b-icon-cursor></b-icon-cursor></b-button>
-      </div>
-    </b-row>
+        <b-row>
+          <p
+            style="
+              font-family: 'Pathway Gothic One', monospace;
+              color: #a7804a;
+              padding-left: 12.3em;
+              padding-top: 2em;
+              padding-bottom: 3em;
+            "
+          >
+            <b-icon icon="arrow-down" animation="cylon-vertical" font-scale="4"></b-icon>
+          </p>
+        </b-row>
 
-    <br /> <br /> <br /> 
+        <b-row>
+          <div
+            style="font-family: 'Pathway Gothic One', monospace; font-size: 30px; color: #5e6472; padding-left: 5em"
+            class="mb-2"
+          >
+            <p>Board & Comment</p>
+            <b-button href="/board" variant="outline-secondary"><b-icon-cursor></b-icon-cursor></b-button>
+          </div>
+        </b-row>
 
-    <b-row>
-      <div 
-        style="font-family: 'Pathway Gothic One', monospace; font-size: 30px; color: #5e6472; padding-left: 6em;"
-        class="mb-2">
-        <p> Be our user! </p>
-        <b-button href="/member" variant="outline-secondary"><b-icon-cursor></b-icon-cursor></b-button>
-      </div>
-    </b-row>
+        <br />
+        <br />
+        <br />
 
-    <br /> <br /> <br /> 
+        <b-row>
+          <div
+            style="font-family: 'Pathway Gothic One', monospace; font-size: 30px; color: #5e6472; padding-left: 6em"
+            class="mb-2"
+          >
+            <p>Be our user!</p>
+            <b-button href="/member" variant="outline-secondary"><b-icon-cursor></b-icon-cursor></b-button>
+          </div>
+        </b-row>
 
-    <b-row>
-      <div 
-        style="font-family: 'Pathway Gothic One', monospace; font-size: 30px; color: #5e6472; padding-left: 4.3em;"
-        class="mb-2">              
-        <p> Find your dream house! </p>
-        <b-button href="/map" variant="outline-secondary"><b-icon-cursor></b-icon-cursor></b-button>
-      </div>
-    </b-row>
+        <br />
+        <br />
+        <br />
 
-    <br /> <br /> <br /> 
+        <b-row>
+          <div
+            style="font-family: 'Pathway Gothic One', monospace; font-size: 30px; color: #5e6472; padding-left: 4.3em"
+            class="mb-2"
+          >
+            <p>Find your dream house!</p>
+            <b-button href="/map" variant="outline-secondary"><b-icon-cursor></b-icon-cursor></b-button>
+          </div>
+        </b-row>
 
-    <b-row>
-      <div 
-        style="padding-left: 3.1em;"
-        class="mb-2">              
-        <p style="font-family: 'Pathway Gothic One', monospace; font-size: 30px; color: #D3E7AC;"> LATEST NEWS </p>
-        <b-button href="/map" variant="outline-light" @click="moveLink(0)" style="margin-bottom: 10px;"><b-icon-newspaper></b-icon-newspaper></b-button> <p>{{ news_list[0].title }}</p>
-        <br>
-        <b-button href="/map" variant="outline-light" @click="moveLink(1)" style="margin-bottom: 10px;"><b-icon-newspaper></b-icon-newspaper></b-button> <p>{{ news_list[1].title }}</p>
-        <br>
-        <b-button href="/map" variant="outline-light" @click="moveLink(2)" style="margin-bottom: 10px;"><b-icon-newspaper></b-icon-newspaper></b-button> <p>{{ news_list[2].title }}</p>
-      </div>
-    </b-row>
+        <br />
+        <br />
+        <br />
 
-    
-    <!-- <b-row>
+        <b-row>
+          <div style="padding-left: 3.1em" class="mb-2">
+            <p style="font-family: 'Pathway Gothic One', monospace; font-size: 30px; color: #d3e7ac">LATEST NEWS</p>
+            <b-button href="/map" variant="outline-light" @click="moveLink(0)" style="margin-bottom: 10px"
+              ><b-icon-newspaper></b-icon-newspaper
+            ></b-button>
+            <p>{{ news_list[0].title }}</p>
+            <br />
+            <b-button href="/map" variant="outline-light" @click="moveLink(1)" style="margin-bottom: 10px"
+              ><b-icon-newspaper></b-icon-newspaper
+            ></b-button>
+            <p>{{ news_list[1].title }}</p>
+            <br />
+            <b-button href="/map" variant="outline-light" @click="moveLink(2)" style="margin-bottom: 10px"
+              ><b-icon-newspaper></b-icon-newspaper
+            ></b-button>
+            <p>{{ news_list[2].title }}</p>
+          </div>
+        </b-row>
+
+        <!-- <b-row>
       Text slides with image
       <b-col class="justify-content-md-center" cols="8">
         <div>
@@ -92,15 +116,15 @@
           >
             <b-carousel-slide v-for="(item, idx) in news_list" :key="idx" :img-src="require(`@/assets/news.png`)" style="background-color: rgba(0,0,0,0);">
               <div class="p-2" style="background-color: white">
-                <a :href="`https://land.naver.com${item.link}`">{{ item.title }}</a>
+                <a :href="`https://land.naver.com${item.link}`">{{ item.ti1tle }}</a>
               </div>
             </b-carousel-slide>
           </b-carousel>
         </div>
       </b-col>
     </b-row> -->
-  </b-container>
-  </b-row>
+      </b-container>
+    </b-row>
   </div>
 </template>
 
@@ -114,7 +138,7 @@ export default {
   name: "HomeView",
   data() {
     return {
-      news_list: [],
+      news_list: [{ title: "" }, { title: "" }, { title: "" }],
       slide: 0,
       sliding: null,
       cimg: "",
@@ -128,13 +152,10 @@ export default {
     };
   },
   created() {
-    this.CLEAR_POPULAR_BOARD();
-    this.getPopularBoard();
     newsInit(
       () => {
         getNewsList(
           ({ data }) => {
-            // console.log(data);
             this.news_list = data;
           },
           (error2) => {
@@ -146,6 +167,8 @@ export default {
         console.log(error);
       }
     );
+    this.CLEAR_POPULAR_BOARD();
+    this.getPopularBoard();
   },
   methods: {
     ...mapMutations(boardStore, ["CLEAR_POPULAR_BOARD"]),
@@ -157,7 +180,7 @@ export default {
       this.sliding = false;
     },
     moveLink(num) {
-      let url = "https://land.naver.com"+this.news_list[num].link;
+      let url = "https://land.naver.com" + this.news_list[num].link;
       window.open(url);
     },
   },

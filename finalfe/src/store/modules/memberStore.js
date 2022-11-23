@@ -13,7 +13,7 @@ const memberStore = {
   },
   getters: {
     checkMemberInfo: function (state) {
-      return state.userInfo;
+      return state.memberInfo;
     },
     checkToken: function (state) {
       return state.isValidToken;
@@ -31,6 +31,7 @@ const memberStore = {
     },
     SET_MEMBER_INFO: (state, memberInfo) => {
       state.isLogin = true;
+      state.keyword = [];
       state.memberInfo = memberInfo;
     },
     SET_KEYWORD: (state, arr) => {

@@ -100,10 +100,10 @@ export default {
     //   return; /* mutable chart options */
     // },
   },
-  watch: {
-    data(val) {
-      console.log(val);
-    },
-  },
+  // watch: {
+  //   data(val) {
+  //     console.log(val);
+  //   },
+  // },
 };
 </script>

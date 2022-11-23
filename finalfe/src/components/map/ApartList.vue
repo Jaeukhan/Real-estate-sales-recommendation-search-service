@@ -57,7 +57,7 @@
 
 <script>
 import { addApt } from "@/api/favorite";
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 
 const mapStore = "mapStore";
 const memberStore = "memberStore";
@@ -77,10 +77,15 @@ export default {
   methods: {
     ...mapActions(mapStore, ["getAptOne"]),
     ...mapActions(weatherStore, ["apiload"]),
+    ...mapGetters(mapStore, ["checkMemberInfo"]),
     moveloc(apart) {
       this.getAptOne(apart);
     },
     addFavoriteApt(apt) {
+      if (this.$store.state.memberStore.memberInfo == null) {
+        alert("로그인이 필요한 기능 입니다.");
+        this.$router.push({ name: "memberLogin" });
+      }
       let param = {
         userid: this.memberInfo.userid,
         aptcode: apt.일련번호,
@@ -89,7 +94,7 @@ export default {
         aptname: apt.아파트,
         aptfloor: apt.층,
       };
-      // console.log(param);
+      // console.log("pp", param);
       let _this = this;
       this.apartlist.forEach((a) => {
         // console.log(a);
