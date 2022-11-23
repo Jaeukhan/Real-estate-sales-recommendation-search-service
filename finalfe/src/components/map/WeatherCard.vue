@@ -1,13 +1,6 @@
 <template>
   <div id="wcard">
-    <b-card
-      :style="{
-        backgroundImage:
-          `url(` +
-          require(`@/assets/backgroundweather/${info.weather}.jpeg`) +
-          `)`,
-      }"
-    >
+    <b-card>
       <b-card-text>
         <div
           class="mb-3"
@@ -22,7 +15,7 @@
         <div>{{ days }}</div>
         <div>
           <img
-            style="display: inline-block; width: 50px; height: 40px"
+            style="display: inline-block; width: 50px; height: 50px"
             :src="require(`@/assets/weather/${info.weather}.gif`)"
             alt=""
           />
@@ -36,7 +29,6 @@
           <!-- 최고/최저기온 -->
         </div>
         <div>
-          {{ info.weather }}
           <!-- 현재기온: {{ info.temp }} 도 최저기온: {{ info.min_temp }} 도 최고기온: {{ info.max_temp }} 도 날씨:
          -->
         </div>
