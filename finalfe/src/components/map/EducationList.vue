@@ -1,7 +1,17 @@
 <template>
   <div>
     <div>
-      <b-button class="m-3" style="background-color: #5e6472; font-family: 'Titan One'" v-b-toggle.edc>
+      <b-button
+        class="m-3"
+        style="background-color: #5e6472; font-family: 'Titan One'"
+        v-b-toggle.edc
+        v-if="
+          keyword.includes('유치원생') ||
+          keyword.includes('초등학생') ||
+          keyword.includes('중학생') ||
+          keyword.includes('고등학생')
+        "
+      >
         주변 교육 시설 찾기
       </b-button>
     </div>
@@ -16,7 +26,10 @@
           </b-col>
         </b-row>
       </b-card>
-      <b-container v-if="selectedsch && selectedsch.length > 0" class="bv-example-row mt-3">
+      <b-container
+        v-if="selectedsch && selectedsch.length > 0"
+        class="bv-example-row mt-3"
+      >
         <b-row>
           <b-table
             hover
@@ -45,6 +58,8 @@
 <script>
 import { mapState, mapActions, mapMutations } from "vuex";
 const mapStore = "mapStore";
+const memberStore = "memberStore";
+
 export default {
   data() {
     return {
@@ -52,7 +67,13 @@ export default {
         { key: "REFINE_ROADNM_ADDR", label: "주소" },
         { key: "title", label: "시설 이름" },
       ],
-      schools: [{ value: null, text: "학교 선택" }, "유치원", "초등학교", "중학교", "고등학교"],
+      schools: [
+        { value: null, text: "학교 선택" },
+        "유치원",
+        "초등학교",
+        "중학교",
+        "고등학교",
+      ],
       sch: null,
       currentPage: 1,
       rows: 0,
@@ -99,6 +120,7 @@ export default {
   },
   computed: {
     ...mapState(mapStore, ["selectedsch", "gugunName", "gugunCodeForInfra"]),
+    ...mapState(memberStore, ["keyword"]),
   },
 };
 </script>
