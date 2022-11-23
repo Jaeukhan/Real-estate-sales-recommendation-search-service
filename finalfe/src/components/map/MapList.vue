@@ -5,7 +5,8 @@
     <b-container v-if="aparts && aparts.length > 0" class="bv-example-row mt-3">
       <education-list :cup="bus" />
       <div>
-        <b-button v-b-toggle.sidebar-1 style="background-color: #5e6472; font-family: 'Titan One'"
+        <b-button v-b-toggle.sidebar-1       style="background-color: #faf3dd; color: black;"
+
           >현지역 과거 부동산 동향 보기</b-button
         >
         <b-sidebar id="sidebar-1" title="최근 1년 가격동향" width="600px">

@@ -1,7 +1,8 @@
 <template>
   <div>
     <div class="mb-3">
-      <b-button v-b-toggle.searchBar style="background-color: #5e6472; font-family: 'Titan One'"> 매물 찾기 </b-button>
+      <b-button v-b-toggle.searchBar style="background-color: #faf3dd; color: black;"
+> 매물 찾기 </b-button>
     </div>
 
     <b-collapse id="searchBar">
@@ -23,7 +24,8 @@
             <b-form-select v-model="type" :options="searchType"></b-form-select>
           </b-col>
           <b-col>
-            <b-button @click="getList()">검색</b-button>
+            <b-button @click="getList()" style="background-color: #faf3dd; color: black;"
+>검색</b-button>
           </b-col>
         </b-row>
       </b-card>
