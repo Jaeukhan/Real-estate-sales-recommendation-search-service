@@ -6,7 +6,7 @@
         id="home"
         fluid="true"
       >
-        <b-row style="padding-bottom: 1.6em; padding-top: 5.5em">
+        <b-row style="padding-bottom: 8em; padding-top: 5.5em">
           <p
             style="
               font-family: 'Lobster', monospace;
@@ -61,7 +61,7 @@
               color: #a7804a;
               padding-left: 12.3em;
               padding-top: 2em;
-              padding-bottom: 3em;
+              padding-bottom: 6em;
             "
           >
             <b-icon
@@ -76,7 +76,7 @@
           style="
             position: absolute;
             left: 200px;
-            top: 670px;
+            top: 820px;
             width: 250px;
             height: 170px; ;
           "
@@ -88,6 +88,7 @@
               font-size: 30px;
               color: #5e6472;
               padding-left: 5em;
+              padding-bottom: 4em;
             "
             class="mb-2"
           >
@@ -106,7 +107,7 @@
           style="
             position: absolute;
             left: 700px;
-            top: 870px;
+            top: 1170px;
             width: 200px;
             height: 170px; ;
           "
@@ -118,6 +119,7 @@
               font-size: 30px;
               color: #5e6472;
               padding-left: 6em;
+              padding-bottom: 4em;
             "
             class="mb-2"
           >
@@ -136,9 +138,9 @@
           style="
             position: absolute;
             left: 240px;
-            top: 1150px;
+            top: 1550px;
             width: 250px;
-            height: 230px; ;
+            height: 230px;
           "
         />
         <b-row>
@@ -148,6 +150,7 @@
               font-size: 30px;
               color: #5e6472;
               padding-left: 4.3em;
+              padding-bottom: 4em;
             "
             class="mb-2"
           >
@@ -168,7 +171,7 @@
             width: 300px;
             height: 230px;
             left: 100px;
-            top: 1550px;
+            top: 2150px;
           "
         />
         <b-row>
@@ -207,6 +210,7 @@
             <p>{{ news_list[2].title }}</p>
           </div>
         </b-row>
+        <br /><br /><br /><br />
       </b-container>
     </b-row>
   </div>

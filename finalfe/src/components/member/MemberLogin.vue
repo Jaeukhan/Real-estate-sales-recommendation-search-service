@@ -2,14 +2,20 @@
   <b-container class="bv-example-row mt-3">
     <b-row>
       <b-col>
-        <div style="color: white;"
-          ><h3>SIGN IN</h3></div>
+        <div style="color: white"><h3>SIGN IN</h3></div>
       </b-col>
     </b-row>
     <b-row>
       <b-col></b-col>
-      <b-col cols="8" style="background-color: rgba(255,255,255,0.4); padding: 1em; ">
-        <b-card class="text-center mt-3" style="max-width: 40rem" align="left">
+      <b-col
+        cols="8"
+        style="background-color: rgba(255, 251, 229, 0.4); padding: 1em"
+      >
+        <b-card
+          class="text-center mt-3"
+          style="max-width: 40rem; background-color: #fffbe5"
+          align="left"
+        >
           <b-form class="text-left">
             <b-form-group label="ID" label-for="id">
               <b-form-input
@@ -28,7 +34,7 @@
                 placeholder="password"
               ></b-form-input>
             </b-form-group>
-            <div style="padding-left: 12em;">
+            <div style="padding-left: 12em">
               <b-button
                 type="button"
                 class="m-1"
@@ -90,6 +96,6 @@ export default {
 
 <style scoped>
 * {
-  font-family: 'Pathway Gothic One', monospace;
+  font-family: "Pathway Gothic One", monospace;
 }
 </style>

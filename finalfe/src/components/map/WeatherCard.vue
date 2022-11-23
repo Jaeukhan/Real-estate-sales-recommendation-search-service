@@ -1,8 +1,22 @@
 <template>
   <div id="wcard">
-    <b-card :style="{ backgroundImage: `url(` + require(`@/assets/backgroundweather/${info.weather}.jpeg`) + `)` }">
+    <b-card
+      :style="{
+        backgroundImage:
+          `url(` +
+          require(`@/assets/backgroundweather/${info.weather}.jpeg`) +
+          `)`,
+      }"
+    >
       <b-card-text>
-        <div class="mb-3" style="font-family: 'Titan One', monospace; font-size: 20px; color: #2b3752">
+        <div
+          class="mb-3"
+          style="
+            font-family: 'Titan One', monospace;
+            font-size: 20px;
+            color: #2b3752;
+          "
+        >
           {{ info.name }}
         </div>
         <div>{{ days }}</div>
@@ -12,9 +26,13 @@
             :src="require(`@/assets/weather/${info.weather}.gif`)"
             alt=""
           />
-          <h2 class="m-2" style="display: inline-block; font-size: 23px">{{ info.temp }}°</h2>
+          <h2 class="m-2" style="display: inline-block; font-size: 23px">
+            {{ info.temp }}°
+          </h2>
           <!-- 현재기온 -->
-          <div style="display: inline-block">{{ info.min_temp }}° / {{ info.max_temp }}°</div>
+          <div style="display: inline-block">
+            {{ info.min_temp }}° / {{ info.max_temp }}°
+          </div>
           <!-- 최고/최저기온 -->
         </div>
         <div>

@@ -115,10 +115,13 @@
           <div style="background-color: white; padding: 3em">
             <div v-if="keyword && keyword.length > 0">
               <p>{{ memberInfo.userid }} 님이 선택한 키워드</p>
-              <table border="1" style="border-collapse: collapse">
-                <tr v-for="k in keyword" :key="k">
-                  <td>{{ k }}</td>
-                </tr>
+              <table style="border-collapse: collapse">
+                <td v-for="k in keyword" :key="k">
+                  <img
+                    :src="require(`../../assets/icon/${k}.png`)"
+                    style="width: 30px; height: 30px; margin: 5px"
+                  />
+                </td>
               </table>
             </div>
             <div v-else>
@@ -127,9 +130,13 @@
                 매물을 추천받아보세요!
               </p>
             </div>
-            <b-button v-b-modal.modal-1>추가</b-button>
+            <b-button
+              v-b-modal.modal-1
+              style="background-color: white; color: black; margin: 1px"
+              >추가</b-button
+            >
             <!-- 모달창 - 관심 키워드 체크 -->
-            <b-modal id="modal-1" title="BootstrapVue">
+            <b-modal id="modal-1" title="SELECT YOUR KEYWORD">
               <!-- 교통수단 -->
               <b-form-group
                 label="이동 시 어떤 교통수단을 이용하시나요?"
@@ -141,8 +148,16 @@
                   :aria-describedby="ariaDescribedby"
                   name="flavour-1"
                 >
-                  <b-form-checkbox value="자가용">자가용</b-form-checkbox>
-                  <b-form-checkbox value="대중교통">대중교통</b-form-checkbox>
+                  <b-form-checkbox value="자가용"
+                    >자가용<img
+                      src="../../assets/icon/자가용.png"
+                      style="width: 30px; height: 30px"
+                  /></b-form-checkbox>
+                  <b-form-checkbox value="대중교통"
+                    >대중교통<img
+                      src="../../assets/icon/대중교통.png"
+                      style="width: 30px; height: 30px"
+                  /></b-form-checkbox>
                 </b-form-checkbox-group>
               </b-form-group>
               <!-- 자녀 유무 -->
@@ -156,10 +171,27 @@
                   :aria-describedby="ariaDescribedby"
                   name="flavour-2"
                 >
-                  <b-form-checkbox value="유치원생">유치원생</b-form-checkbox>
-                  <b-form-checkbox value="초등학생">초등학생</b-form-checkbox>
-                  <b-form-checkbox value="중학생">중학생</b-form-checkbox>
-                  <b-form-checkbox value="고등학생">고등학생</b-form-checkbox>
+                  <b-form-checkbox value="유치원생"
+                    >유치원생<img
+                      src="../../assets/icon/유치원생.png"
+                      style="width: 30px; height: 30px"
+                  /></b-form-checkbox>
+                  <b-form-checkbox value="초등학생"
+                    >초등학생<img
+                      src="../../assets/icon/초등학생.png"
+                      style="width: 30px; height: 30px"
+                  /></b-form-checkbox>
+                  <br />
+                  <b-form-checkbox value="중학생"
+                    >중학생<img
+                      src="../../assets/icon/중학생.png"
+                      style="width: 30px; height: 30px"
+                  /></b-form-checkbox>
+                  <b-form-checkbox value="고등학생"
+                    >고등학생<img
+                      src="../../assets/icon/고등학생.png"
+                      style="width: 30px; height: 30px"
+                  /></b-form-checkbox>
                 </b-form-checkbox-group>
               </b-form-group>
               <!-- 주거유형 -->
@@ -173,8 +205,16 @@
                   :aria-describedby="ariaDescribedby"
                   name="flavour-2"
                 >
-                  <b-form-checkbox value="아파트">아파트</b-form-checkbox>
-                  <b-form-checkbox value="주택">주택</b-form-checkbox>
+                  <b-form-checkbox value="아파트"
+                    >아파트<img
+                      src="../../assets/icon/아파트.png"
+                      style="width: 30px; height: 30px"
+                  /></b-form-checkbox>
+                  <b-form-checkbox value="주택"
+                    >주택<img
+                      src="../../assets/icon/주택.png"
+                      style="width: 30px; height: 30px"
+                  /></b-form-checkbox>
                 </b-form-checkbox-group>
               </b-form-group>
               <!-- 인프라 -->
@@ -188,18 +228,28 @@
                   :aria-describedby="ariaDescribedby"
                   name="flavour-2"
                 >
-                  <b-form-checkbox value="도서관">도서관</b-form-checkbox>
-                  <b-form-checkbox value="마트">마트</b-form-checkbox>
+                  <b-form-checkbox value="도서관"
+                    >도서관<img
+                      src="../../assets/icon/도서관.png"
+                      style="width: 30px; height: 30px"
+                  /></b-form-checkbox>
+                  <b-form-checkbox value="마트"
+                    >마트<img
+                      src="../../assets/icon/마트.png"
+                      style="width: 30px; height: 30px"
+                  /></b-form-checkbox>
                 </b-form-checkbox-group>
               </b-form-group>
-              <b-button
-                style="margin: 5px; background-color: #aed9e0; color: black"
-                class="sm"
-                @click="keywordClick()"
-                >SAVE</b-button
-              >
-              <p style="font-size; 10x; text-align: right;">
-                반드시 저장 버트까지 눌러주세요!
+              <div style="flow: right">
+                <b-button
+                  style="margin: 5px; background-color: #aed9e0; color: black"
+                  class="sm"
+                  @click="keywordClick()"
+                  >SAVE</b-button
+                >
+              </div>
+              <p style="font-size; 10x; text-align: right; color: red">
+                반드시 저장 버튼까지 눌러주세요!
               </p>
             </b-modal>
           </div>

@@ -2,7 +2,9 @@
   <b-container class="bv-example-row mt-3">
     <b-row class="mb-1">
       <b-col class="text-right">
-        <b-button variant="outline-primary" @click="moveWrite()">Write</b-button>
+        <b-button variant="outline-secondary" @click="moveWrite()"
+          >Write</b-button
+        >
       </b-col>
     </b-row>
     <b-row>
@@ -17,7 +19,12 @@
           :current-page="currentPage"
         >
           <template #cell(subject)="data">
-            <router-link :to="{ name: 'boarddetail', params: { articleno: data.item.articleno } }">
+            <router-link
+              :to="{
+                name: 'boarddetail',
+                params: { articleno: data.item.articleno },
+              }"
+            >
               {{ data.item.subject }}
             </router-link>
           </template>
@@ -35,45 +42,41 @@
     </b-row>
     <!-- 사용자 게시판 글 목록 -->
     <b-row>
-      <div no-body class="card-profile" alt="Image placeholder" img-top>
-        <b-row class="justify-content-center">
-          <b-col lg="3" class="order-lg-2"> </b-col>
-        </b-row>
-
-        <b-card-header class="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-          <div class="d-flex justify-content-between"></div>
-        </b-card-header>
-
-        <div>
-          <b-row>
-            <b-col lg="20">
-              <div class="card-profile-stats d-flex justify-content-center mt-md-5">
-                <h5 class="h3">인기 게시물</h5>
-              </div>
-            </b-col>
-          </b-row>
-          <div class="text-center">
-            <b-table
-              hover
-              :items="popular_board"
-              :fields="fields"
-              @row-clicked="viewArticle"
-              id="boardlist-table"
-              :per-page="perPage"
-              :current-page="currentPage"
+      <div>
+        <b-row>
+          <b-col lg="20">
+            <div
+              class="card-profile-stats d-flex justify-content-center mt-md-5"
             >
-              <template #cell(subject)="data">
-                <router-link
-                  :to="{
-                    name: 'boarddetail',
-                    params: { articleno: data.item.articleno },
-                  }"
-                >
-                  {{ data.item.subject }}
-                </router-link>
-              </template>
-            </b-table>
-          </div>
+              <h5
+                style="font-family: 'Titan One', monospace; padding-left: 1em"
+              >
+                POPULAR<b-icon-pencil animation="cylon"></b-icon-pencil>
+              </h5>
+            </div>
+          </b-col>
+        </b-row>
+        <div class="text-center">
+          <b-table
+            hover
+            :items="popular_board"
+            :fields="fields"
+            @row-clicked="viewArticle"
+            id="boardlist-table"
+            :per-page="perPage"
+            :current-page="currentPage"
+          >
+            <template #cell(subject)="data">
+              <router-link
+                :to="{
+                  name: 'boarddetail',
+                  params: { articleno: data.item.articleno },
+                }"
+              >
+                {{ data.item.subject }}
+              </router-link>
+            </template>
+          </b-table>
         </div>
       </div>
     </b-row>
