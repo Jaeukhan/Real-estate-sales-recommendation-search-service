@@ -28,7 +28,7 @@ const parkingStore = {
         param.siGunCode,
         param.siGunName,
         ({ data }) => {
-          console.log("[[[[parking", data);
+          // console.log("[[[[parking", data);
           //   console.log("[[[[", data.ParkingPlace[1].row);
           commit("SET_PARKING_LIST", data.ParkingPlace[1].row);
         },
