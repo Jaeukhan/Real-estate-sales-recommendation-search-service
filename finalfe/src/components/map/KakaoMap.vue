@@ -3,7 +3,7 @@
     <h3 v-if="apt">{{ apt.aptName }}</h3>
     <!--맵-->
     <div id="map" style="margin-right: 0" align-h="center"></div>
-    <div>My Favorite Keyword</div>
+    <div style="font-family: 'Titan One', monospace;">My Favorite Keyword</div>
     <table style="border-collapse: collapse" align="center">
       <td v-for="k in keyword" :key="k">
         <img
@@ -13,28 +13,28 @@
       </td>
     </table>
     <b-button
-      style="background-color: #5e6472; font-family: 'Titan One'"
+      style="background-color: #faf3dd; font-family: 'Titan One'"
       class="mt-3 m-2"
       @click="getParkinglot"
       v-if="keyword.includes('자가용')"
       >주차장 찾기</b-button
     >
     <b-button
-      style="background-color: #5e6472; font-family: 'Titan One'"
+      style="background-color: #faf3dd; font-family: 'Titan One'"
       class="mt-3 m-2"
       @click="getLibloc"
       v-if="keyword.includes('도서관')"
       >도서관 찾기</b-button
     >
     <b-button
-      style="background-color: #5e6472; font-family: 'Titan One'"
+      style="background-color: #faf3dd; font-family: 'Titan One'"
       class="mt-3 m-2"
       @click="getMartloc"
       v-if="keyword.includes('마트')"
       >시장 및 마트 찾기</b-button
     >
     <b-button
-      style="background-color: #5e6472; font-family: 'Titan One'"
+      style="background-color: #faf3dd; font-family: 'Titan One'"
       class="mt-3 m-2"
       @click="getBusStopList"
       v-if="keyword.includes('대중교통')"
