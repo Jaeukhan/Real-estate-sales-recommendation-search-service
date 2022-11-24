@@ -85,6 +85,8 @@ export default {
         await this.getMemberInfo(token);
         alert("로그인 되었습니다");
         this.$router.push({ name: "home" });
+      } else {
+        alert("아이디 또는 비밀번호가 일치하지 않습니다!");
       }
     },
     movePage() {

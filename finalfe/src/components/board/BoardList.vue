@@ -8,78 +8,63 @@
       </b-col>
     </b-row>
     <b-row>
-      <b-col>
-        <b-table
-          striped
-          hover
-          :items="articles"
-          :fields="fields"
-          @row-clicked="viewArticle"
-          id="boardlist-table"
-          :per-page="perPage"
-          :current-page="currentPage"
-        >
-          <template #cell(subject)="data">
-            <router-link
-              :to="{
-                name: 'boarddetail',
-                params: { articleno: data.item.articleno },
-              }"
-            >
-              {{ data.item.subject }}
-            </router-link>
-          </template>
-        </b-table>
-      </b-col>
+      <b-table
+        striped
+        hover
+        :items="articles"
+        :fields="fields"
+        @row-clicked="viewArticle"
+        id="boardlist-table"
+        :per-page="perPage"
+        :current-page="currentPage"
+      >
+        <template #cell(subject)="data">
+          <router-link
+            :to="{
+              name: 'boarddetail',
+              params: { articleno: data.item.articleno },
+            }"
+          >
+            {{ data.item.subject }}
+          </router-link>
+        </template>
+      </b-table>
     </b-row>
-    <b-row class="justify-content-md-center">
+    <b-row class="justify-content-md-center" style="padding-bottom: 10em">
       <b-pagination
         v-model="currentPage"
-        pills
         :total-rows="rows"
         :per-page="perPage"
         aria-controls="boardlist-table"
       ></b-pagination>
     </b-row>
-    <!-- 사용자 게시판 글 목록 -->
+    <!-- 인기글 목록 -->
     <b-row>
-      <div>
-        <b-row>
-          <b-col lg="20">
-            <div
-              class="card-profile-stats d-flex justify-content-center mt-md-5"
-            >
-              <h5
-                style="font-family: 'Titan One', monospace; padding-left: 1em"
-              >
-                POPULAR<b-icon-pencil animation="cylon"></b-icon-pencil>
-              </h5>
-            </div>
-          </b-col>
-        </b-row>
-        <div class="text-center">
-          <b-table
-            hover
-            :items="popular_board"
-            :fields="fields"
-            @row-clicked="viewArticle"
-            id="boardlist-table"
-            :per-page="perPage"
-            :current-page="currentPage"
+      <b-row>
+        <h5 style="font-family: 'Titan One', monospace; padding-left: 1em">
+          POPULAR<b-icon-pencil animation="cylon"></b-icon-pencil>
+        </h5>
+      </b-row>
+      <b-table
+        hover
+        :items="popular_board"
+        :fields="fields"
+        @row-clicked="viewArticle"
+        id="boardlist-table"
+        :per-page="perPage"
+        :current-page="currentPage"
+      >
+        <template #cell(subject)="data">
+          <router-link
+            :to="{
+              name: 'boarddetail',
+              params: { articleno: data.item.articleno },
+            }"
           >
-            <template #cell(subject)="data">
-              <router-link
-                :to="{
-                  name: 'boarddetail',
-                  params: { articleno: data.item.articleno },
-                }"
-              >
-                {{ data.item.subject }}
-              </router-link>
-            </template>
-          </b-table>
-        </div>
-      </div>
+            {{ data.item.subject }}
+          </router-link>
+        </template>
+      </b-table>
     </b-row>
   </b-container>
 </template>
@@ -145,7 +130,7 @@ export default {
 };
 </script>
 
-<style scope>
+<style scoped>
 .tdClass {
   width: 50px;
   text-align: center;

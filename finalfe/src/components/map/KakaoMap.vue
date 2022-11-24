@@ -1,9 +1,14 @@
 <template>
   <div align-v="center" align-h="center" style="text-align: center">
-    <h3 v-if="apt">{{ apt.aptName }}</h3>
+    <h3
+      v-if="apt"
+      style="font-family: 'Black Han Sans', monospace; color: #396f18"
+    >
+      {{ apt.aptName }}
+    </h3>
     <!--맵-->
     <div id="map" style="margin-right: 0" align-h="center"></div>
-    <div style="font-family: 'Titan One', monospace;">My Favorite Keyword</div>
+    <div style="font-family: 'Titan One', monospace">My Favorite Keyword</div>
     <table style="border-collapse: collapse" align="center">
       <td v-for="k in keyword" :key="k">
         <img
@@ -13,28 +18,28 @@
       </td>
     </table>
     <b-button
-      style="background-color: #faf3dd; color: black;"
+      style="background-color: #faf3dd; color: black"
       class="mt-3 m-2"
       @click="getParkinglot"
       v-if="keyword.includes('자가용')"
       >주차장 찾기</b-button
     >
     <b-button
-      style="background-color: #faf3dd; color: black;"
+      style="background-color: #faf3dd; color: black"
       class="mt-3 m-2"
       @click="getLibloc"
       v-if="keyword.includes('도서관')"
       >도서관 찾기</b-button
     >
     <b-button
-      style="background-color: #faf3dd; color: black;"
+      style="background-color: #faf3dd; color: black"
       class="mt-3 m-2"
       @click="getMartloc"
       v-if="keyword.includes('마트')"
       >시장 및 마트 찾기</b-button
     >
     <b-button
-      style="background-color: #faf3dd; color: black;"
+      style="background-color: #faf3dd; color: black"
       class="mt-3 m-2"
       @click="getBusStopList"
       v-if="keyword.includes('대중교통')"
@@ -96,6 +101,7 @@ export default {
       "gugunName",
       "weatherLoc",
       "gugunCodeForInfra",
+      "house",
     ]), //apt.load, apt.
     ...mapState(parkingStore, ["parking_li"]),
     ...mapState(transportStore, ["busList"]),
@@ -481,7 +487,7 @@ export default {
     getParkinglot() {
       // console.log(this.tempLoc.lat, this.tempLoc.lon);
       if (!this.isselectapart) {
-        alert("관심매물을 체크해주세요.");
+        alert("먼저 매물을 선택해주세요!");
         return;
       }
       const param = {
@@ -492,7 +498,7 @@ export default {
     },
     getLibloc() {
       if (!this.isselectapart) {
-        alert("관심매물을 체크해주세요.");
+        alert("먼저 매물을 선택해주세요!");
         return;
       }
       const param = {
@@ -503,7 +509,7 @@ export default {
     },
     getMartloc() {
       if (!this.isselectapart) {
-        alert("관심매물을 체크해주세요.");
+        alert("먼저 매물을 선택해주세요!");
 
         return;
       }
@@ -515,7 +521,7 @@ export default {
     },
     getBusStopList() {
       if (!this.isselectapart) {
-        alert("관심매물을 체크해주세요.");
+        alert("먼저 매물을 선택해주세요!");
         return;
       }
       this.getBusList(11);
