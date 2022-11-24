@@ -171,7 +171,7 @@ UNLOCK TABLES;
 	 );
 	 
 -- favorite_apt data 2022-11-19
-drop table favorite_apt;
+-- drop table favorite_apt;
 create table favorite_apt(
 	apt_id int auto_increment primary key,
     user_id varchar(16),
@@ -180,10 +180,10 @@ create table favorite_apt(
     apt_price varchar(45) not null,
     apt_name varchar(45) not null,
     apt_floor varchar(45),
-    foreign key(user_id) references members(user_id)
+    foreign key(user_id) references members(user_id) on delete cascade
 );
 
-drop table favorite_house;
+-- drop table favorite_house;
 create table favorite_house(
 	house_id int AUTO_INCREMENT primary key,
     user_id varchar(16),
@@ -191,10 +191,10 @@ create table favorite_house(
     house_price varchar(45) not null,
     house_area varchar(45) not null,
     house_type varchar(20),
-    foreign key(user_id) references members(user_id)
+    foreign key(user_id) references members(user_id) on delete cascade
 );
 
+use happy_house;
 
-
-
+select * from bus_stop where 도시코드 = 11;
 

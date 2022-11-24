@@ -36,12 +36,18 @@ const boardStore = {
     getPopularBoard: ({ commit }) => {
       getPopularArticle(
         ({ data }) => {
+          console.log(data);
+
           commit("GET_POPULAR_BOARD", data);
         },
         (error) => {
           console.log("Getting getPopularArticle error: ", error);
         }
       );
+    },
+    clearPopularBoard: ({ commit }) => {
+      console.log("clear popular board");
+      commit("CLEAR_POPULAR_BOARD");
     },
   },
 };

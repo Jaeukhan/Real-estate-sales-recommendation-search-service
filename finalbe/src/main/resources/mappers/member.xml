@@ -46,7 +46,7 @@
 	
 	<!-- 회원 탈퇴 -->
 	<delete id="delete" parameterType="String">
-		delete from members where user_id = #{userid}
+		delete from members where user_id = #{userid};
 	</delete>
 	
 	<!-- 토큰 -->

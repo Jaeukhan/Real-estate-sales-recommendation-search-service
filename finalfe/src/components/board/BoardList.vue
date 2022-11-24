@@ -2,7 +2,9 @@
   <b-container class="bv-example-row mt-3">
     <b-row class="mb-1">
       <b-col class="text-right">
-        <b-button variant="outline-secondary" @click="moveWrite()">Write</b-button>
+        <b-button variant="outline-secondary" @click="moveWrite()"
+          >Write</b-button
+        >
       </b-col>
     </b-row>
     <b-row>
@@ -44,8 +46,12 @@
       <div>
         <b-row>
           <b-col lg="20">
-            <div class="card-profile-stats d-flex justify-content-center mt-md-5">
-              <h5 style="font-family: 'Titan One', monospace; padding-left: 1em">
+            <div
+              class="card-profile-stats d-flex justify-content-center mt-md-5"
+            >
+              <h5
+                style="font-family: 'Titan One', monospace; padding-left: 1em"
+              >
                 POPULAR<b-icon-pencil animation="cylon"></b-icon-pencil>
               </h5>
             </div>
@@ -80,7 +86,7 @@
 
 <script>
 import { listArticle } from "@/api/board";
-import { mapState, mapMutations, mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 const boardStore = "boardStore";
 export default {
   name: "BoardList",
@@ -118,12 +124,11 @@ export default {
         console.log(error);
       }
     );
-    this.CLEAR_POPULAR_BOARD();
+    this.clearPopularBoard();
     this.getPopularBoard();
   },
   methods: {
-    ...mapMutations(boardStore, ["CLEAR_POPULAR_BOARD"]),
-    ...mapActions(boardStore, ["getPopularBoard"]),
+    ...mapActions(boardStore, ["getPopularBoard", "clearPopularBoard"]),
     moveWrite() {
       this.$router.push({ name: "boardwrite" });
     },
