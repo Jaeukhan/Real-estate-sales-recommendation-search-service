@@ -3,8 +3,10 @@
     <div id="container">
       <div id="contacts">
         <div id="contacts--contact">
-          <p>{{ mail }}</p>
-          <p>{{ phone }}</p>
+          <div>&nbsp;</div>
+          <div>&nbsp;</div>
+          <div>&nbsp;</div>
+          <a href="/" id="navItem" style="font-size: 23px; floa t: right">Where Is My HOME? </a>
         </div>
         <div id="contacts--social">
           <div></div>
@@ -19,11 +21,7 @@
 <script>
 export default {
   data() {
-    return {
-      mail: "xavier.seignard+drangies@gmail.com",
-      phone: "06.00.00.00.00",
-      mention: "2018 | mentions légales",
-    };
+    return {};
   },
 };
 </script>

@@ -13,7 +13,7 @@
   </class>  
   <class id="2" language="java" name="com.ssafy.finalbe.controller.BoardController" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/controller/BoardController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="279" width="336" x="823" y="14"/>    
+    <position height="-1" width="-1" x="612" y="221"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -22,7 +22,7 @@
   </class>  
   <class id="3" language="java" name="com.ssafy.finalbe.controller.ChartController" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/controller/ChartController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="171" width="264" x="1199" y="14"/>    
+    <position height="-1" width="-1" x="1298" y="87"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -31,7 +31,7 @@
   </class>  
   <class id="4" language="java" name="com.ssafy.finalbe.controller.NaverController" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/controller/NaverController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="171" width="202" x="1503" y="14"/>    
+    <position height="-1" width="-1" x="404" y="110"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -60,7 +60,7 @@
   <class id="7" language="java" name="com.ssafy.finalbe.controller.HouseMapController" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/controller/HouseMapController.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="189" width="305" x="2505" y="14"/>    
+    <position height="-1" width="-1" x="2612" y="99"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -90,7 +90,7 @@
   <class id="10" language="java" name="com.ssafy.finalbe.controller.FavoriteController" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/controller/FavoriteController.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="297" width="311" x="3568" y="14"/>    
+    <position height="-1" width="-1" x="3515" y="149"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -99,7 +99,7 @@
   </class>  
   <class id="11" language="java" name="com.ssafy.finalbe.controller.EduController" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/controller/EduController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="171" width="265" x="3919" y="14"/>    
+    <position height="-1" width="-1" x="3817" y="94"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -137,7 +137,7 @@
   </class>  
   <interface id="15" language="java" name="com.ssafy.finalbe.model.service.BoardService" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/model/service/BoardService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="998" y="413"/>    
+    <position height="-1" width="-1" x="619" y="481"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -147,7 +147,7 @@
   <class id="16" language="java" name="com.ssafy.finalbe.model.service.BoardServiceImpl" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/model/service/BoardServiceImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="994" y="659"/>    
+    <position height="-1" width="-1" x="615" y="727"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -156,7 +156,7 @@
   </class>  
   <class id="17" language="java" name="com.ssafy.finalbe.model.BoardDto" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/model/BoardDto.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="931" y="1008"/>    
+    <position height="-1" width="-1" x="828" y="713"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -165,7 +165,7 @@
   </class>  
   <class id="18" language="java" name="com.ssafy.finalbe.model.BoardParameterDto" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/model/BoardParameterDto.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1081" y="976"/>    
+    <position height="-1" width="-1" x="978" y="681"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -175,7 +175,7 @@
   <class id="19" language="java" name="com.ssafy.finalbe.model.service.ChartServiceImpl" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/model/service/ChartServiceImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1329" y="357"/>    
+    <position height="-1" width="-1" x="1312" y="356"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -184,7 +184,7 @@
   </class>  
   <interface id="20" language="java" name="com.ssafy.finalbe.model.service.ChartService" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/model/service/ChartService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1327" y="229"/>    
+    <position height="-1" width="-1" x="1310" y="228"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -193,7 +193,7 @@
   </interface>  
   <class id="21" language="java" name="com.ssafy.finalbe.model.ChartDto" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/model/ChartDto.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1328" y="864"/>    
+    <position height="-1" width="-1" x="1591" y="448"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -222,7 +222,7 @@
   </interface>  
   <class id="24" language="java" name="com.ssafy.finalbe.controller.NewsController" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/controller/NewsController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2380" y="75"/>    
+    <position height="-1" width="-1" x="2362" y="71"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -231,7 +231,7 @@
   </class>  
   <interface id="25" language="java" name="com.ssafy.finalbe.model.service.NewsService" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/model/service/NewsService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2378" y="221"/>    
+    <position height="-1" width="-1" x="2360" y="217"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -241,7 +241,7 @@
   <class id="26" language="java" name="com.ssafy.finalbe.model.service.NewsServiceImpl" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/model/service/NewsServiceImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2379" y="401"/>    
+    <position height="-1" width="-1" x="2361" y="397"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -251,7 +251,7 @@
   <interface id="27" language="java" name="com.ssafy.finalbe.model.service.HouseMapService" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/model/service/HouseMapService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2653" y="262"/>    
+    <position height="-1" width="-1" x="2608" y="253"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -261,7 +261,7 @@
   <class id="28" language="java" name="com.ssafy.finalbe.model.service.HouseMapServiceImpl" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/model/service/HouseMapServiceImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2654" y="404"/>    
+    <position height="-1" width="-1" x="2609" y="395"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -270,7 +270,7 @@
   </class>  
   <class id="29" language="java" name="com.ssafy.finalbe.model.SidoGugunCodeDto" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/model/SidoGugunCodeDto.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2638" y="635"/>    
+    <position height="-1" width="-1" x="2593" y="626"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -300,7 +300,7 @@
   <interface id="32" language="java" name="com.ssafy.finalbe.model.service.FavoriteService" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/model/service/FavoriteService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="3720" y="429"/>    
+    <position height="-1" width="-1" x="3512" y="416"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -310,7 +310,7 @@
   <class id="33" language="java" name="com.ssafy.finalbe.model.service.FavoriteServiceImpl" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/model/service/FavoriteServiceImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="3717" y="681"/>    
+    <position height="-1" width="-1" x="3509" y="668"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -319,7 +319,7 @@
   </class>  
   <class id="34" language="java" name="com.ssafy.finalbe.model.NewsDto" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/model/NewsDto.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2377" y="724"/>    
+    <position height="-1" width="-1" x="2358" y="681"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -328,7 +328,7 @@
   </class>  
   <class id="35" language="java" name="com.ssafy.finalbe.model.CommentDto" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/model/CommentDto.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1751" y="617"/>    
+    <position height="-1" width="-1" x="1867" y="719"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -337,7 +337,7 @@
   </class>  
   <class id="36" language="java" name="com.ssafy.finalbe.model.FavoriteAptDto" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/model/FavoriteAptDto.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="3939" y="567"/>    
+    <position height="-1" width="-1" x="3731" y="554"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -383,7 +383,7 @@
   </class>  
   <interface id="41" language="java" name="com.ssafy.finalbe.model.mapper.BoardMapper" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/model/mapper/BoardMapper.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2038" y="1082"/>    
+    <position height="-1" width="-1" x="3971" y="366"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -392,7 +392,7 @@
   </interface>  
   <interface id="42" language="java" name="com.ssafy.finalbe.model.mapper.CommentMapper" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/model/mapper/CommentMapper.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1921" y="511"/>    
+    <position height="-1" width="-1" x="1851" y="501"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -401,7 +401,7 @@
   </interface>  
   <interface id="43" language="java" name="com.ssafy.finalbe.model.mapper.ChartMapper" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/model/mapper/ChartMapper.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2260" y="995"/>    
+    <position height="-1" width="-1" x="4193" y="279"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -410,7 +410,7 @@
   </interface>  
   <interface id="44" language="java" name="com.ssafy.finalbe.model.mapper.MemberMapper" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/model/mapper/MemberMapper.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="207" width="244" x="2361" y="951"/>    
+    <position height="-1" width="-1" x="4416" y="338"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -420,7 +420,7 @@
   <interface id="45" language="java" name="com.ssafy.finalbe.model.mapper.HouseMapMapper" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/model/mapper/HouseMapMapper.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2760" y="1000"/>    
+    <position height="-1" width="-1" x="3977" y="548"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -430,7 +430,7 @@
   <interface id="46" language="java" name="com.ssafy.finalbe.model.mapper.FavoriteMapper" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/model/mapper/FavoriteMapper.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="3023" y="1054"/>    
+    <position height="-1" width="-1" x="4238" y="555"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -440,7 +440,7 @@
   <interface id="47" language="java" name="com.ssafy.finalbe.model.mapper.TransportMapper" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/model/mapper/TransportMapper.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2256" y="1093"/>    
+    <position height="-1" width="-1" x="4189" y="377"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -449,7 +449,7 @@
   </interface>  
   <interface id="48" language="java" name="com.ssafy.finalbe.model.mapper.NewsMapper" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/model/mapper/NewsMapper.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2178" y="495"/>    
+    <position height="-1" width="-1" x="2159" y="469"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -468,7 +468,7 @@
   <class id="50" language="java" name="com.ssafy.finalbe.exception.UnAuthorizedException" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/exception/UnAuthorizedException.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="121" y="798"/>    
+    <position height="-1" width="-1" x="250" y="680"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -478,7 +478,7 @@
   <class id="51" language="java" name="com.ssafy.finalbe.config.SwaggerConfiguration" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/config/SwaggerConfiguration.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="261" width="234" x="72" y="22"/>    
+    <position height="-1" width="-1" x="153" y="160"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -488,7 +488,7 @@
   <class id="52" language="java" name="com.ssafy.finalbe.config.DatabaseConfiguration" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/config/DatabaseConfiguration.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="411" y="183"/>    
+    <position height="-1" width="-1" x="400" y="293"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -497,7 +497,7 @@
   </class>  
   <class id="53" language="java" name="com.ssafy.finalbe.config.JwtConfiguration" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/config/JwtConfiguration.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="395" y="75"/>    
+    <position height="-1" width="-1" x="393" y="399"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -506,7 +506,7 @@
   </class>  
   <class id="54" language="java" name="com.ssafy.finalbe.config.WebConfiguration" project="finalbe" 
     file="/finalbe/src/main/java/com/ssafy/finalbe/config/WebConfiguration.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="193" y="383"/>    
+    <position height="-1" width="-1" x="164" y="368"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
