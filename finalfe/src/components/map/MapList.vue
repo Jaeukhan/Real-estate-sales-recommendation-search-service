@@ -1,12 +1,11 @@
 <template>
   <div>
     <apart-search-bar></apart-search-bar>
-    <kakao-map :cup="bus" class="m-3" />
+    <kakao-map :cup="bus" :plate="taxi" class="m-3" />
     <b-container v-if="aparts && aparts.length > 0" class="bv-example-row mt-3">
       <education-list :cup="bus" />
       <div>
-        <b-button v-b-toggle.sidebar-1       style="background-color: #faf3dd; color: black;"
-
+        <b-button v-b-toggle.sidebar-1 style="background-color: #faf3dd; color: black"
           >현지역 과거 부동산 동향 보기</b-button
         >
         <b-sidebar id="sidebar-1" title="최근 1년 가격동향" width="600px">
@@ -20,7 +19,7 @@
           </div>
         </b-sidebar>
       </div>
-      <apart-list></apart-list>
+      <apart-list :plate="taxi"></apart-list>
     </b-container>
     <b-container v-else-if="houses && houses.length > 0" class="bv-example-row mt-3">
       <house-list></house-list>
@@ -47,7 +46,7 @@ import WeatherCard from "@/components/map/WeatherCard.vue";
 const mapStore = "mapStore";
 
 var bus = new Vue();
-
+var taxi = new Vue();
 export default {
   name: "MapList",
   components: {
@@ -64,10 +63,15 @@ export default {
       bus: bus,
       sido: "",
       gugun: "",
+      taxi: taxi,
     };
   },
   computed: {
     ...mapState(mapStore, ["aparts", "houses", "apt"]),
+  },
+  mounted() {
+    window.scrollTo(0, 0);
+    document.addEventListener("scroll", this.scrollEvents);
   },
 };
 </script>

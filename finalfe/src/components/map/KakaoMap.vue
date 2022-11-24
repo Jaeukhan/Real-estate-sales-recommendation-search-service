@@ -1,9 +1,6 @@
 <template>
   <div align-v="center" align-h="center" style="text-align: center">
-    <h3
-      v-if="apt"
-      style="font-family: 'Black Han Sans', monospace; color: #396f18"
-    >
+    <h3 v-if="apt" style="font-family: 'Black Han Sans', monospace; color: #396f18" ref="kmap">
       {{ apt.aptName }}
     </h3>
     <!--맵-->
@@ -11,10 +8,7 @@
     <div style="font-family: 'Titan One', monospace">My Favorite Keyword</div>
     <table style="border-collapse: collapse" align="center">
       <td v-for="k in keyword" :key="k">
-        <img
-          :src="require(`../../assets/icon/${k}.png`)"
-          style="width: 30px; height: 30px; margin: 5px"
-        />
+        <img :src="require(`../../assets/icon/${k}.png`)" style="width: 30px; height: 30px; margin: 5px" />
       </td>
     </table>
     <b-button
@@ -87,10 +81,11 @@ export default {
       isselectapart: false,
     };
   },
-  props: ["cup"],
+  props: ["cup", "plate"],
   created() {
     this.CLEAR_APT();
     this.cup.$on("move", this.searchSubmit);
+    this.plate.$on("move", this.scroll);
   },
   computed: {
     ...mapState(mapStore, [
@@ -159,8 +154,7 @@ export default {
       this.displayMarker(positions);
     },
     selectedsch(val) {
-      if (val != "undefined" && val.length > 0)
-        this.SchoolgeolocDisplayMarker(val);
+      if (val != "undefined" && val.length > 0) this.SchoolgeolocDisplayMarker(val);
     },
     apt(val) {
       if (val.load) {
@@ -174,14 +168,7 @@ export default {
       if (val) {
         let li = [];
         for (let i = 0; i < val.length; i++) {
-          const names =
-            this.sidoName +
-            " " +
-            this.gugunName +
-            " " +
-            val[i].법정동 +
-            " " +
-            val[i].도로명;
+          const names = this.sidoName + " " + this.gugunName + " " + val[i].법정동 + " " + val[i].도로명;
           li.push({
             REFINE_ROADNM_ADDR: names,
             title: val[i].아파트,
@@ -202,7 +189,11 @@ export default {
     ...mapActions(martStore, ["getMart"]), //libraryStore
 
     ...mapMutations(mapStore, ["CLEAR_APT"]),
-
+    scroll() {
+      // window.scrollTo(0, 0);
+      // document.addEventListener("scroll", this.scrollEvents);
+      this.$refs.kmap.scrollIntoView({ behavior: "smooth" });
+    },
     initMap() {
       const mapContainer = document.getElementById("map");
       const mapOption = {
@@ -225,25 +216,13 @@ export default {
     },
     SchoolgeolocDisplayMarker(Addr) {
       if (Addr[0].markname == "kindergarden") {
-        this.markerImage = new kakao.maps.MarkerImage(
-          this.imageSrc.kindergarden,
-          this.imageSize
-        );
+        this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.kindergarden, this.imageSize);
       } else if (Addr[0].markname == "element") {
-        this.markerImage = new kakao.maps.MarkerImage(
-          this.imageSrc.element,
-          this.imageSize
-        );
+        this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.element, this.imageSize);
       } else if (Addr[0].markname == "middle") {
-        this.markerImage = new kakao.maps.MarkerImage(
-          this.imageSrc.middle,
-          this.imageSize
-        );
+        this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.middle, this.imageSize);
       } else if (Addr[0].markname == "high") {
-        this.markerImage = new kakao.maps.MarkerImage(
-          this.imageSrc.high,
-          this.imageSize
-        );
+        this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.high, this.imageSize);
       }
       let line = new kakao.maps.Polyline();
       const coords = new kakao.maps.LatLng(this.tempLoc.y, this.tempLoc.x);
@@ -251,46 +230,36 @@ export default {
       this.markers = [];
       for (let n = 0; n < Addr.length; n++) {
         if (Addr[n].REFINE_ROADNM_ADDR != null) {
-          this.geocoder.addressSearch(
-            Addr[n].REFINE_ROADNM_ADDR,
-            (result, status) => {
-              if (status === kakao.maps.services.Status.OK) {
-                const position = new kakao.maps.LatLng(
-                  result[0].y,
-                  result[0].x
-                );
-                let path = [position, coords];
-                line.setPath(path);
-                let dist = line.getLength();
-                // console.log(Addr[n].REFINE_ROADNM_ADDR);
-                if (radius > dist) {
-                  const marker = new kakao.maps.Marker({
-                    map: this.map,
-                    position: position,
-                    title: Addr[n].title,
-                    clickable: true,
-                    image: this.markerImage,
-                  });
-                  const infowindow = new kakao.maps.InfoWindow({
-                    content: `<div>${Addr[n].title}</div>`,
-                  });
-                  let _this = this;
-                  kakao.maps.event.addListener(
-                    marker,
-                    "mouseover",
-                    function () {
-                      infowindow.open(_this.map, marker);
-                    }
-                  );
-                  kakao.maps.event.addListener(marker, "mouseout", function () {
-                    infowindow.close();
-                  });
+          this.geocoder.addressSearch(Addr[n].REFINE_ROADNM_ADDR, (result, status) => {
+            if (status === kakao.maps.services.Status.OK) {
+              const position = new kakao.maps.LatLng(result[0].y, result[0].x);
+              let path = [position, coords];
+              line.setPath(path);
+              let dist = line.getLength();
+              // console.log(Addr[n].REFINE_ROADNM_ADDR);
+              if (radius > dist) {
+                const marker = new kakao.maps.Marker({
+                  map: this.map,
+                  position: position,
+                  title: Addr[n].title,
+                  clickable: true,
+                  image: this.markerImage,
+                });
+                const infowindow = new kakao.maps.InfoWindow({
+                  content: `<div>${Addr[n].title}</div>`,
+                });
+                let _this = this;
+                kakao.maps.event.addListener(marker, "mouseover", function () {
+                  infowindow.open(_this.map, marker);
+                });
+                kakao.maps.event.addListener(marker, "mouseout", function () {
+                  infowindow.close();
+                });
 
-                  this.markers.push(marker);
-                }
+                this.markers.push(marker);
               }
             }
-          );
+          });
         }
       }
       this.clustererAddMark();
@@ -298,43 +267,37 @@ export default {
     displayMarkerAndMove(Addr) {
       // let positions = [];
       // console.log(Addr[0]);
-      this.markerImage = new kakao.maps.MarkerImage(
-        this.imageSrc.apart,
-        this.imageSize
-      );
+      this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.apart, this.imageSize);
       let bounds = new kakao.maps.LatLngBounds();
       for (let n = 0; n < Addr.length; n++) {
-        this.geocoder.addressSearch(
-          Addr[n].REFINE_ROADNM_ADDR,
-          (result, status) => {
-            if (status === kakao.maps.services.Status.OK) {
-              const position = new kakao.maps.LatLng(result[0].y, result[0].x);
+        this.geocoder.addressSearch(Addr[n].REFINE_ROADNM_ADDR, (result, status) => {
+          if (status === kakao.maps.services.Status.OK) {
+            const position = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-              const marker = new kakao.maps.Marker({
-                map: this.map,
-                position: position,
-                title: Addr[n].title,
-                clickable: true,
-                image: this.markerImage,
-              });
-              const infowindow = new kakao.maps.InfoWindow({
-                content: `<div>${Addr[n].title}</div>`,
-              });
-              let _this = this;
-              kakao.maps.event.addListener(marker, "mouseover", function () {
-                infowindow.open(_this.map, marker);
-              });
-              kakao.maps.event.addListener(marker, "mouseout", function () {
-                infowindow.close();
-              });
+            const marker = new kakao.maps.Marker({
+              map: this.map,
+              position: position,
+              title: Addr[n].title,
+              clickable: true,
+              image: this.markerImage,
+            });
+            const infowindow = new kakao.maps.InfoWindow({
+              content: `<div>${Addr[n].title}</div>`,
+            });
+            let _this = this;
+            kakao.maps.event.addListener(marker, "mouseover", function () {
+              infowindow.open(_this.map, marker);
+            });
+            kakao.maps.event.addListener(marker, "mouseout", function () {
+              infowindow.close();
+            });
 
-              this.markers.push(marker);
+            this.markers.push(marker);
 
-              bounds.extend(new kakao.maps.LatLng(result[0].y, result[0].x));
-              this.map.setBounds(bounds);
-            }
+            bounds.extend(new kakao.maps.LatLng(result[0].y, result[0].x));
+            this.map.setBounds(bounds);
           }
-        );
+        });
       }
     },
     displayMarker(positions) {
@@ -343,50 +306,23 @@ export default {
       }
       // console.log(positions[0].markname);
       if (positions[0].markname == "bus") {
-        this.markerImage = new kakao.maps.MarkerImage(
-          this.imageSrc.buststop,
-          this.imageSize
-        );
+        this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.buststop, this.imageSize);
       } else if (positions[0].markname == "apart") {
-        this.markerImage = new kakao.maps.MarkerImage(
-          this.imageSrc.apart,
-          this.imageSize
-        );
+        this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.apart, this.imageSize);
       } else if (positions[0].markname == "parking") {
-        this.markerImage = new kakao.maps.MarkerImage(
-          this.imageSrc.parking,
-          this.imageSize
-        );
+        this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.parking, this.imageSize);
       } else if (positions[0].markname == "library") {
-        this.markerImage = new kakao.maps.MarkerImage(
-          this.imageSrc.library,
-          this.imageSize
-        );
+        this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.library, this.imageSize);
       } else if (positions[0].markname == "high") {
-        this.markerImage = new kakao.maps.MarkerImage(
-          this.imageSrc.high,
-          this.imageSize
-        );
+        this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.high, this.imageSize);
       } else if (positions[0].markname == "middle") {
-        this.markerImage = new kakao.maps.MarkerImage(
-          this.imageSrc.middle,
-          this.imageSize
-        );
+        this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.middle, this.imageSize);
       } else if (positions[0].markname == "element") {
-        this.markerImage = new kakao.maps.MarkerImage(
-          this.imageSrc.element,
-          this.imageSize
-        );
+        this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.element, this.imageSize);
       } else if (positions[0].markname == "kindergarden") {
-        this.markerImage = new kakao.maps.MarkerImage(
-          this.imageSrc.kindergarden,
-          this.imageSize
-        );
+        this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.kindergarden, this.imageSize);
       } else {
-        this.markerImage = new kakao.maps.MarkerImage(
-          this.imageSrc.mart,
-          this.imageSize
-        );
+        this.markerImage = new kakao.maps.MarkerImage(this.imageSrc.mart, this.imageSize);
       }
 
       positions.forEach((position) => {
@@ -453,7 +389,7 @@ export default {
         center: coords,
         radius: 400, // m단위
         strokeWeight: 2,
-        strokeColor: "#FF00FF",
+        strokeColor: "#74FAC9",
         strokeOpacity: 0.8,
         strokeStyle: "dashed",
         fillColor: "#00EEEE",
