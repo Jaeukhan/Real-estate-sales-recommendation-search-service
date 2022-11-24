@@ -27,7 +27,15 @@ import {
   PointElement,
 } from "chart.js";
 const chartStore = "chartStore";
-ChartJS.register(Title, Tooltip, Legend, LineElement, LinearScale, CategoryScale, PointElement);
+ChartJS.register(
+  Title,
+  Tooltip,
+  Legend,
+  LineElement,
+  LinearScale,
+  CategoryScale,
+  PointElement
+);
 
 export default {
   name: "LineChart",

@@ -11,8 +11,12 @@
         :current-page="currentPage"
       >
         <template #cell(자세히보기)="row">
-          <b-button size="sm" @click="row.toggleDetails" class="mr-2"       style="background-color: #faf3dd; color: black;"
->
+          <b-button
+            size="sm"
+            @click="row.toggleDetails"
+            class="mr-2"
+            style="background-color: #faf3dd; color: black"
+          >
             <b-icon icon="info-circle"></b-icon>
           </b-button>
         </template>
@@ -34,12 +38,21 @@
               <b-col sm="6"><b>거래금액 </b></b-col>
               <b-col>{{ row.item.거래금액 }},000 원</b-col>
             </b-row>
-            <b-button size="sm" @click="addFavoriteApt(row.item)" style="background-color: #ffa69e; color: black;"><b-icon icon="heart"></b-icon></b-button>
+            <b-button
+              size="sm"
+              @click="addFavoriteApt(row.item)"
+              style="background-color: #ffa69e; color: black"
+              ><b-icon icon="heart"></b-icon
+            ></b-button>
           </b-card>
         </template>
         <template #cell(지도보기)="mapRow">
-          <b-button size="sm" @click="moveloc(mapRow.item)" class="mr-2"       style="background-color: #faf3dd; color: black;"
->
+          <b-button
+            size="sm"
+            @click="moveloc(mapRow.item)"
+            class="mr-2"
+            style="background-color: #faf3dd; color: black"
+          >
             <b-icon icon="pin-map"></b-icon>
           </b-button>
         </template>
@@ -70,7 +83,12 @@ export default {
   name: "ApartList",
   data() {
     return {
-      fields: [{ key: "아파트", label: "아파트 이름" }, { key: "법정동" }, "자세히보기", "지도보기"],
+      fields: [
+        { key: "아파트", label: "아파트 이름" },
+        { key: "법정동" },
+        "자세히보기",
+        "지도보기",
+      ],
       currentPage: 1,
       perPage: 10,
       isDuplicate: false,
@@ -82,6 +100,7 @@ export default {
     ...mapGetters(mapStore, ["checkMemberInfo"]),
     moveloc(apart) {
       this.getAptOne(apart);
+      this.$refs.kakaoMap.scrollIntoView({ behavior: "smooth" });
     },
     addFavoriteApt(apt) {
       if (this.$store.state.memberStore.memberInfo == null) {
