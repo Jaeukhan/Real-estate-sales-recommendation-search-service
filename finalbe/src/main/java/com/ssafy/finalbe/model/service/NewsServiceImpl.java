@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 @Service
-public class NewsServiceImpl {
+public class NewsServiceImpl implements NewsService{
 	@Autowired
 	private NewsMapper ndao;
 	
